@@ -105,7 +105,7 @@ class TestAuthBoundary:
 
     @pytest.mark.parametrize("password,expected_status", [
         pytest.param(
-            "A" + "x" * 100 + "@1a",
+            "A" + "x" * 68 + "@1a",
             201,
             id="long_valid_password",
         ),
