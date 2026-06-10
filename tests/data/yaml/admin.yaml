@@ -1,0 +1,107 @@
+# ============================================================
+# 管理员模块测试数据
+# ============================================================
+get_all_orders:
+  - name: 管理员获取所有订单
+    as_admin: true
+    expected_status: 200
+    expected_has_orders: true
+  - name: 普通用户获取所有订单-禁止
+    as_admin: false
+    expected_status: 403
+  - name: 管理员按状态过滤订单-paid
+    as_admin: true
+    status_filter: paid
+    expected_status: 200
+
+ship_order:
+  - name: 管理员发货
+    as_admin: true
+    expected_status: 200
+  - name: 管理员发货-带tracking_number
+    as_admin: true
+    tracking_number: "SF1234567890"
+    expected_status: 200
+  - name: 发货pending订单-不允许
+    as_admin: true
+    ship_pending: true
+    expected_status: 400
+
+deliver_order:
+  - name: 管理员确认送达
+    as_admin: true
+    expected_status: 200
+  - name: 送达未发货订单-不允许
+    as_admin: true
+    skip_ship: true
+    expected_status: 400
+
+refund_order:
+  - name: 管理员退款
+    as_admin: true
+    expected_status: 200
+  - name: 正常退款后重复退款-应拒绝
+    as_admin: true
+    refund_twice: true
+    expected_status: 200
+
+get_all_users:
+  - name: 管理员获取用户列表
+    as_admin: true
+    expected_status: 200
+    expected_has_users: true
+  - name: 普通用户获取用户列表-禁止
+    as_admin: false
+    expected_status: 403
+
+adjust_balance:
+  - name: 管理员调整余额-增加
+    amount: 10000
+    as_admin: true
+    expected_status: 200
+  - name: 管理员调整余额-减少
+    amount: -5000
+    as_admin: true
+    expected_status: 200
+  - name: 管理员调整余额-不存在用户
+    user_id: 99999
+    amount: 1000
+    as_admin: true
+    expected_status: 404
+  - name: 管理员调整余额-负值导致负余额
+    amount: -999999999
+    as_admin: true
+    expected_status: 400
+
+admin_pay_order:
+  - name: 管理员代付pending订单
+    as_admin: true
+    expected_status: 200
+  - name: 管理员代付-订单不存在
+    as_admin: true
+    order_id: 99999
+    expected_status: 404
+  - name: 管理员代付-普通用户禁止
+    as_admin: false
+    expected_status: 403
+
+admin_reset:
+  - name: 管理员重置-仅账户
+    as_admin: true
+    mode: accounts
+    expected_status: 200
+  - name: 管理员重置-清空全部测试数据
+    as_admin: true
+    mode: all
+    expected_status: 200
+  - name: 管理员重置-普通用户禁止
+    as_admin: false
+    expected_status: 403
+
+admin_import_data:
+  - name: 管理员触发数据导入
+    as_admin: true
+    expected_status: 200
+  - name: 管理员导入数据-普通用户禁止
+    as_admin: false
+    expected_status: 403

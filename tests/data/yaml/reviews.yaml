@@ -1,0 +1,68 @@
+get_product_reviews:
+  - name: 获取商品评价列表-有评价
+    product_id: 1
+    params:
+      page: 1
+      per_page: 10
+    expected_status: 200
+    expected_has_reviews: true
+  - name: 获取商品评价列表-无评价
+    product_id: 9999
+    params:
+      page: 1
+      per_page: 10
+    expected_status: 200
+    expected_has_reviews: false
+  - name: 获取商品评价列表-分页参数
+    product_id: 1
+    params:
+      page: 1
+      per_page: 5
+    expected_status: 200
+
+create_review:
+  - name: 创建评价-5星好评
+    product_id: 1
+    rating: 5
+    content: "非常好的商品，强烈推荐！"
+    expected_status: 201
+    expected_code: 201
+  - name: 创建评价-1星差评
+    product_id: 1
+    rating: 1
+    content: "质量很差"
+    expected_status: 201
+    expected_code: 201
+  - name: 创建评价-缺少product_id
+    rating: 5
+    content: "test"
+    expected_status: 400
+    expected_code: 400
+  - name: 创建评价-缺少rating
+    product_id: 1
+    content: "test"
+    expected_status: 400
+    expected_code: 400
+  - name: 创建评价-rating越界-0
+    product_id: 1
+    rating: 0
+    content: "test"
+    expected_status: 400
+    expected_code: 400
+  - name: 创建评价-rating越界-6
+    product_id: 1
+    rating: 6
+    content: "test"
+    expected_status: 400
+    expected_code: 400
+  - name: 创建评价-未登录
+    product_id: 1
+    rating: 5
+    content: "test"
+    no_auth: true
+    expected_status: 401
+  - name: 创建评价-重复评价应更新而非新建
+    product_id: 2
+    rating: 4
+    content: "更新后的评价"
+    expected_status: 200

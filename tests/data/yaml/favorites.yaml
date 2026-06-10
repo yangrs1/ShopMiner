@@ -1,0 +1,53 @@
+# ============================================================
+# 收藏夹模块测试数据
+# ============================================================
+favorites_list:
+  - name: 用户获取收藏列表
+    as_admin: false
+    expected_status: 200
+
+favorites_add:
+  - name: 收藏已存在商品
+    as_admin: false
+    product_id: 1
+    expected_status: 201
+  - name: 收藏不存在的商品
+    as_admin: false
+    product_id: 999999
+    expected_status: 404
+  - name: 收藏缺少 product_id
+    as_admin: false
+    body_override: {}
+    expected_status: 400
+
+favorites_remove:
+  - name: 取消已收藏商品
+    as_admin: false
+    product_id: 1
+    expected_status: 200
+  - name: 取消未收藏商品(幂等)
+    as_admin: false
+    product_id: 1
+    expected_status: 200
+
+favorites_check:
+  - name: 检查已收藏状态
+    as_admin: false
+    product_id: 1
+    expected_status: 200
+  - name: 检查未收藏状态
+    as_admin: false
+    product_id: 2
+    expected_status: 200
+
+favorites_recommendation_reason:
+  - name: 获取关联推荐-包含reason字段
+    as_admin: false
+    product_id: 3861
+    expected_status: 200
+    response_asserts:
+      - path: "$.data.recommendations"
+        condition: "is_list"
+      - path: "$.data.recommendations[0].reason"
+        condition: "exists"
+        when_has_items: true

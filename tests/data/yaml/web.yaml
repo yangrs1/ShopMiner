@@ -1,0 +1,102 @@
+# ============================================================
+# Playwright Web UI 测试数据
+# ============================================================
+register_flow:
+  - name: 正常注册流程
+    first_name: WebTest
+    last_name: User
+    email: webtest@example.com
+    password: Test@123
+    address: Web Test Address
+    expected_redirect: /login
+
+login_flow:
+  - name: 正常登录流程
+    email: user_0@shopminer.com
+    password: shopminer2024
+    expected_redirect: /
+  - name: 登录失败-密码错误
+    email: user_0@shopminer.com
+    password: WrongPwd
+    expected_error: true
+
+browse_and_search:
+  - name: 浏览首页商品
+    expected_has_products: true
+  - name: 搜索商品
+    keyword: T-Shirt
+    expected_has_results: true
+  - name: 按分类浏览
+    category: tshirt
+    expected_has_products: true
+
+product_detail:
+  - name: 查看商品详情
+    expected_has_detail: true
+  - name: 查看关联推荐
+    expected_has_recommendations: true
+
+cart_flow:
+  - name: 添加商品到购物车
+    expected_cart_count: 1
+  - name: 修改购物车数量
+    new_quantity: 3
+    expected_quantity: 3
+  - name: 删除购物车商品
+    expected_cart_empty: true
+
+order_flow:
+  - name: 完整下单流程
+    expected_order_created: true
+  - name: 查看订单列表
+    expected_has_orders: true
+
+profile_flow:
+  - name: 查看消费报告
+    expected_has_charts: true
+
+admin_flow:
+  - name: 管理员登录并查看仪表盘
+    email: admin@shopminer.com
+    password: shopminer2024
+    expected_has_dashboard: true
+
+# ============================================================
+# 管理后台-模型可视化弹窗 (新)
+# 点击 KPI 卡片打开 el-dialog 弹窗,展示模型版本/指标/图表
+# ============================================================
+admin_viz_dialog:
+  - name: 客户分群弹窗-显示v4标识
+    tab_index: 0
+    card_label: 客户分群
+    expected_version: v4
+  - name: 流失预警弹窗-显示v8 SHAP标识
+    tab_index: 1
+    card_label: 流失预警
+    expected_version: v8
+  - name: 销售预测弹窗-显示v3标识
+    tab_index: 2
+    card_label: 销售预测
+    expected_version: v3
+  - name: 关联规则弹窗-显示v3 dual-level标识
+    tab_index: 3
+    card_label: 关联规则
+    expected_version: v3
+
+# ============================================================
+# 管理后台-KPI卡片版本号展示 (新)
+# KPI 卡片显示 v3/v4/v8 等模型版本号
+# ============================================================
+admin_kpi_version:
+  - name: 聚类KPI卡片显示K=4
+    tab_index: 0
+    expected_text: "K=4"
+  - name: 流失KPI卡片显示OOT AUC
+    tab_index: 1
+    expected_text: "OOT"
+  - name: 销售预测KPI卡片显示sMAPE
+    tab_index: 2
+    expected_text: "sMAPE"
+  - name: 关联规则KPI卡片显示规则数
+    tab_index: 3
+    expected_text: "规则"

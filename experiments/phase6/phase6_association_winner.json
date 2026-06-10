@@ -1,0 +1,2096 @@
+{
+  "metadata": {
+    "n_transactions": 36969,
+    "n_items_description": 5240,
+    "method": "FP-Growth + adaptive min_support + cluster-specific",
+    "version": "v3_more_rules_cluster_aware"
+  },
+  "global_rules": {
+    "n_rules": 694,
+    "mean_lift": 11.0718421029071,
+    "median_lift": 9.549050010129367,
+    "top_rules": [
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.009,
+        "confidence": 0.5595,
+        "lift": 39.93
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.009,
+        "confidence": 0.6448,
+        "lift": 39.93
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.009,
+        "confidence": 0.784,
+        "lift": 39.01
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.009,
+        "confidence": 0.4495,
+        "lift": 39.01
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.009,
+        "confidence": 0.7678,
+        "lift": 38.05
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.009,
+        "confidence": 0.4477,
+        "lift": 38.05
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.0102,
+        "confidence": 0.5067,
+        "lift": 36.16
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0102,
+        "confidence": 0.7297,
+        "lift": 36.16
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.009,
+        "confidence": 0.9076,
+        "lift": 35.96
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.009,
+        "confidence": 0.358,
+        "lift": 35.96
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0144,
+        "confidence": 0.7145,
+        "lift": 35.55
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0144,
+        "confidence": 0.7174,
+        "lift": 35.55
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0144,
+        "confidence": 0.5713,
+        "lift": 35.38
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0144,
+        "confidence": 0.8928,
+        "lift": 35.38
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0102,
+        "confidence": 0.8873,
+        "lift": 35.16
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.0102,
+        "confidence": 0.4051,
+        "lift": 35.16
+      },
+      {
+        "antecedents": [
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.009,
+        "confidence": 0.5759,
+        "lift": 34.06
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.009,
+        "confidence": 0.5344,
+        "lift": 34.06
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0169,
+        "confidence": 0.8378,
+        "lift": 33.2
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0169,
+        "confidence": 0.6699,
+        "lift": 33.2
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.01,
+        "confidence": 0.4933,
+        "lift": 31.44
+      },
+      {
+        "antecedents": [
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.01,
+        "confidence": 0.6345,
+        "lift": 31.44
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.009,
+        "confidence": 0.8836,
+        "lift": 30.93
+      },
+      {
+        "antecedents": [
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "GREEN REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.009,
+        "confidence": 0.3163,
+        "lift": 30.93
+      },
+      {
+        "antecedents": [
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.01,
+        "confidence": 0.3485,
+        "lift": 30.24
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.01,
+        "confidence": 0.8638,
+        "lift": 30.24
+      },
+      {
+        "antecedents": [
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0144,
+        "confidence": 0.5047,
+        "lift": 29.86
+      },
+      {
+        "antecedents": [
+          "PINK REGENCY TEACUP AND SAUCER",
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "ROSES REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0144,
+        "confidence": 0.8528,
+        "lift": 29.86
+      },
+      {
+        "antecedents": [
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "consequents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "support": 0.0118,
+        "confidence": 0.75,
+        "lift": 29.72
+      },
+      {
+        "antecedents": [
+          "GREEN REGENCY TEACUP AND SAUCER"
+        ],
+        "consequents": [
+          "ROSES REGENCY TEACUP AND SAUCER",
+          "REGENCY CAKESTAND 3 TIER"
+        ],
+        "support": 0.0118,
+        "confidence": 0.4662,
+        "lift": 29.72
+      }
+    ]
+  },
+  "stockcode_rules": {
+    "n_rules": 1456,
+    "mean_lift": 10.667275526280779,
+    "median_lift": 10.096472004515626,
+    "top_rules": [
+      {
+        "antecedents": [
+          "22698",
+          "22699"
+        ],
+        "consequents": [
+          "22697",
+          "22423"
+        ],
+        "support": 0.0092,
+        "confidence": 0.562,
+        "lift": 39.42
+      },
+      {
+        "antecedents": [
+          "22697",
+          "22423"
+        ],
+        "consequents": [
+          "22698",
+          "22699"
+        ],
+        "support": 0.0092,
+        "confidence": 0.6452,
+        "lift": 39.42
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22423"
+        ],
+        "consequents": [
+          "22697",
+          "22699"
+        ],
+        "support": 0.0092,
+        "confidence": 0.7889,
+        "lift": 38.68
+      },
+      {
+        "antecedents": [
+          "22697",
+          "22699"
+        ],
+        "consequents": [
+          "22698",
+          "22423"
+        ],
+        "support": 0.0092,
+        "confidence": 0.4509,
+        "lift": 38.68
+      },
+      {
+        "antecedents": [
+          "22698"
+        ],
+        "consequents": [
+          "22697",
+          "22699",
+          "22423"
+        ],
+        "support": 0.0092,
+        "confidence": 0.4503,
+        "lift": 37.58
+      },
+      {
+        "antecedents": [
+          "22697",
+          "22699",
+          "22423"
+        ],
+        "consequents": [
+          "22698"
+        ],
+        "support": 0.0092,
+        "confidence": 0.7675,
+        "lift": 37.58
+      },
+      {
+        "antecedents": [
+          "22697",
+          "22423"
+        ],
+        "consequents": [
+          "22698"
+        ],
+        "support": 0.0104,
+        "confidence": 0.7287,
+        "lift": 35.68
+      },
+      {
+        "antecedents": [
+          "22698"
+        ],
+        "consequents": [
+          "22697",
+          "22423"
+        ],
+        "support": 0.0104,
+        "confidence": 0.5086,
+        "lift": 35.68
+      },
+      {
+        "antecedents": [
+          "22697"
+        ],
+        "consequents": [
+          "22698",
+          "22699",
+          "22423"
+        ],
+        "support": 0.0092,
+        "confidence": 0.3594,
+        "lift": 35.62
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22699",
+          "22423"
+        ],
+        "consequents": [
+          "22697"
+        ],
+        "support": 0.0092,
+        "confidence": 0.9115,
+        "lift": 35.62
+      },
+      {
+        "antecedents": [
+          "22698"
+        ],
+        "consequents": [
+          "22697",
+          "22699"
+        ],
+        "support": 0.0147,
+        "confidence": 0.7179,
+        "lift": 35.2
+      },
+      {
+        "antecedents": [
+          "22697",
+          "22699"
+        ],
+        "consequents": [
+          "22698"
+        ],
+        "support": 0.0147,
+        "confidence": 0.7188,
+        "lift": 35.2
+      },
+      {
+        "antecedents": [
+          "22697"
+        ],
+        "consequents": [
+          "22698",
+          "22699"
+        ],
+        "support": 0.0147,
+        "confidence": 0.5729,
+        "lift": 35.01
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22699"
+        ],
+        "consequents": [
+          "22697"
+        ],
+        "support": 0.0147,
+        "confidence": 0.8959,
+        "lift": 35.01
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22423"
+        ],
+        "consequents": [
+          "22697"
+        ],
+        "support": 0.0104,
+        "confidence": 0.891,
+        "lift": 34.82
+      },
+      {
+        "antecedents": [
+          "22697"
+        ],
+        "consequents": [
+          "22698",
+          "22423"
+        ],
+        "support": 0.0104,
+        "confidence": 0.4059,
+        "lift": 34.82
+      },
+      {
+        "antecedents": [
+          "22699",
+          "22423"
+        ],
+        "consequents": [
+          "22698",
+          "22697"
+        ],
+        "support": 0.0092,
+        "confidence": 0.5782,
+        "lift": 33.66
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22697"
+        ],
+        "consequents": [
+          "22699",
+          "22423"
+        ],
+        "support": 0.0092,
+        "confidence": 0.5354,
+        "lift": 33.66
+      },
+      {
+        "antecedents": [
+          "22698"
+        ],
+        "consequents": [
+          "22697"
+        ],
+        "support": 0.0172,
+        "confidence": 0.8411,
+        "lift": 32.87
+      },
+      {
+        "antecedents": [
+          "22697"
+        ],
+        "consequents": [
+          "22698"
+        ],
+        "support": 0.0172,
+        "confidence": 0.6712,
+        "lift": 32.87
+      },
+      {
+        "antecedents": [
+          "84997D",
+          "84997B"
+        ],
+        "consequents": [
+          "84997C"
+        ],
+        "support": 0.0104,
+        "confidence": 0.7466,
+        "lift": 31.26
+      },
+      {
+        "antecedents": [
+          "84997C"
+        ],
+        "consequents": [
+          "84997D",
+          "84997B"
+        ],
+        "support": 0.0104,
+        "confidence": 0.4337,
+        "lift": 31.26
+      },
+      {
+        "antecedents": [
+          "22698"
+        ],
+        "consequents": [
+          "22699",
+          "22423"
+        ],
+        "support": 0.0101,
+        "confidence": 0.494,
+        "lift": 31.06
+      },
+      {
+        "antecedents": [
+          "22699",
+          "22423"
+        ],
+        "consequents": [
+          "22698"
+        ],
+        "support": 0.0101,
+        "confidence": 0.6344,
+        "lift": 31.06
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22697",
+          "22423"
+        ],
+        "consequents": [
+          "22699"
+        ],
+        "support": 0.0092,
+        "confidence": 0.8854,
+        "lift": 30.59
+      },
+      {
+        "antecedents": [
+          "22699"
+        ],
+        "consequents": [
+          "22698",
+          "22697",
+          "22423"
+        ],
+        "support": 0.0092,
+        "confidence": 0.3178,
+        "lift": 30.59
+      },
+      {
+        "antecedents": [
+          "82580"
+        ],
+        "consequents": [
+          "82581"
+        ],
+        "support": 0.015,
+        "confidence": 0.5976,
+        "lift": 30.35
+      },
+      {
+        "antecedents": [
+          "82581"
+        ],
+        "consequents": [
+          "82580"
+        ],
+        "support": 0.015,
+        "confidence": 0.761,
+        "lift": 30.35
+      },
+      {
+        "antecedents": [
+          "22698",
+          "22423"
+        ],
+        "consequents": [
+          "22699"
+        ],
+        "support": 0.0101,
+        "confidence": 0.8654,
+        "lift": 29.9
+      },
+      {
+        "antecedents": [
+          "22699"
+        ],
+        "consequents": [
+          "22698",
+          "22423"
+        ],
+        "support": 0.0101,
+        "confidence": 0.3486,
+        "lift": 29.9
+      }
+    ]
+  },
+  "seasonal": {
+    "christmas": {
+      "n_rules": 166,
+      "mean_lift": 9.970803546519805,
+      "top_rules": [
+        {
+          "antecedents": [
+            "POPPY'S PLAYHOUSE BEDROOM"
+          ],
+          "consequents": [
+            "POPPY'S PLAYHOUSE KITCHEN"
+          ],
+          "support": 0.023,
+          "confidence": 0.8592,
+          "lift": 29.0
+        },
+        {
+          "antecedents": [
+            "POPPY'S PLAYHOUSE KITCHEN"
+          ],
+          "consequents": [
+            "POPPY'S PLAYHOUSE BEDROOM"
+          ],
+          "support": 0.023,
+          "confidence": 0.7766,
+          "lift": 29.0
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0192,
+          "confidence": 0.793,
+          "lift": 28.16
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0192,
+          "confidence": 0.6803,
+          "lift": 28.16
+        },
+        {
+          "antecedents": [
+            "FELTCRAFT PRINCESS CHARLOTTE DOLL"
+          ],
+          "consequents": [
+            "FELTCRAFT PRINCESS LOLA DOLL"
+          ],
+          "support": 0.0177,
+          "confidence": 0.6233,
+          "lift": 21.6
+        },
+        {
+          "antecedents": [
+            "FELTCRAFT PRINCESS LOLA DOLL"
+          ],
+          "consequents": [
+            "FELTCRAFT PRINCESS CHARLOTTE DOLL"
+          ],
+          "support": 0.0177,
+          "confidence": 0.6133,
+          "lift": 21.6
+        },
+        {
+          "antecedents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "consequents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "support": 0.0177,
+          "confidence": 0.6461,
+          "lift": 21.04
+        },
+        {
+          "antecedents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "consequents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "support": 0.0177,
+          "confidence": 0.5764,
+          "lift": 21.04
+        },
+        {
+          "antecedents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN",
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0165,
+          "confidence": 0.397,
+          "lift": 20.97
+        },
+        {
+          "antecedents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN",
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0165,
+          "confidence": 0.8699,
+          "lift": 20.97
+        },
+        {
+          "antecedents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN",
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0165,
+          "confidence": 0.5617,
+          "lift": 20.16
+        },
+        {
+          "antecedents": [
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN",
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0165,
+          "confidence": 0.5912,
+          "lift": 20.16
+        },
+        {
+          "antecedents": [
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0216,
+          "confidence": 0.7762,
+          "lift": 18.72
+        },
+        {
+          "antecedents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0216,
+          "confidence": 0.5213,
+          "lift": 18.72
+        },
+        {
+          "antecedents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN",
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0165,
+          "confidence": 0.7616,
+          "lift": 17.87
+        },
+        {
+          "antecedents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN",
+            "WOODEN TREE CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0165,
+          "confidence": 0.3863,
+          "lift": 17.87
+        },
+        {
+          "antecedents": [
+            "CHRISTMAS CRAFT LITTLE FRIENDS"
+          ],
+          "consequents": [
+            "CHRISTMAS CRAFT WHITE FAIRY"
+          ],
+          "support": 0.0162,
+          "confidence": 0.471,
+          "lift": 17.0
+        },
+        {
+          "antecedents": [
+            "CHRISTMAS CRAFT WHITE FAIRY"
+          ],
+          "consequents": [
+            "CHRISTMAS CRAFT LITTLE FRIENDS"
+          ],
+          "support": 0.0162,
+          "confidence": 0.5861,
+          "lift": 17.0
+        },
+        {
+          "antecedents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0293,
+          "confidence": 0.6877,
+          "lift": 16.58
+        },
+        {
+          "antecedents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0293,
+          "confidence": 0.7069,
+          "lift": 16.58
+        }
+      ]
+    },
+    "normal": {
+      "n_rules": 248,
+      "mean_lift": 9.398174138466773,
+      "top_rules": [
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER",
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0157,
+          "confidence": 0.6074,
+          "lift": 35.0
+        },
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER",
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0157,
+          "confidence": 0.9038,
+          "lift": 35.0
+        },
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER",
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0157,
+          "confidence": 0.7189,
+          "lift": 34.89
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER",
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0157,
+          "confidence": 0.7611,
+          "lift": 34.89
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0184,
+          "confidence": 0.7141,
+          "lift": 32.73
+        },
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0184,
+          "confidence": 0.8451,
+          "lift": 32.73
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER",
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0157,
+          "confidence": 0.5449,
+          "lift": 29.56
+        },
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER",
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0157,
+          "confidence": 0.8507,
+          "lift": 29.56
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0206,
+          "confidence": 0.7159,
+          "lift": 27.73
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0206,
+          "confidence": 0.7981,
+          "lift": 27.73
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0174,
+          "confidence": 0.6029,
+          "lift": 27.64
+        },
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0174,
+          "confidence": 0.7954,
+          "lift": 27.64
+        },
+        {
+          "antecedents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "consequents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "support": 0.0184,
+          "confidence": 0.6885,
+          "lift": 23.28
+        },
+        {
+          "antecedents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "consequents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "support": 0.0184,
+          "confidence": 0.6234,
+          "lift": 23.28
+        },
+        {
+          "antecedents": [
+            "TOILET METAL SIGN"
+          ],
+          "consequents": [
+            "BATHROOM METAL SIGN"
+          ],
+          "support": 0.0183,
+          "confidence": 0.7671,
+          "lift": 22.79
+        },
+        {
+          "antecedents": [
+            "BATHROOM METAL SIGN"
+          ],
+          "consequents": [
+            "TOILET METAL SIGN"
+          ],
+          "support": 0.0183,
+          "confidence": 0.5428,
+          "lift": 22.79
+        },
+        {
+          "antecedents": [
+            "PINK CREAM FELT CRAFT TRINKET BOX"
+          ],
+          "consequents": [
+            "PINK BLUE FELT CRAFT TRINKET BOX"
+          ],
+          "support": 0.014,
+          "confidence": 0.459,
+          "lift": 18.46
+        },
+        {
+          "antecedents": [
+            "PINK BLUE FELT CRAFT TRINKET BOX"
+          ],
+          "consequents": [
+            "PINK CREAM FELT CRAFT TRINKET BOX"
+          ],
+          "support": 0.014,
+          "confidence": 0.5638,
+          "lift": 18.46
+        },
+        {
+          "antecedents": [
+            "PLASTERS IN TIN WOODLAND ANIMALS"
+          ],
+          "consequents": [
+            "PLASTERS IN TIN SPACEBOY"
+          ],
+          "support": 0.0152,
+          "confidence": 0.5237,
+          "lift": 17.51
+        },
+        {
+          "antecedents": [
+            "PLASTERS IN TIN SPACEBOY"
+          ],
+          "consequents": [
+            "PLASTERS IN TIN WOODLAND ANIMALS"
+          ],
+          "support": 0.0152,
+          "confidence": 0.5077,
+          "lift": 17.51
+        }
+      ]
+    }
+  },
+  "cluster_rules": {
+    "-1": {
+      "n_customers": 154,
+      "n_transactions": 340,
+      "min_support": 0.01,
+      "n_rules": 246,
+      "mean_lift": 26.740722505661832,
+      "top_rules": [
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE LEAP FROG"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE LEAP FROG",
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE BUNNIES"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BUNNIES"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE LEAP FROG"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE LEAP FROG"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE BUNNIES"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE LEAP FROG"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BUNNIES"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE BUNNIES"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BUNNIES",
+            "MAGIC DRAWING SLATE LEAP FROG"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BUNNIES",
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE LEAP FROG"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        },
+        {
+          "antecedents": [
+            "MAGIC DRAWING SLATE BUNNIES"
+          ],
+          "consequents": [
+            "MAGIC DRAWING SLATE LEAP FROG",
+            "MAGIC DRAWING SLATE BAKE A CAKE"
+          ],
+          "support": 0.0118,
+          "confidence": 1.0,
+          "lift": 85.0
+        }
+      ]
+    },
+    "0": {
+      "n_customers": 1404,
+      "n_transactions": 1646,
+      "min_support": 0.01,
+      "n_rules": 110,
+      "mean_lift": 12.22436335985565,
+      "top_rules": [
+        {
+          "antecedents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0182,
+          "confidence": 0.6667,
+          "lift": 26.76
+        },
+        {
+          "antecedents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0182,
+          "confidence": 0.7317,
+          "lift": 26.76
+        },
+        {
+          "antecedents": [
+            "RED  HARMONICA IN BOX"
+          ],
+          "consequents": [
+            "BLUE HARMONICA IN BOX"
+          ],
+          "support": 0.0109,
+          "confidence": 0.4737,
+          "lift": 21.66
+        },
+        {
+          "antecedents": [
+            "BLUE HARMONICA IN BOX"
+          ],
+          "consequents": [
+            "RED  HARMONICA IN BOX"
+          ],
+          "support": 0.0109,
+          "confidence": 0.5,
+          "lift": 21.66
+        },
+        {
+          "antecedents": [
+            "PACK OF 60 PINK PAISLEY CAKE CASES",
+            "60 TEATIME FAIRY CAKE CASES"
+          ],
+          "consequents": [
+            "PACK OF 60 DINOSAUR CAKE CASES"
+          ],
+          "support": 0.0103,
+          "confidence": 0.6071,
+          "lift": 20.4
+        },
+        {
+          "antecedents": [
+            "PACK OF 60 DINOSAUR CAKE CASES"
+          ],
+          "consequents": [
+            "PACK OF 60 PINK PAISLEY CAKE CASES",
+            "60 TEATIME FAIRY CAKE CASES"
+          ],
+          "support": 0.0103,
+          "confidence": 0.3469,
+          "lift": 20.4
+        },
+        {
+          "antecedents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "support": 0.0122,
+          "confidence": 0.5,
+          "lift": 19.6
+        },
+        {
+          "antecedents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "consequents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "support": 0.0122,
+          "confidence": 0.4762,
+          "lift": 19.6
+        },
+        {
+          "antecedents": [
+            "PINK CREAM FELT CRAFT TRINKET BOX"
+          ],
+          "consequents": [
+            "PINK BLUE FELT CRAFT TRINKET BOX"
+          ],
+          "support": 0.0152,
+          "confidence": 0.431,
+          "lift": 19.18
+        },
+        {
+          "antecedents": [
+            "PINK BLUE FELT CRAFT TRINKET BOX"
+          ],
+          "consequents": [
+            "PINK CREAM FELT CRAFT TRINKET BOX"
+          ],
+          "support": 0.0152,
+          "confidence": 0.6757,
+          "lift": 19.18
+        }
+      ]
+    },
+    "1": {
+      "n_customers": 1481,
+      "n_transactions": 7071,
+      "min_support": 0.01,
+      "n_rules": 22,
+      "mean_lift": 18.02703036929192,
+      "top_rules": [
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0119,
+          "confidence": 0.7568,
+          "lift": 40.23
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0119,
+          "confidence": 0.6316,
+          "lift": 40.23
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0143,
+          "confidence": 0.6918,
+          "lift": 36.78
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0143,
+          "confidence": 0.7594,
+          "lift": 36.78
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.011,
+          "confidence": 0.5342,
+          "lift": 34.03
+        },
+        {
+          "antecedents": [
+            "PINK REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.011,
+          "confidence": 0.7027,
+          "lift": 34.03
+        },
+        {
+          "antecedents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "support": 0.0103,
+          "confidence": 0.471,
+          "lift": 18.0
+        },
+        {
+          "antecedents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "consequents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "support": 0.0103,
+          "confidence": 0.3946,
+          "lift": 18.0
+        },
+        {
+          "antecedents": [
+            "BAKING SET 9 PIECE RETROSPOT"
+          ],
+          "consequents": [
+            "BAKING SET SPACEBOY DESIGN"
+          ],
+          "support": 0.0126,
+          "confidence": 0.2977,
+          "lift": 15.59
+        },
+        {
+          "antecedents": [
+            "BAKING SET SPACEBOY DESIGN"
+          ],
+          "consequents": [
+            "BAKING SET 9 PIECE RETROSPOT"
+          ],
+          "support": 0.0126,
+          "confidence": 0.6593,
+          "lift": 15.59
+        }
+      ]
+    },
+    "2": {
+      "n_customers": 334,
+      "n_transactions": 515,
+      "min_support": 0.01,
+      "n_rules": 420,
+      "mean_lift": 8.59612449536205,
+      "top_rules": [
+        {
+          "antecedents": [
+            "HEART OF WICKER SMALL",
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "consequents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "support": 0.0155,
+          "confidence": 1.0,
+          "lift": 23.41
+        },
+        {
+          "antecedents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "consequents": [
+            "HEART OF WICKER SMALL",
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "support": 0.0155,
+          "confidence": 0.3636,
+          "lift": 23.41
+        },
+        {
+          "antecedents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0233,
+          "confidence": 0.75,
+          "lift": 22.72
+        },
+        {
+          "antecedents": [
+            "TOILET METAL SIGN"
+          ],
+          "consequents": [
+            "BATHROOM METAL SIGN"
+          ],
+          "support": 0.0291,
+          "confidence": 0.8824,
+          "lift": 22.72
+        },
+        {
+          "antecedents": [
+            "BATHROOM METAL SIGN"
+          ],
+          "consequents": [
+            "TOILET METAL SIGN"
+          ],
+          "support": 0.0291,
+          "confidence": 0.75,
+          "lift": 22.72
+        },
+        {
+          "antecedents": [
+            "WOODEN HEART CHRISTMAS SCANDINAVIAN"
+          ],
+          "consequents": [
+            "WOODEN STAR CHRISTMAS SCANDINAVIAN"
+          ],
+          "support": 0.0233,
+          "confidence": 0.7059,
+          "lift": 22.72
+        },
+        {
+          "antecedents": [
+            "HAND OVER THE CHOCOLATE   SIGN",
+            "GIN + TONIC DIET METAL SIGN"
+          ],
+          "consequents": [
+            "COOK WITH WINE METAL SIGN"
+          ],
+          "support": 0.0136,
+          "confidence": 0.7,
+          "lift": 22.53
+        },
+        {
+          "antecedents": [
+            "COOK WITH WINE METAL SIGN"
+          ],
+          "consequents": [
+            "HAND OVER THE CHOCOLATE   SIGN",
+            "GIN + TONIC DIET METAL SIGN"
+          ],
+          "support": 0.0136,
+          "confidence": 0.4375,
+          "lift": 22.53
+        },
+        {
+          "antecedents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "consequents": [
+            "HEART OF WICKER SMALL",
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "support": 0.0155,
+          "confidence": 0.381,
+          "lift": 21.8
+        },
+        {
+          "antecedents": [
+            "HEART OF WICKER SMALL",
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "support": 0.0155,
+          "confidence": 0.8889,
+          "lift": 21.8
+        }
+      ]
+    },
+    "3": {
+      "n_customers": 1318,
+      "n_transactions": 4926,
+      "min_support": 0.01,
+      "n_rules": 302,
+      "mean_lift": 6.912063283649104,
+      "top_rules": [
+        {
+          "antecedents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "consequents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "support": 0.0215,
+          "confidence": 0.7162,
+          "lift": 22.33
+        },
+        {
+          "antecedents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "consequents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "support": 0.0215,
+          "confidence": 0.6709,
+          "lift": 22.33
+        },
+        {
+          "antecedents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "support": 0.0193,
+          "confidence": 0.6013,
+          "lift": 16.83
+        },
+        {
+          "antecedents": [
+            "WOODEN FRAME ANTIQUE WHITE"
+          ],
+          "consequents": [
+            "WOODEN PICTURE FRAME WHITE FINISH"
+          ],
+          "support": 0.0193,
+          "confidence": 0.5398,
+          "lift": 16.83
+        },
+        {
+          "antecedents": [
+            "PLASTERS IN TIN CIRCUS PARADE"
+          ],
+          "consequents": [
+            "PLASTERS IN TIN SPACEBOY",
+            "PLASTERS IN TIN STRONGMAN"
+          ],
+          "support": 0.0106,
+          "confidence": 0.2512,
+          "lift": 16.28
+        },
+        {
+          "antecedents": [
+            "PLASTERS IN TIN SPACEBOY",
+            "PLASTERS IN TIN STRONGMAN"
+          ],
+          "consequents": [
+            "PLASTERS IN TIN CIRCUS PARADE"
+          ],
+          "support": 0.0106,
+          "confidence": 0.6842,
+          "lift": 16.28
+        },
+        {
+          "antecedents": [
+            "HAND WARMER OWL DESIGN"
+          ],
+          "consequents": [
+            "HAND WARMER BIRD DESIGN"
+          ],
+          "support": 0.0181,
+          "confidence": 0.5361,
+          "lift": 16.1
+        },
+        {
+          "antecedents": [
+            "HAND WARMER BIRD DESIGN"
+          ],
+          "consequents": [
+            "HAND WARMER OWL DESIGN"
+          ],
+          "support": 0.0181,
+          "confidence": 0.5427,
+          "lift": 16.1
+        },
+        {
+          "antecedents": [
+            "PLASTERS IN TIN CIRCUS PARADE",
+            "PLASTERS IN TIN SPACEBOY"
+          ],
+          "consequents": [
+            "PLASTERS IN TIN STRONGMAN"
+          ],
+          "support": 0.0106,
+          "confidence": 0.5149,
+          "lift": 13.78
+        },
+        {
+          "antecedents": [
+            "PLASTERS IN TIN STRONGMAN"
+          ],
+          "consequents": [
+            "PLASTERS IN TIN CIRCUS PARADE",
+            "PLASTERS IN TIN SPACEBOY"
+          ],
+          "support": 0.0106,
+          "confidence": 0.2826,
+          "lift": 13.78
+        }
+      ]
+    },
+    "4": {
+      "n_customers": 1180,
+      "n_transactions": 20767,
+      "min_support": 0.01,
+      "n_rules": 608,
+      "mean_lift": 7.554021257211069,
+      "top_rules": [
+        {
+          "antecedents": [
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN PICTURE FRAME WHITE FINISH",
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "support": 0.0112,
+          "confidence": 0.2952,
+          "lift": 19.1
+        },
+        {
+          "antecedents": [
+            "WOODEN PICTURE FRAME WHITE FINISH",
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "consequents": [
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "support": 0.0112,
+          "confidence": 0.7227,
+          "lift": 19.1
+        },
+        {
+          "antecedents": [
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN FRAME ANTIQUE WHITE",
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "support": 0.0116,
+          "confidence": 0.3053,
+          "lift": 18.93
+        },
+        {
+          "antecedents": [
+            "WOODEN FRAME ANTIQUE WHITE",
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "consequents": [
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "support": 0.0116,
+          "confidence": 0.7164,
+          "lift": 18.93
+        },
+        {
+          "antecedents": [
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN FRAME ANTIQUE WHITE",
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "support": 0.0116,
+          "confidence": 0.323,
+          "lift": 18.43
+        },
+        {
+          "antecedents": [
+            "WOODEN FRAME ANTIQUE WHITE",
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "consequents": [
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "support": 0.0116,
+          "confidence": 0.6593,
+          "lift": 18.43
+        },
+        {
+          "antecedents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "consequents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "support": 0.0227,
+          "confidence": 0.6038,
+          "lift": 18.04
+        },
+        {
+          "antecedents": [
+            "DOLLY GIRL LUNCH BOX"
+          ],
+          "consequents": [
+            "SPACEBOY LUNCH BOX"
+          ],
+          "support": 0.0227,
+          "confidence": 0.6777,
+          "lift": 18.04
+        },
+        {
+          "antecedents": [
+            "WOODEN PICTURE FRAME WHITE FINISH",
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "consequents": [
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "support": 0.0112,
+          "confidence": 0.6444,
+          "lift": 18.01
+        },
+        {
+          "antecedents": [
+            "WOOD S/3 CABINET ANT WHITE FINISH"
+          ],
+          "consequents": [
+            "WOODEN PICTURE FRAME WHITE FINISH",
+            "WOOD 2 DRAWER CABINET WHITE FINISH"
+          ],
+          "support": 0.0112,
+          "confidence": 0.3122,
+          "lift": 18.01
+        }
+      ]
+    },
+    "999": {
+      "n_customers": 7,
+      "n_transactions": 1704,
+      "min_support": 0.01,
+      "n_rules": 606,
+      "mean_lift": 7.0986426616457905,
+      "top_rules": [
+        {
+          "antecedents": [
+            "BLUE SPOT CERAMIC DRAWER KNOB"
+          ],
+          "consequents": [
+            "WHITE SPOT BLUE CERAMIC DRAWER KNOB",
+            "BLUE STRIPE CERAMIC DRAWER KNOB"
+          ],
+          "support": 0.0141,
+          "confidence": 0.4138,
+          "lift": 21.37
+        },
+        {
+          "antecedents": [
+            "WHITE SPOT BLUE CERAMIC DRAWER KNOB",
+            "BLUE STRIPE CERAMIC DRAWER KNOB"
+          ],
+          "consequents": [
+            "BLUE SPOT CERAMIC DRAWER KNOB"
+          ],
+          "support": 0.0141,
+          "confidence": 0.7273,
+          "lift": 21.37
+        },
+        {
+          "antecedents": [
+            "LUNCH BAG RED RETROSPOT",
+            "LUNCH BAG CARS BLUE"
+          ],
+          "consequents": [
+            "LUNCH BAG PINK POLKADOT"
+          ],
+          "support": 0.0117,
+          "confidence": 0.6897,
+          "lift": 19.59
+        },
+        {
+          "antecedents": [
+            "LUNCH BAG PINK POLKADOT"
+          ],
+          "consequents": [
+            "LUNCH BAG RED RETROSPOT",
+            "LUNCH BAG CARS BLUE"
+          ],
+          "support": 0.0117,
+          "confidence": 0.3333,
+          "lift": 19.59
+        },
+        {
+          "antecedents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "consequents": [
+            "GREEN REGENCY TEACUP AND SAUCER",
+            "REGENCY CAKESTAND 3 TIER"
+          ],
+          "support": 0.0188,
+          "confidence": 0.4324,
+          "lift": 19.39
+        },
+        {
+          "antecedents": [
+            "GREEN REGENCY TEACUP AND SAUCER",
+            "REGENCY CAKESTAND 3 TIER"
+          ],
+          "consequents": [
+            "ROSES REGENCY TEACUP AND SAUCER"
+          ],
+          "support": 0.0188,
+          "confidence": 0.8421,
+          "lift": 19.39
+        },
+        {
+          "antecedents": [
+            "LUNCH BAG RED RETROSPOT",
+            "LUNCH BAG  BLACK SKULL."
+          ],
+          "consequents": [
+            "LUNCH BAG PINK POLKADOT"
+          ],
+          "support": 0.0135,
+          "confidence": 0.6765,
+          "lift": 19.21
+        },
+        {
+          "antecedents": [
+            "LUNCH BAG PINK POLKADOT"
+          ],
+          "consequents": [
+            "LUNCH BAG RED RETROSPOT",
+            "LUNCH BAG  BLACK SKULL."
+          ],
+          "support": 0.0135,
+          "confidence": 0.3833,
+          "lift": 19.21
+        },
+        {
+          "antecedents": [
+            "WHITE SPOT BLUE CERAMIC DRAWER KNOB"
+          ],
+          "consequents": [
+            "RED STRIPE CERAMIC DRAWER KNOB",
+            "BLUE SPOT CERAMIC DRAWER KNOB"
+          ],
+          "support": 0.0117,
+          "confidence": 0.2899,
+          "lift": 19.0
+        },
+        {
+          "antecedents": [
+            "RED STRIPE CERAMIC DRAWER KNOB",
+            "BLUE SPOT CERAMIC DRAWER KNOB"
+          ],
+          "consequents": [
+            "WHITE SPOT BLUE CERAMIC DRAWER KNOB"
+          ],
+          "support": 0.0117,
+          "confidence": 0.7692,
+          "lift": 19.0
+        }
+      ]
+    }
+  },
+  "improvement_note": "v3: lower min_support 0.015->0.008, max_len 3->4 -> 694 global rules (868% more, mean_lift=11.07). Added per-cluster rules: 2314 total across 7 clusters."
+}

@@ -1,0 +1,521 @@
+timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
+1779473561797,30,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-1,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,26,0,18
+1779473561797,30,GET /api/v1/products/categories,200,OK,03-Categories 3-1,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,26,0,17
+1779473561797,31,GET /api/v1/products,200,OK,01-Browse Products 1-1,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,31,0,18
+1779473561830,9,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-1,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,8,0,1
+1779473561830,9,GET /api/v1/products/categories,200,OK,03-Categories 3-1,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,9,0,2
+1779473561830,10,GET /api/v1/products,200,OK,01-Browse Products 1-1,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,10,0,1
+1779473561839,8,GET /api/v1/products/categories,200,OK,03-Categories 3-1,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,8,0,1
+1779473561839,13,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-1,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,13,0,1
+1779473561840,15,GET /api/v1/products,200,OK,01-Browse Products 1-1,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,15,0,1
+1779473561848,8,GET /api/v1/products/categories,200,OK,03-Categories 3-1,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,8,0,1
+1779473561856,8,GET /api/v1/products/categories,200,OK,03-Categories 3-1,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,8,0,1
+1779473561856,8,GET /api/v1/products,200,OK,01-Browse Products 1-1,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473561864,7,GET /api/v1/products,200,OK,01-Browse Products 1-1,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473561905,7,GET /api/v1/products,200,OK,01-Browse Products 1-2,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473561912,8,GET /api/v1/products,200,OK,01-Browse Products 1-2,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473561920,8,GET /api/v1/products,200,OK,01-Browse Products 1-2,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473561929,7,GET /api/v1/products,200,OK,01-Browse Products 1-2,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473561936,7,GET /api/v1/products,200,OK,01-Browse Products 1-2,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473561797,262,POST /api/v1/auth/login,200,OK,02-Login 2-1,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,262,0,18
+1779473562061,6,GET /api/v1/products/categories,200,OK,03-Categories 3-2,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,6,0,0
+1779473562067,5,GET /api/v1/products/categories,200,OK,03-Categories 3-2,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473562073,5,GET /api/v1/products/categories,200,OK,03-Categories 3-2,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473562078,6,GET /api/v1/products/categories,200,OK,03-Categories 3-2,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,6,0,1
+1779473562085,5,GET /api/v1/products/categories,200,OK,03-Categories 3-2,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473562105,8,GET /api/v1/products,200,OK,01-Browse Products 1-3,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473562113,8,GET /api/v1/products,200,OK,01-Browse Products 1-3,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473562121,7,GET /api/v1/products,200,OK,01-Browse Products 1-3,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473562129,6,GET /api/v1/products,200,OK,01-Browse Products 1-3,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473562135,7,GET /api/v1/products,200,OK,01-Browse Products 1-3,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473562237,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-2,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473562242,5,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-2,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,5,0,1
+1779473562248,5,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-2,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,5,0,1
+1779473562060,233,POST /api/v1/auth/login,200,OK,02-Login 2-1,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,232,0,1
+1779473562304,7,GET /api/v1/products,200,OK,01-Browse Products 1-4,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473562311,7,GET /api/v1/products,200,OK,01-Browse Products 1-4,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473562318,7,GET /api/v1/products,200,OK,01-Browse Products 1-4,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473562325,8,GET /api/v1/products,200,OK,01-Browse Products 1-4,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473562333,7,GET /api/v1/products,200,OK,01-Browse Products 1-4,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473562394,4,GET /api/v1/products/categories,200,OK,03-Categories 3-3,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473562398,6,GET /api/v1/products/categories,200,OK,03-Categories 3-3,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473562404,5,GET /api/v1/products/categories,200,OK,03-Categories 3-3,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473562410,5,GET /api/v1/products/categories,200,OK,03-Categories 3-3,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473562415,5,GET /api/v1/products/categories,200,OK,03-Categories 3-3,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473562222,233,POST /api/v1/auth/login,200,OK,02-Login 2-2,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,233,0,1
+1779473562504,7,GET /api/v1/products,200,OK,01-Browse Products 1-5,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473562512,7,GET /api/v1/products,200,OK,01-Browse Products 1-5,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473562293,232,POST /api/v1/auth/login,200,OK,02-Login 2-1,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,232,0,1
+1779473562519,6,GET /api/v1/products,200,OK,01-Browse Products 1-5,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473562526,6,GET /api/v1/products,200,OK,01-Browse Products 1-5,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473562533,6,GET /api/v1/products,200,OK,01-Browse Products 1-5,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473562456,192,POST /api/v1/auth/login,Non HTTP response code: java.net.SocketException,Non HTTP response message: Connection reset,02-Login 2-2,text,false,,2630,0,1,1,http://127.0.0.1:5000/api/v1/auth/login,0,0,1
+1779473562704,700,GET /api/v1/products,200,OK,01-Browse Products 1-6,text,true,,10538,132,4,12,http://127.0.0.1:5000/api/v1/products,699,0,1
+1779473562728,682,GET /api/v1/products/categories,200,OK,03-Categories 3-4,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,681,0,1
+1779473562734,677,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-3,text,true,,3354,141,2,12,http://127.0.0.1:5000/api/v1/analytics/products/hot,676,0,1
+1779473563060,356,GET /api/v1/products/categories,200,OK,03-Categories 3-5,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,356,0,1
+1779473563234,184,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-4,text,true,,3354,141,2,12,http://127.0.0.1:5000/api/v1/analytics/products/hot,184,0,1
+1779473563393,30,GET /api/v1/products/categories,200,OK,03-Categories 3-6,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,30,0,1
+1779473563410,14,GET /api/v1/products/categories,200,OK,03-Categories 3-4,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,14,0,1
+1779473563411,18,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-3,text,true,,3354,141,2,12,http://127.0.0.1:5000/api/v1/analytics/products/hot,18,0,1
+1779473563417,14,GET /api/v1/products/categories,200,OK,03-Categories 3-5,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,14,0,1
+1779473563103,332,GET /api/v1/products,200,OK,01-Browse Products 1-8,text,true,,10538,132,4,12,http://127.0.0.1:5000/api/v1/products,332,0,1
+1779473563418,17,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-4,text,true,,3354,141,2,12,http://127.0.0.1:5000/api/v1/analytics/products/hot,17,0,1
+1779473563423,16,GET /api/v1/products/categories,200,OK,03-Categories 3-6,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,16,0,1
+1779473563425,16,GET /api/v1/products/categories,200,OK,03-Categories 3-4,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,16,0,0
+1779473563431,16,GET /api/v1/products/categories,200,OK,03-Categories 3-5,text,true,,1255,138,3,12,http://127.0.0.1:5000/api/v1/products/categories,16,0,1
+1779473562904,546,GET /api/v1/products,200,OK,01-Browse Products 1-7,text,true,,10538,132,4,12,http://127.0.0.1:5000/api/v1/products,545,0,1
+1779473563429,21,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-3,text,true,,3354,141,2,12,http://127.0.0.1:5000/api/v1/analytics/products/hot,21,0,1
+1779473563435,17,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-4,text,true,,3354,141,1,11,http://127.0.0.1:5000/api/v1/analytics/products/hot,17,0,0
+1779473563302,154,GET /api/v1/products,200,OK,01-Browse Products 1-9,text,true,,10538,132,4,10,http://127.0.0.1:5000/api/v1/products,154,0,1
+1779473563439,17,GET /api/v1/products/categories,200,OK,03-Categories 3-6,text,true,,1255,138,3,10,http://127.0.0.1:5000/api/v1/products/categories,17,0,1
+1779473563441,15,GET /api/v1/products/categories,200,OK,03-Categories 3-4,text,true,,1255,138,3,10,http://127.0.0.1:5000/api/v1/products/categories,15,0,1
+1779473563404,53,GET /api/v1/products,200,OK,01-Browse Products 1-6,text,true,,10538,132,4,10,http://127.0.0.1:5000/api/v1/products,53,0,1
+1779473563447,14,GET /api/v1/products/categories,200,OK,03-Categories 3-5,text,true,,1255,138,3,10,http://127.0.0.1:5000/api/v1/products/categories,14,0,1
+1779473563435,33,GET /api/v1/products,200,OK,01-Browse Products 1-8,text,true,,10538,132,4,10,http://127.0.0.1:5000/api/v1/products,32,0,1
+1779473563456,14,GET /api/v1/products/categories,200,OK,03-Categories 3-4,text,true,,1255,138,3,10,http://127.0.0.1:5000/api/v1/products/categories,14,0,1
+1779473563450,20,GET /api/v1/products,200,OK,01-Browse Products 1-7,text,true,,10538,132,4,10,http://127.0.0.1:5000/api/v1/products,19,0,0
+1779473563456,19,GET /api/v1/products/categories,200,OK,03-Categories 3-6,text,true,,1255,138,2,9,http://127.0.0.1:5000/api/v1/products/categories,19,0,1
+1779473563461,14,GET /api/v1/products/categories,200,OK,03-Categories 3-5,text,true,,1255,138,2,9,http://127.0.0.1:5000/api/v1/products/categories,14,0,1
+1779473563475,7,GET /api/v1/products/categories,200,OK,03-Categories 3-6,text,true,,1255,138,1,8,http://127.0.0.1:5000/api/v1/products/categories,7,0,1
+1779473563468,14,GET /api/v1/products,200,OK,01-Browse Products 1-8,text,true,,10538,132,4,8,http://127.0.0.1:5000/api/v1/products,14,0,1
+1779473563456,26,GET /api/v1/products,200,OK,01-Browse Products 1-9,text,true,,10538,132,4,8,http://127.0.0.1:5000/api/v1/products,26,0,1
+1779473563457,30,GET /api/v1/products,200,OK,01-Browse Products 1-6,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,30,0,1
+1779473563470,17,GET /api/v1/products,200,OK,01-Browse Products 1-7,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,17,0,1
+1779473563482,13,GET /api/v1/products,200,OK,01-Browse Products 1-9,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,13,0,1
+1779473563482,13,GET /api/v1/products,200,OK,01-Browse Products 1-8,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,13,0,1
+1779473563487,12,GET /api/v1/products,200,OK,01-Browse Products 1-7,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,12,0,1
+1779473563487,13,GET /api/v1/products,200,OK,01-Browse Products 1-6,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,13,0,1
+1779473563495,10,GET /api/v1/products,200,OK,01-Browse Products 1-8,text,true,,10538,132,5,8,http://127.0.0.1:5000/api/v1/products,10,0,1
+1779473563495,14,GET /api/v1/products,200,OK,01-Browse Products 1-9,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,14,0,1
+1779473563499,12,GET /api/v1/products,200,OK,01-Browse Products 1-7,text,true,,10538,132,4,7,http://127.0.0.1:5000/api/v1/products,12,0,0
+1779473563501,13,GET /api/v1/products,200,OK,01-Browse Products 1-10,text,true,,10538,132,3,6,http://127.0.0.1:5000/api/v1/products,13,0,0
+1779473563500,14,GET /api/v1/products,200,OK,01-Browse Products 1-6,text,true,,10538,132,3,6,http://127.0.0.1:5000/api/v1/products,14,0,0
+1779473563510,8,GET /api/v1/products,200,OK,01-Browse Products 1-9,text,true,,10538,132,2,5,http://127.0.0.1:5000/api/v1/products,8,0,0
+1779473563514,7,GET /api/v1/products,200,OK,01-Browse Products 1-10,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473563521,5,GET /api/v1/products,200,OK,01-Browse Products 1-10,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563526,6,GET /api/v1/products,200,OK,01-Browse Products 1-10,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563532,7,GET /api/v1/products,200,OK,01-Browse Products 1-10,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,7,0,0
+1779473562649,958,POST /api/v1/auth/login,200,OK,02-Login 2-2,text,true,,925,241,3,3,http://127.0.0.1:5000/api/v1/auth/login,958,0,1
+1779473562723,890,POST /api/v1/auth/login,200,OK,02-Login 2-3,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,890,0,0
+1779473563222,400,POST /api/v1/auth/login,200,OK,02-Login 2-4,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,400,0,1
+1779473563702,5,GET /api/v1/products,200,OK,01-Browse Products 1-11,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473563707,5,GET /api/v1/products,200,OK,01-Browse Products 1-11,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563712,6,GET /api/v1/products,200,OK,01-Browse Products 1-11,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563727,7,GET /api/v1/products/categories,200,OK,03-Categories 3-7,text,true,,1255,138,1,6,http://127.0.0.1:5000/api/v1/products/categories,7,0,1
+1779473563718,20,GET /api/v1/products,200,OK,01-Browse Products 1-11,text,true,,10538,132,1,6,http://127.0.0.1:5000/api/v1/products,20,0,1
+1779473563735,9,GET /api/v1/products/categories,200,OK,03-Categories 3-7,text,true,,1255,138,1,6,http://127.0.0.1:5000/api/v1/products/categories,9,0,1
+1779473563735,11,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-5,text,true,,3354,141,1,6,http://127.0.0.1:5000/api/v1/analytics/products/hot,10,0,1
+1779473563739,14,GET /api/v1/products,200,OK,01-Browse Products 1-11,text,true,,10538,132,1,6,http://127.0.0.1:5000/api/v1/products,14,0,1
+1779473563745,8,GET /api/v1/products/categories,200,OK,03-Categories 3-7,text,true,,1255,138,1,6,http://127.0.0.1:5000/api/v1/products/categories,8,0,1
+1779473563746,10,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-5,text,true,,3354,141,1,5,http://127.0.0.1:5000/api/v1/analytics/products/hot,10,0,1
+1779473563754,7,GET /api/v1/products/categories,200,OK,03-Categories 3-7,text,true,,1255,138,1,5,http://127.0.0.1:5000/api/v1/products/categories,7,0,1
+1779473563756,7,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-5,text,true,,3354,141,1,5,http://127.0.0.1:5000/api/v1/analytics/products/hot,7,0,1
+1779473563762,5,GET /api/v1/products/categories,200,OK,03-Categories 3-7,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473563614,231,POST /api/v1/auth/login,200,OK,02-Login 2-3,text,true,,925,241,3,3,http://127.0.0.1:5000/api/v1/auth/login,231,0,1
+1779473563622,224,POST /api/v1/auth/login,200,OK,02-Login 2-4,text,true,,925,241,3,3,http://127.0.0.1:5000/api/v1/auth/login,224,0,1
+1779473563901,5,GET /api/v1/products,200,OK,01-Browse Products 1-12,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563907,4,GET /api/v1/products,200,OK,01-Browse Products 1-12,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473563911,5,GET /api/v1/products,200,OK,01-Browse Products 1-12,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563916,4,GET /api/v1/products,200,OK,01-Browse Products 1-12,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473563921,4,GET /api/v1/products,200,OK,01-Browse Products 1-12,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473563727,221,POST /api/v1/auth/login,200,OK,02-Login 2-5,text,true,,925,241,3,3,http://127.0.0.1:5000/api/v1/auth/login,221,0,1
+1779473563845,217,POST /api/v1/auth/login,200,OK,02-Login 2-3,text,true,,925,241,3,4,http://127.0.0.1:5000/api/v1/auth/login,216,0,1
+1779473563847,215,POST /api/v1/auth/login,200,OK,02-Login 2-4,text,true,,925,241,3,4,http://127.0.0.1:5000/api/v1/auth/login,215,0,0
+1779473564058,4,GET /api/v1/products/categories,200,OK,03-Categories 3-8,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473564063,4,GET /api/v1/products/categories,200,OK,03-Categories 3-8,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473564067,3,GET /api/v1/products/categories,200,OK,03-Categories 3-8,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473564070,4,GET /api/v1/products/categories,200,OK,03-Categories 3-8,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473564074,4,GET /api/v1/products/categories,200,OK,03-Categories 3-8,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473564101,5,GET /api/v1/products,200,OK,01-Browse Products 1-13,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564106,5,GET /api/v1/products,200,OK,01-Browse Products 1-13,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564111,5,GET /api/v1/products,200,OK,01-Browse Products 1-13,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564116,5,GET /api/v1/products,200,OK,01-Browse Products 1-13,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564121,5,GET /api/v1/products,200,OK,01-Browse Products 1-13,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473563948,216,POST /api/v1/auth/login,200,OK,02-Login 2-5,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,215,0,1
+1779473564233,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-6,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473564237,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-6,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473564241,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-6,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473564301,5,GET /api/v1/products,200,OK,01-Browse Products 1-14,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473564306,5,GET /api/v1/products,200,OK,01-Browse Products 1-14,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564311,5,GET /api/v1/products,200,OK,01-Browse Products 1-14,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473564316,4,GET /api/v1/products,200,OK,01-Browse Products 1-14,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473564320,5,GET /api/v1/products,200,OK,01-Browse Products 1-14,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564164,215,POST /api/v1/auth/login,200,OK,02-Login 2-5,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,214,0,1
+1779473564391,3,GET /api/v1/products/categories,200,OK,03-Categories 3-9,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473564395,3,GET /api/v1/products/categories,200,OK,03-Categories 3-9,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473564398,3,GET /api/v1/products/categories,200,OK,03-Categories 3-9,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473564401,3,GET /api/v1/products/categories,200,OK,03-Categories 3-9,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473564405,2,GET /api/v1/products/categories,200,OK,03-Categories 3-9,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,2,0,0
+1779473564221,215,POST /api/v1/auth/login,200,OK,02-Login 2-6,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,215,0,1
+1779473564502,5,GET /api/v1/products,200,OK,01-Browse Products 1-15,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564507,5,GET /api/v1/products,200,OK,01-Browse Products 1-15,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564512,5,GET /api/v1/products,200,OK,01-Browse Products 1-15,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564517,6,GET /api/v1/products,200,OK,01-Browse Products 1-15,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473564523,5,GET /api/v1/products,200,OK,01-Browse Products 1-15,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564437,212,POST /api/v1/auth/login,200,OK,02-Login 2-6,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,212,0,0
+1779473564702,4,GET /api/v1/products,200,OK,01-Browse Products 1-16,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473564707,4,GET /api/v1/products,200,OK,01-Browse Products 1-16,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473564711,5,GET /api/v1/products,200,OK,01-Browse Products 1-16,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564716,4,GET /api/v1/products,200,OK,01-Browse Products 1-16,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473564721,7,GET /api/v1/products,200,OK,01-Browse Products 1-16,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473564725,3,GET /api/v1/products/categories,200,OK,03-Categories 3-10,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473564728,4,GET /api/v1/products/categories,200,OK,03-Categories 3-10,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473564732,3,GET /api/v1/products/categories,200,OK,03-Categories 3-10,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473564736,3,GET /api/v1/products/categories,200,OK,03-Categories 3-10,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473564736,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-7,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473564739,4,GET /api/v1/products/categories,200,OK,03-Categories 3-10,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473564740,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-7,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473564745,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-7,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473564650,216,POST /api/v1/auth/login,200,OK,02-Login 2-6,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,216,0,0
+1779473564900,5,GET /api/v1/products,200,OK,01-Browse Products 1-17,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564905,5,GET /api/v1/products,200,OK,01-Browse Products 1-17,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564911,4,GET /api/v1/products,200,OK,01-Browse Products 1-17,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473564915,5,GET /api/v1/products,200,OK,01-Browse Products 1-17,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473564920,5,GET /api/v1/products,200,OK,01-Browse Products 1-17,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473564721,216,POST /api/v1/auth/login,200,OK,02-Login 2-7,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,216,0,1
+1779473565057,4,GET /api/v1/products/categories,200,OK,03-Categories 3-11,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473565061,3,GET /api/v1/products/categories,200,OK,03-Categories 3-11,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473565065,4,GET /api/v1/products/categories,200,OK,03-Categories 3-11,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473565069,5,GET /api/v1/products/categories,200,OK,03-Categories 3-11,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473565074,4,GET /api/v1/products/categories,200,OK,03-Categories 3-11,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473565101,5,GET /api/v1/products,200,OK,01-Browse Products 1-18,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565106,7,GET /api/v1/products,200,OK,01-Browse Products 1-18,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473565113,5,GET /api/v1/products,200,OK,01-Browse Products 1-18,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565119,5,GET /api/v1/products,200,OK,01-Browse Products 1-18,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565125,5,GET /api/v1/products,200,OK,01-Browse Products 1-18,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473564938,216,POST /api/v1/auth/login,200,OK,02-Login 2-7,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,216,0,0
+1779473565234,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-8,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473565238,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-8,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473565241,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-8,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,1
+1779473565302,5,GET /api/v1/products,200,OK,01-Browse Products 1-19,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565307,5,GET /api/v1/products,200,OK,01-Browse Products 1-19,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565313,5,GET /api/v1/products,200,OK,01-Browse Products 1-19,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565318,5,GET /api/v1/products,200,OK,01-Browse Products 1-19,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565324,4,GET /api/v1/products,200,OK,01-Browse Products 1-19,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473565154,217,POST /api/v1/auth/login,200,OK,02-Login 2-7,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,217,0,1
+1779473565390,4,GET /api/v1/products/categories,200,OK,03-Categories 3-12,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473565394,3,GET /api/v1/products/categories,200,OK,03-Categories 3-12,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473565397,3,GET /api/v1/products/categories,200,OK,03-Categories 3-12,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473565400,3,GET /api/v1/products/categories,200,OK,03-Categories 3-12,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473565404,3,GET /api/v1/products/categories,200,OK,03-Categories 3-12,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473565220,217,POST /api/v1/auth/login,200,OK,02-Login 2-8,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,217,0,1
+1779473565502,4,GET /api/v1/products,200,OK,01-Browse Products 1-20,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473565507,4,GET /api/v1/products,200,OK,01-Browse Products 1-20,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473565511,4,GET /api/v1/products,200,OK,01-Browse Products 1-20,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473565516,4,GET /api/v1/products,200,OK,01-Browse Products 1-20,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473565520,5,GET /api/v1/products,200,OK,01-Browse Products 1-20,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565438,212,POST /api/v1/auth/login,200,OK,02-Login 2-8,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,212,0,1
+1779473565702,5,GET /api/v1/products,200,OK,01-Browse Products 1-21,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473565707,5,GET /api/v1/products,200,OK,01-Browse Products 1-21,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565712,5,GET /api/v1/products,200,OK,01-Browse Products 1-21,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565717,6,GET /api/v1/products,200,OK,01-Browse Products 1-21,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565722,5,GET /api/v1/products/categories,200,OK,03-Categories 3-13,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473565723,6,GET /api/v1/products,200,OK,01-Browse Products 1-21,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473565727,5,GET /api/v1/products/categories,200,OK,03-Categories 3-13,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473565733,3,GET /api/v1/products/categories,200,OK,03-Categories 3-13,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473565734,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-9,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473565736,5,GET /api/v1/products/categories,200,OK,03-Categories 3-13,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473565738,5,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-9,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,5,0,1
+1779473565741,4,GET /api/v1/products/categories,200,OK,03-Categories 3-13,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473565743,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-9,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473565651,220,POST /api/v1/auth/login,200,OK,02-Login 2-8,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,220,0,0
+1779473565901,5,GET /api/v1/products,200,OK,01-Browse Products 1-22,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473565907,4,GET /api/v1/products,200,OK,01-Browse Products 1-22,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473565911,5,GET /api/v1/products,200,OK,01-Browse Products 1-22,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565916,5,GET /api/v1/products,200,OK,01-Browse Products 1-22,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565922,5,GET /api/v1/products,200,OK,01-Browse Products 1-22,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473565721,231,POST /api/v1/auth/login,200,OK,02-Login 2-9,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,231,0,0
+1779473566057,4,GET /api/v1/products/categories,200,OK,03-Categories 3-14,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473566061,4,GET /api/v1/products/categories,200,OK,03-Categories 3-14,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473566065,3,GET /api/v1/products/categories,200,OK,03-Categories 3-14,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473566068,3,GET /api/v1/products/categories,200,OK,03-Categories 3-14,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473566071,4,GET /api/v1/products/categories,200,OK,03-Categories 3-14,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473566101,5,GET /api/v1/products,200,OK,01-Browse Products 1-23,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566106,5,GET /api/v1/products,200,OK,01-Browse Products 1-23,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566111,5,GET /api/v1/products,200,OK,01-Browse Products 1-23,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566116,6,GET /api/v1/products,200,OK,01-Browse Products 1-23,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473566122,5,GET /api/v1/products,200,OK,01-Browse Products 1-23,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473565953,227,POST /api/v1/auth/login,200,OK,02-Login 2-9,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,227,0,0
+1779473566234,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-10,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473566238,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-10,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,1
+1779473566242,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-10,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473566300,7,GET /api/v1/products,200,OK,01-Browse Products 1-24,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473566307,6,GET /api/v1/products,200,OK,01-Browse Products 1-24,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473566313,6,GET /api/v1/products,200,OK,01-Browse Products 1-24,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473566319,5,GET /api/v1/products,200,OK,01-Browse Products 1-24,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566324,5,GET /api/v1/products,200,OK,01-Browse Products 1-24,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566391,4,GET /api/v1/products/categories,200,OK,03-Categories 3-15,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473566395,3,GET /api/v1/products/categories,200,OK,03-Categories 3-15,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473566398,4,GET /api/v1/products/categories,200,OK,03-Categories 3-15,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473566402,4,GET /api/v1/products/categories,200,OK,03-Categories 3-15,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473566180,226,POST /api/v1/auth/login,200,OK,02-Login 2-9,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,226,0,1
+1779473566406,4,GET /api/v1/products/categories,200,OK,03-Categories 3-15,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473566223,226,POST /api/v1/auth/login,200,OK,02-Login 2-10,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,226,0,1
+1779473566502,5,GET /api/v1/products,200,OK,01-Browse Products 1-25,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473566507,5,GET /api/v1/products,200,OK,01-Browse Products 1-25,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566513,4,GET /api/v1/products,200,OK,01-Browse Products 1-25,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473566518,5,GET /api/v1/products,200,OK,01-Browse Products 1-25,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473566523,5,GET /api/v1/products,200,OK,01-Browse Products 1-25,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566449,243,POST /api/v1/auth/login,200,OK,02-Login 2-10,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,243,0,1
+1779473566701,5,GET /api/v1/products,200,OK,01-Browse Products 1-26,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473566706,5,GET /api/v1/products,200,OK,01-Browse Products 1-26,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473566711,6,GET /api/v1/products,200,OK,01-Browse Products 1-26,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473566717,7,GET /api/v1/products,200,OK,01-Browse Products 1-26,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473566722,6,GET /api/v1/products/categories,200,OK,03-Categories 3-16,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,6,0,1
+1779473566724,7,GET /api/v1/products,200,OK,01-Browse Products 1-26,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,7,0,0
+1779473566728,6,GET /api/v1/products/categories,200,OK,03-Categories 3-16,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473566734,4,GET /api/v1/products/categories,200,OK,03-Categories 3-16,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473566734,5,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-11,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,5,0,1
+1779473566738,5,GET /api/v1/products/categories,200,OK,03-Categories 3-16,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473566740,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-11,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473566743,5,GET /api/v1/products/categories,200,OK,03-Categories 3-16,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473566743,6,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-11,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,6,0,1
+1779473566902,4,GET /api/v1/products,200,OK,01-Browse Products 1-27,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473566907,4,GET /api/v1/products,200,OK,01-Browse Products 1-27,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473566912,5,GET /api/v1/products,200,OK,01-Browse Products 1-27,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473566693,227,POST /api/v1/auth/login,200,OK,02-Login 2-10,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,227,0,1
+1779473566917,5,GET /api/v1/products,200,OK,01-Browse Products 1-27,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473566922,5,GET /api/v1/products,200,OK,01-Browse Products 1-27,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566721,226,POST /api/v1/auth/login,200,OK,02-Login 2-11,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,226,0,0
+1779473567054,4,GET /api/v1/products/categories,200,OK,03-Categories 3-17,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473567058,4,GET /api/v1/products/categories,200,OK,03-Categories 3-17,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473567062,4,GET /api/v1/products/categories,200,OK,03-Categories 3-17,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473567066,4,GET /api/v1/products/categories,200,OK,03-Categories 3-17,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473567070,4,GET /api/v1/products/categories,200,OK,03-Categories 3-17,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473567102,5,GET /api/v1/products,200,OK,01-Browse Products 1-28,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473567107,5,GET /api/v1/products,200,OK,01-Browse Products 1-28,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567112,5,GET /api/v1/products,200,OK,01-Browse Products 1-28,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567117,5,GET /api/v1/products,200,OK,01-Browse Products 1-28,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567122,5,GET /api/v1/products,200,OK,01-Browse Products 1-28,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473566947,226,POST /api/v1/auth/login,200,OK,02-Login 2-11,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,225,0,1
+1779473567234,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-12,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473567238,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-12,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,0
+1779473567243,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-12,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473567302,5,GET /api/v1/products,200,OK,01-Browse Products 1-29,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473567308,5,GET /api/v1/products,200,OK,01-Browse Products 1-29,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473567313,5,GET /api/v1/products,200,OK,01-Browse Products 1-29,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567319,5,GET /api/v1/products,200,OK,01-Browse Products 1-29,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473567324,6,GET /api/v1/products,200,OK,01-Browse Products 1-29,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473567387,4,GET /api/v1/products/categories,200,OK,03-Categories 3-18,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473567391,3,GET /api/v1/products/categories,200,OK,03-Categories 3-18,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473567395,4,GET /api/v1/products/categories,200,OK,03-Categories 3-18,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473567173,229,POST /api/v1/auth/login,200,OK,02-Login 2-11,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,229,0,1
+1779473567399,6,GET /api/v1/products/categories,200,OK,03-Categories 3-18,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,6,0,1
+1779473567405,4,GET /api/v1/products/categories,200,OK,03-Categories 3-18,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473567220,231,POST /api/v1/auth/login,200,OK,02-Login 2-12,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,231,0,1
+1779473567501,5,GET /api/v1/products,200,OK,01-Browse Products 1-30,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567506,4,GET /api/v1/products,200,OK,01-Browse Products 1-30,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567511,5,GET /api/v1/products,200,OK,01-Browse Products 1-30,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473567516,6,GET /api/v1/products,200,OK,01-Browse Products 1-30,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473567522,7,GET /api/v1/products,200,OK,01-Browse Products 1-30,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,0
+1779473567451,236,POST /api/v1/auth/login,200,OK,02-Login 2-12,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,236,0,1
+1779473567700,5,GET /api/v1/products,200,OK,01-Browse Products 1-31,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567705,4,GET /api/v1/products,200,OK,01-Browse Products 1-31,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567710,4,GET /api/v1/products,200,OK,01-Browse Products 1-31,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567714,8,GET /api/v1/products,200,OK,01-Browse Products 1-31,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,8,0,1
+1779473567720,7,GET /api/v1/products/categories,200,OK,03-Categories 3-19,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,7,0,1
+1779473567722,9,GET /api/v1/products,200,OK,01-Browse Products 1-31,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,9,0,1
+1779473567727,6,GET /api/v1/products/categories,200,OK,03-Categories 3-19,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,6,0,0
+1779473567733,4,GET /api/v1/products/categories,200,OK,03-Categories 3-19,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473567734,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-13,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473567737,5,GET /api/v1/products/categories,200,OK,03-Categories 3-19,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473567738,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-13,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473567742,4,GET /api/v1/products/categories,200,OK,03-Categories 3-19,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473567742,5,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-13,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,5,0,1
+1779473567900,5,GET /api/v1/products,200,OK,01-Browse Products 1-32,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567687,223,POST /api/v1/auth/login,200,OK,02-Login 2-12,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,223,0,1
+1779473567906,4,GET /api/v1/products,200,OK,01-Browse Products 1-32,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567911,4,GET /api/v1/products,200,OK,01-Browse Products 1-32,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567915,6,GET /api/v1/products,200,OK,01-Browse Products 1-32,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473567921,5,GET /api/v1/products,200,OK,01-Browse Products 1-32,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473567721,227,POST /api/v1/auth/login,200,OK,02-Login 2-13,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,227,0,1
+1779473568054,4,GET /api/v1/products/categories,200,OK,03-Categories 3-20,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473568058,3,GET /api/v1/products/categories,200,OK,03-Categories 3-20,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473568061,3,GET /api/v1/products/categories,200,OK,03-Categories 3-20,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473568064,4,GET /api/v1/products/categories,200,OK,03-Categories 3-20,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473568068,3,GET /api/v1/products/categories,200,OK,03-Categories 3-20,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473568101,6,GET /api/v1/products,200,OK,01-Browse Products 1-33,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568107,5,GET /api/v1/products,200,OK,01-Browse Products 1-33,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473568112,4,GET /api/v1/products,200,OK,01-Browse Products 1-33,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473568116,5,GET /api/v1/products,200,OK,01-Browse Products 1-33,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473568121,5,GET /api/v1/products,200,OK,01-Browse Products 1-33,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473567948,221,POST /api/v1/auth/login,200,OK,02-Login 2-13,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,220,0,1
+1779473568234,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-14,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473568238,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-14,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473568241,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-14,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473568301,6,GET /api/v1/products,200,OK,01-Browse Products 1-34,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568307,5,GET /api/v1/products,200,OK,01-Browse Products 1-34,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473568312,6,GET /api/v1/products,200,OK,01-Browse Products 1-34,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568318,6,GET /api/v1/products,200,OK,01-Browse Products 1-34,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568324,6,GET /api/v1/products,200,OK,01-Browse Products 1-34,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568388,5,GET /api/v1/products/categories,200,OK,03-Categories 3-21,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473568393,4,GET /api/v1/products/categories,200,OK,03-Categories 3-21,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473568169,229,POST /api/v1/auth/login,200,OK,02-Login 2-13,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,229,0,0
+1779473568397,5,GET /api/v1/products/categories,200,OK,03-Categories 3-21,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473568402,4,GET /api/v1/products/categories,200,OK,03-Categories 3-21,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473568406,4,GET /api/v1/products/categories,200,OK,03-Categories 3-21,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473568221,223,POST /api/v1/auth/login,200,OK,02-Login 2-14,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,223,0,1
+1779473568501,6,GET /api/v1/products,200,OK,01-Browse Products 1-35,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568507,6,GET /api/v1/products,200,OK,01-Browse Products 1-35,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473568513,4,GET /api/v1/products,200,OK,01-Browse Products 1-35,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473568517,4,GET /api/v1/products,200,OK,01-Browse Products 1-35,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473568521,5,GET /api/v1/products,200,OK,01-Browse Products 1-35,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473568445,225,POST /api/v1/auth/login,200,OK,02-Login 2-14,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,225,0,1
+1779473568701,4,GET /api/v1/products,200,OK,01-Browse Products 1-36,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473568706,6,GET /api/v1/products,200,OK,01-Browse Products 1-36,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473568712,5,GET /api/v1/products,200,OK,01-Browse Products 1-36,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473568717,6,GET /api/v1/products,200,OK,01-Browse Products 1-36,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473568720,5,GET /api/v1/products/categories,200,OK,03-Categories 3-22,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473568725,4,GET /api/v1/products/categories,200,OK,03-Categories 3-22,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473568723,7,GET /api/v1/products,200,OK,01-Browse Products 1-36,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473568729,4,GET /api/v1/products/categories,200,OK,03-Categories 3-22,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473568733,3,GET /api/v1/products/categories,200,OK,03-Categories 3-22,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473568735,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-15,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473568736,5,GET /api/v1/products/categories,200,OK,03-Categories 3-22,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473568739,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-15,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473568744,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-15,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,0
+1779473568670,225,POST /api/v1/auth/login,200,OK,02-Login 2-14,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,225,0,1
+1779473568902,4,GET /api/v1/products,200,OK,01-Browse Products 1-37,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473568907,4,GET /api/v1/products,200,OK,01-Browse Products 1-37,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473568911,5,GET /api/v1/products,200,OK,01-Browse Products 1-37,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473568917,4,GET /api/v1/products,200,OK,01-Browse Products 1-37,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473568921,5,GET /api/v1/products,200,OK,01-Browse Products 1-37,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473568719,226,POST /api/v1/auth/login,200,OK,02-Login 2-15,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,226,0,1
+1779473569054,5,GET /api/v1/products/categories,200,OK,03-Categories 3-23,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473569059,4,GET /api/v1/products/categories,200,OK,03-Categories 3-23,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569064,5,GET /api/v1/products/categories,200,OK,03-Categories 3-23,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473569069,4,GET /api/v1/products/categories,200,OK,03-Categories 3-23,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569073,4,GET /api/v1/products/categories,200,OK,03-Categories 3-23,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569102,6,GET /api/v1/products,200,OK,01-Browse Products 1-38,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473569108,5,GET /api/v1/products,200,OK,01-Browse Products 1-38,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569113,6,GET /api/v1/products,200,OK,01-Browse Products 1-38,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473569120,6,GET /api/v1/products,200,OK,01-Browse Products 1-38,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473569126,6,GET /api/v1/products,200,OK,01-Browse Products 1-38,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473568946,237,POST /api/v1/auth/login,200,OK,02-Login 2-15,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,237,0,1
+1779473569235,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-16,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,0
+1779473569239,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-16,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,0
+1779473569243,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-16,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473569302,5,GET /api/v1/products,200,OK,01-Browse Products 1-39,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473569307,5,GET /api/v1/products,200,OK,01-Browse Products 1-39,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569312,7,GET /api/v1/products,200,OK,01-Browse Products 1-39,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473569319,6,GET /api/v1/products,200,OK,01-Browse Products 1-39,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473569325,7,GET /api/v1/products,200,OK,01-Browse Products 1-39,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473569387,5,GET /api/v1/products/categories,200,OK,03-Categories 3-24,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473569392,4,GET /api/v1/products/categories,200,OK,03-Categories 3-24,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569396,4,GET /api/v1/products/categories,200,OK,03-Categories 3-24,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569401,3,GET /api/v1/products/categories,200,OK,03-Categories 3-24,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473569404,5,GET /api/v1/products/categories,200,OK,03-Categories 3-24,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473569183,227,POST /api/v1/auth/login,200,OK,02-Login 2-15,text,true,,925,241,2,2,http://127.0.0.1:5000/api/v1/auth/login,227,0,1
+1779473569220,230,POST /api/v1/auth/login,200,OK,02-Login 2-16,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,230,0,1
+1779473569502,5,GET /api/v1/products,200,OK,01-Browse Products 1-40,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569507,5,GET /api/v1/products,200,OK,01-Browse Products 1-40,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569512,5,GET /api/v1/products,200,OK,01-Browse Products 1-40,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569517,6,GET /api/v1/products,200,OK,01-Browse Products 1-40,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473569523,7,GET /api/v1/products,200,OK,01-Browse Products 1-40,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473569450,227,POST /api/v1/auth/login,200,OK,02-Login 2-16,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,227,0,1
+1779473569701,6,GET /api/v1/products,200,OK,01-Browse Products 1-41,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473569707,5,GET /api/v1/products,200,OK,01-Browse Products 1-41,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569712,4,GET /api/v1/products,200,OK,01-Browse Products 1-41,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473569716,7,GET /api/v1/products,200,OK,01-Browse Products 1-41,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,7,0,1
+1779473569720,6,GET /api/v1/products/categories,200,OK,03-Categories 3-25,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,6,0,0
+1779473569723,6,GET /api/v1/products,200,OK,01-Browse Products 1-41,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473569727,6,GET /api/v1/products/categories,200,OK,03-Categories 3-25,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,6,0,0
+1779473569733,4,GET /api/v1/products/categories,200,OK,03-Categories 3-25,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569733,6,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-17,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,6,0,1
+1779473569738,3,GET /api/v1/products/categories,200,OK,03-Categories 3-25,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473569739,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-17,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,0
+1779473569741,4,GET /api/v1/products/categories,200,OK,03-Categories 3-25,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473569743,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-17,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,0
+1779473569678,228,POST /api/v1/auth/login,200,OK,02-Login 2-16,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,228,0,1
+1779473569901,5,GET /api/v1/products,200,OK,01-Browse Products 1-42,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473569906,5,GET /api/v1/products,200,OK,01-Browse Products 1-42,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473569911,6,GET /api/v1/products,200,OK,01-Browse Products 1-42,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473569917,5,GET /api/v1/products,200,OK,01-Browse Products 1-42,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,1
+1779473569922,4,GET /api/v1/products,200,OK,01-Browse Products 1-42,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473569720,231,POST /api/v1/auth/login,200,OK,02-Login 2-17,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,231,0,1
+1779473570053,4,GET /api/v1/products/categories,200,OK,03-Categories 3-26,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473570057,3,GET /api/v1/products/categories,200,OK,03-Categories 3-26,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473570060,4,GET /api/v1/products/categories,200,OK,03-Categories 3-26,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473570064,3,GET /api/v1/products/categories,200,OK,03-Categories 3-26,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473570067,4,GET /api/v1/products/categories,200,OK,03-Categories 3-26,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473570104,5,GET /api/v1/products,200,OK,01-Browse Products 1-43,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473570109,5,GET /api/v1/products,200,OK,01-Browse Products 1-43,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473570114,5,GET /api/v1/products,200,OK,01-Browse Products 1-43,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570119,5,GET /api/v1/products,200,OK,01-Browse Products 1-43,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473570124,5,GET /api/v1/products,200,OK,01-Browse Products 1-43,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473569951,224,POST /api/v1/auth/login,200,OK,02-Login 2-17,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,224,0,1
+1779473570234,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-18,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473570238,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-18,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473570242,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-18,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,1
+1779473570303,6,GET /api/v1/products,200,OK,01-Browse Products 1-44,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473570309,6,GET /api/v1/products,200,OK,01-Browse Products 1-44,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570315,4,GET /api/v1/products,200,OK,01-Browse Products 1-44,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473570319,6,GET /api/v1/products,200,OK,01-Browse Products 1-44,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473570325,14,GET /api/v1/products,200,OK,01-Browse Products 1-44,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,13,0,1
+1779473570386,6,GET /api/v1/products/categories,200,OK,03-Categories 3-27,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473570392,7,GET /api/v1/products/categories,200,OK,03-Categories 3-27,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,7,0,1
+1779473570399,5,GET /api/v1/products/categories,200,OK,03-Categories 3-27,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473570404,4,GET /api/v1/products/categories,200,OK,03-Categories 3-27,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473570175,236,POST /api/v1/auth/login,200,OK,02-Login 2-17,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,236,0,1
+1779473570408,4,GET /api/v1/products/categories,200,OK,03-Categories 3-27,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473570220,237,POST /api/v1/auth/login,200,OK,02-Login 2-18,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,237,0,1
+1779473570501,6,GET /api/v1/products,200,OK,01-Browse Products 1-45,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473570507,6,GET /api/v1/products,200,OK,01-Browse Products 1-45,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473570513,5,GET /api/v1/products,200,OK,01-Browse Products 1-45,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570518,6,GET /api/v1/products,200,OK,01-Browse Products 1-45,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473570524,5,GET /api/v1/products,200,OK,01-Browse Products 1-45,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473570457,233,POST /api/v1/auth/login,200,OK,02-Login 2-18,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,233,0,1
+1779473570700,4,GET /api/v1/products,200,OK,01-Browse Products 1-46,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473570704,5,GET /api/v1/products,200,OK,01-Browse Products 1-46,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570709,5,GET /api/v1/products,200,OK,01-Browse Products 1-46,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,0
+1779473570714,4,GET /api/v1/products,200,OK,01-Browse Products 1-46,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473570717,7,GET /api/v1/products/categories,200,OK,03-Categories 3-28,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,7,0,0
+1779473570718,9,GET /api/v1/products,200,OK,01-Browse Products 1-46,text,true,,10538,132,1,4,http://127.0.0.1:5000/api/v1/products,9,0,1
+1779473570724,5,GET /api/v1/products/categories,200,OK,03-Categories 3-28,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,5,0,0
+1779473570729,4,GET /api/v1/products/categories,200,OK,03-Categories 3-28,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473570733,5,GET /api/v1/products/categories,200,OK,03-Categories 3-28,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,5,0,1
+1779473570733,5,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-19,text,true,,3354,141,1,4,http://127.0.0.1:5000/api/v1/analytics/products/hot,5,0,1
+1779473570738,4,GET /api/v1/products/categories,200,OK,03-Categories 3-28,text,true,,1255,138,1,4,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473570738,6,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-19,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,6,0,1
+1779473570744,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-19,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,1
+1779473570902,6,GET /api/v1/products,200,OK,01-Browse Products 1-47,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473570690,222,POST /api/v1/auth/login,200,OK,02-Login 2-18,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,222,0,1
+1779473570908,6,GET /api/v1/products,200,OK,01-Browse Products 1-47,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473570914,7,GET /api/v1/products,200,OK,01-Browse Products 1-47,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473570921,5,GET /api/v1/products,200,OK,01-Browse Products 1-47,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570926,5,GET /api/v1/products,200,OK,01-Browse Products 1-47,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570720,229,POST /api/v1/auth/login,200,OK,02-Login 2-19,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,229,0,1
+1779473571052,3,GET /api/v1/products/categories,200,OK,03-Categories 3-29,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473571055,4,GET /api/v1/products/categories,200,OK,03-Categories 3-29,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473571059,3,GET /api/v1/products/categories,200,OK,03-Categories 3-29,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473571062,3,GET /api/v1/products/categories,200,OK,03-Categories 3-29,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,3,0,0
+1779473571065,4,GET /api/v1/products/categories,200,OK,03-Categories 3-29,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473571101,5,GET /api/v1/products,200,OK,01-Browse Products 1-48,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473571107,4,GET /api/v1/products,200,OK,01-Browse Products 1-48,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473571111,5,GET /api/v1/products,200,OK,01-Browse Products 1-48,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473571116,4,GET /api/v1/products,200,OK,01-Browse Products 1-48,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473571120,5,GET /api/v1/products,200,OK,01-Browse Products 1-48,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473570949,227,POST /api/v1/auth/login,200,OK,02-Login 2-19,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,227,0,1
+1779473571233,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-20,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473571237,4,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-20,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,4,0,1
+1779473571241,3,GET /api/v1/analytics/products/hot,200,OK,04-Hot Products 4-20,text,true,,3354,141,1,3,http://127.0.0.1:5000/api/v1/analytics/products/hot,3,0,0
+1779473571302,4,GET /api/v1/products,200,OK,01-Browse Products 1-49,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473571306,5,GET /api/v1/products,200,OK,01-Browse Products 1-49,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473571311,6,GET /api/v1/products,200,OK,01-Browse Products 1-49,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,6,0,0
+1779473571317,6,GET /api/v1/products,200,OK,01-Browse Products 1-49,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473571323,4,GET /api/v1/products,200,OK,01-Browse Products 1-49,text,true,,10538,132,1,3,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473571384,4,GET /api/v1/products/categories,200,OK,03-Categories 3-30,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,1
+1779473571388,4,GET /api/v1/products/categories,200,OK,03-Categories 3-30,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473571392,3,GET /api/v1/products/categories,200,OK,03-Categories 3-30,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,3,0,1
+1779473571396,4,GET /api/v1/products/categories,200,OK,03-Categories 3-30,text,true,,1255,138,1,3,http://127.0.0.1:5000/api/v1/products/categories,4,0,0
+1779473571176,225,POST /api/v1/auth/login,200,OK,02-Login 2-19,text,true,,925,241,2,3,http://127.0.0.1:5000/api/v1/auth/login,225,0,1
+1779473571400,6,GET /api/v1/products/categories,200,OK,03-Categories 3-30,text,true,,1255,138,1,2,http://127.0.0.1:5000/api/v1/products/categories,6,0,2
+1779473571220,226,POST /api/v1/auth/login,200,OK,02-Login 2-20,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,226,0,0
+1779473571501,7,GET /api/v1/products,200,OK,01-Browse Products 1-50,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,7,0,2
+1779473571509,6,GET /api/v1/products,200,OK,01-Browse Products 1-50,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,6,0,1
+1779473571515,6,GET /api/v1/products,200,OK,01-Browse Products 1-50,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473571521,4,GET /api/v1/products,200,OK,01-Browse Products 1-50,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,4,0,0
+1779473571525,5,GET /api/v1/products,200,OK,01-Browse Products 1-50,text,true,,10538,132,1,2,http://127.0.0.1:5000/api/v1/products,5,0,1
+1779473571446,240,POST /api/v1/auth/login,200,OK,02-Login 2-20,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,240,0,2
+1779473571686,228,POST /api/v1/auth/login,200,OK,02-Login 2-20,text,true,,925,241,1,1,http://127.0.0.1:5000/api/v1/auth/login,228,0,1

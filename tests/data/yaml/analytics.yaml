@@ -1,0 +1,246 @@
+# ============================================================
+# 数据分析模块测试数据
+# ============================================================
+clustering_detail:
+  - name: 管理员获取聚类详情
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户获取聚类详情-禁止
+    as_admin: false
+    expected_status: 403
+
+dashboard:
+  - name: 管理员获取仪表盘
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户获取仪表盘-禁止
+    as_admin: false
+    expected_status: 403
+
+rfm_summary:
+  - name: 管理员获取RFM分群摘要
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户获取RFM摘要-禁止
+    as_admin: false
+    expected_status: 403
+
+sales_trend:
+  - name: 管理员获取销售趋势
+    as_admin: true
+    expected_status: 200
+
+sales_prediction:
+  - name: 管理员获取销售预测
+    as_admin: true
+    expected_status: 200
+
+association_list:
+  - name: 管理员获取关联规则列表
+    as_admin: true
+    expected_status: 200
+
+association_for_product:
+  - name: 获取商品关联推荐-无需登录
+    product_id: 1
+    expected_status: 200
+
+churn_list:
+  - name: 管理员获取流失预警列表
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取仅高风险列表
+    as_admin: true
+    risk_only: true
+    expected_status: 200
+
+churn_importance:
+  - name: 管理员获取特征重要性
+    as_admin: true
+    expected_status: 200
+
+user_rfm:
+  - name: 用户获取自身RFM
+    as_admin: false
+    expected_status: 200
+
+user_trend:
+  - name: 用户获取消费趋势
+    as_admin: false
+    expected_status: 200
+
+user_category_preference:
+  - name: 用户获取品类偏好
+    as_admin: false
+    expected_status: 200
+
+model_metrics:
+  - name: 管理员获取模型指标
+    as_admin: true
+    expected_status: 200
+
+hot_products:
+  - name: 获取热门商品-无需登录
+    limit: 3
+    expected_status: 200
+  - name: 获取热门商品-按品类
+    category: 电子产品
+    limit: 6
+    expected_status: 200
+
+recompute:
+  - name: 管理员触发重算
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户触发重算-禁止
+    as_admin: false
+    expected_status: 403
+
+last_compute_time:
+  - name: 管理员获取最后计算时间
+    as_admin: true
+    expected_status: 200
+
+churn_status_update:
+  - name: 管理员更新流失状态
+    status: contacted
+    as_admin: true
+    expected_status: 200
+  - name: 无效状态值
+    status: invalid_status
+    as_admin: true
+    expected_status: 400
+
+churn_trend:
+  - name: 管理员获取流失趋势
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户获取流失趋势-禁止
+    as_admin: false
+    expected_status: 403
+
+sales_heatmap:
+  - name: 管理员获取销售热力图
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户获取销售热力图-禁止
+    as_admin: false
+    expected_status: 403
+
+prediction_metrics:
+  - name: 管理员获取预测指标
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户获取预测指标-禁止
+    as_admin: false
+    expected_status: 403
+
+# ============================================================
+# 模型可视化数据接口 (新)
+# /api/v1/analytics/viz/<model>
+# ============================================================
+model_viz:
+  - name: 管理员获取聚类可视化数据(phase3别名)
+    model: phase3
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取流失预警可视化数据(phase4别名)
+    model: phase4
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取销售预测可视化数据(phase5别名)
+    model: phase5
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取关联规则可视化数据(phase6别名)
+    model: phase6
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取聚类可视化数据(Clustering别名)
+    model: Clustering
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取流失预警可视化数据(Churn别名)
+    model: Churn
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取销售预测可视化数据(SalesForecast别名)
+    model: SalesForecast
+    as_admin: true
+    expected_status: 200
+  - name: 管理员获取关联规则可视化数据(Association别名)
+    model: Association
+    as_admin: true
+    expected_status: 200
+  - name: 管理员请求不存在的模型
+    model: nonexistent_model
+    as_admin: true
+    expected_status: 404
+  - name: 普通用户获取聚类可视化数据-禁止
+    model: phase3
+    as_admin: false
+    expected_status: 403
+  - name: 未登录访问viz接口-禁止
+    model: phase3
+    as_admin: none
+    expected_status: 401
+
+# ============================================================
+# 模型版本字段验证 (新)
+# 验证 DB 中 4 个模型的 version 字段
+# ============================================================
+model_version:
+  - name: 聚类模型版本为v4_optuna
+    model_name: Clustering
+    expected_version: v4_optuna
+  - name: 流失预警模型版本为v8_xgb_shap_K50
+    model_name: Churn
+    expected_version: v8_xgb_shap_K50
+  - name: 销售预测模型版本为v3_calendar_features
+    model_name: SalesForecast
+    expected_version: v3_calendar_features
+  - name: 关联规则模型版本为v3_dual_level
+    model_name: Association
+    expected_version: v3_dual_level
+
+# ============================================================
+# 预测指标新字段验证 (新)
+# /api/v1/analytics/sales/prediction-metrics
+# 新增 cv_smape_std, cv_folds, best_r2 字段
+# ============================================================
+prediction_metrics_new_fields:
+  - name: 验证预测指标含cv_smape_std字段
+    field: cv_smape_std
+    expected_present: true
+  - name: 验证预测指标含cv_folds字段
+    field: cv_folds
+    expected_present: true
+  - name: 验证预测指标含best_r2字段
+    field: best_r2
+    expected_present: true
+  - name: 验证预测指标含version字段
+    field: version
+    expected_present: true
+
+# ============================================================
+# 模型指标接口字段验证 (新)
+# /api/v1/analytics/model-metrics
+# 验证返回数据含 version 字段
+# ============================================================
+model_metrics_version:
+  - name: 模型指标含Clustering版本号
+    model_name: Clustering
+    field: version
+    expected_present: true
+  - name: 模型指标含Churn版本号
+    model_name: Churn
+    field: version
+    expected_present: true
+  - name: 模型指标含SalesForecast版本号
+    model_name: SalesForecast
+    field: version
+    expected_present: true
+  - name: 模型指标含Association版本号
+    model_name: Association
+    field: version
+    expected_present: true

@@ -1,0 +1,17 @@
+{
+  "best_value": 339.0180778999094,
+  "best_params": {
+    "top_n": 250,
+    "min_support": 0.00593636571266795,
+    "max_len": 5,
+    "min_lift": 4.08897907718663,
+    "min_confidence": 0.4192294089205034
+  },
+  "n_trials": 30,
+  "new_n_rules": 392,
+  "new_mean_lift": 16.84139387744491,
+  "new_high_lift": 330,
+  "baseline_n_rules": 694,
+  "baseline_mean_lift": 11.0718421029071,
+  "improved": false
+}

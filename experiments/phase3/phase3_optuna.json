@@ -1,0 +1,19 @@
+{
+  "best_value_sub_sil": 0.35586236264904786,
+  "best_params": {
+    "K": 4,
+    "batch_size": 64,
+    "n_init": 20,
+    "max_iter": 150,
+    "init": "k-means++",
+    "max_no_improvement": 18,
+    "reassignment_ratio": 0.0031687170986830276
+  },
+  "final_K": 4,
+  "final_sil": 0.3599122210285978,
+  "final_db": 1.06135504782217,
+  "ari_mean": 0.9741782908597767,
+  "ari_std": 0.004793869402113014,
+  "sil_improved": true,
+  "baseline_sil": 0.3595963449568028
+}

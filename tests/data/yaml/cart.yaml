@@ -1,0 +1,68 @@
+# ============================================================
+# 购物车模块测试数据
+# ============================================================
+add_to_cart:
+  - name: 正常添加商品到购物车
+    product_id: 1
+    quantity: 2
+    expected_status: 200
+  - name: 添加商品-重复商品合并数量
+    product_id: 1
+    quantity: 3
+    expected_status: 200
+    expected_merged: true
+  - name: 添加不存在的商品
+    product_id: 99999
+    quantity: 1
+    expected_status: 404
+  - name: 未登录添加商品
+    product_id: 1
+    quantity: 1
+    no_auth: true
+    expected_status: 401
+  - name: 缺少product_id
+    product_id: null
+    quantity: 1
+    expected_status: 400
+  - name: 加购数量为0
+    product_id: 1
+    quantity: 0
+    expected_status: 400
+  - name: 加购数量为负数
+    product_id: 1
+    quantity: -1
+    expected_status: 400
+  - name: 合并后超库存
+    product_id: 1
+    quantity: 99999
+    expected_status: 400
+    pre_add_quantity: 1
+
+get_cart:
+  - name: 获取购物车
+    expected_status: 200
+    expected_has_items: true
+  - name: 未登录获取购物车
+    no_auth: true
+    expected_status: 401
+
+update_cart:
+  - name: 更新购物车商品数量
+    product_id: 1
+    quantity: 5
+    expected_status: 200
+    expected_quantity: 5
+  - name: 更新不存在的购物车项
+    product_id: 99999
+    quantity: 1
+    expected_status: 404
+
+remove_cart_item:
+  - name: 删除购物车商品
+    product_id: 1
+    expected_status: 200
+
+clear_cart:
+  - name: 清空购物车
+    expected_status: 200
+    expected_empty: true

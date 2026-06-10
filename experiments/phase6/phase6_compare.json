@@ -1,0 +1,74 @@
+{
+  "baseline": {
+    "global_rules": 80,
+    "stockcode_rules": 152,
+    "mean_lift": 11.31
+  },
+  "A_adaptive": {
+    "rules": 2856740,
+    "mean_lift": 5.585038182541719,
+    "time_s": 30.755536556243896
+  },
+  "B_fpmax": {
+    "rules": 80,
+    "mean_lift": 11.307700878380851,
+    "time_s": 0.6137821674346924
+  },
+  "C_low_sup_max4": {
+    "rules": 694,
+    "mean_lift": 11.0718421029071,
+    "high_lift_10": 330,
+    "time_s": 0.6465871334075928
+  },
+  "D_cluster": {
+    "-1": {
+      "n_customers": 154,
+      "n_transactions": 340,
+      "min_support": 0.01,
+      "n_rules": 246,
+      "mean_lift": 26.740722505661832
+    },
+    "0": {
+      "n_customers": 1404,
+      "n_transactions": 1646,
+      "min_support": 0.01,
+      "n_rules": 110,
+      "mean_lift": 12.22436335985565
+    },
+    "1": {
+      "n_customers": 1481,
+      "n_transactions": 7071,
+      "min_support": 0.01,
+      "n_rules": 22,
+      "mean_lift": 18.02703036929192
+    },
+    "2": {
+      "n_customers": 334,
+      "n_transactions": 515,
+      "min_support": 0.01,
+      "n_rules": 420,
+      "mean_lift": 8.596124495362051
+    },
+    "3": {
+      "n_customers": 1318,
+      "n_transactions": 4926,
+      "min_support": 0.01,
+      "n_rules": 302,
+      "mean_lift": 6.912063283649104
+    },
+    "4": {
+      "n_customers": 1180,
+      "n_transactions": 20767,
+      "min_support": 0.01,
+      "n_rules": 608,
+      "mean_lift": 7.554021257211069
+    },
+    "999": {
+      "n_customers": 7,
+      "n_transactions": 1704,
+      "min_support": 0.01,
+      "n_rules": 606,
+      "mean_lift": 7.0986426616457905
+    }
+  }
+}

@@ -1,0 +1,249 @@
+{
+  "shap_top50": [
+    {
+      "name": "recency_days",
+      "mean_abs_shap": 0.5869702696800232
+    },
+    {
+      "name": "spend_early_60d",
+      "mean_abs_shap": 0.41742369532585144
+    },
+    {
+      "name": "avg_item_price",
+      "mean_abs_shap": 0.3505445122718811
+    },
+    {
+      "name": "total_spent",
+      "mean_abs_shap": 0.29757624864578247
+    },
+    {
+      "name": "avg_purchase_hour",
+      "mean_abs_shap": 0.27870872616767883
+    },
+    {
+      "name": "price_cv",
+      "mean_abs_shap": 0.27617061138153076
+    },
+    {
+      "name": "unique_products",
+      "mean_abs_shap": 0.2698807120323181
+    },
+    {
+      "name": "tenure_days",
+      "mean_abs_shap": 0.2446523904800415
+    },
+    {
+      "name": "product_diversity",
+      "mean_abs_shap": 0.23504303395748138
+    },
+    {
+      "name": "recency_vs_interval",
+      "mean_abs_shap": 0.22884009778499603
+    },
+    {
+      "name": "price_std",
+      "mean_abs_shap": 0.22199039161205292
+    },
+    {
+      "name": "spend_depth",
+      "mean_abs_shap": 0.20801861584186554
+    },
+    {
+      "name": "avg_spend_per_order",
+      "mean_abs_shap": 0.20511429011821747
+    },
+    {
+      "name": "recency_score",
+      "mean_abs_shap": 0.1973065435886383
+    },
+    {
+      "name": "avg_items_per_order",
+      "mean_abs_shap": 0.1898648738861084
+    },
+    {
+      "name": "total_items",
+      "mean_abs_shap": 0.18960128724575043
+    },
+    {
+      "name": "relative_spend_trend",
+      "mean_abs_shap": 0.18860138952732086
+    },
+    {
+      "name": "spend_early_30d",
+      "mean_abs_shap": 0.18846550583839417
+    },
+    {
+      "name": "diversity_x_freq",
+      "mean_abs_shap": 0.17242184281349182
+    },
+    {
+      "name": "days_overdue",
+      "mean_abs_shap": 0.17007684707641602
+    },
+    {
+      "name": "price_p25",
+      "mean_abs_shap": 0.1641307920217514
+    },
+    {
+      "name": "hour_std",
+      "mean_abs_shap": 0.16237056255340576
+    },
+    {
+      "name": "spend_per_day",
+      "mean_abs_shap": 0.15920472145080566
+    },
+    {
+      "name": "interval_cv",
+      "mean_abs_shap": 0.15838998556137085
+    },
+    {
+      "name": "last_interval_ratio",
+      "mean_abs_shap": 0.15252059698104858
+    },
+    {
+      "name": "relative_freq_trend",
+      "mean_abs_shap": 0.14988964796066284
+    },
+    {
+      "name": "recency_vs_lifespan",
+      "mean_abs_shap": 0.14632830023765564
+    },
+    {
+      "name": "avg_purchase_interval",
+      "mean_abs_shap": 0.13764934241771698
+    },
+    {
+      "name": "interval_std",
+      "mean_abs_shap": 0.13558243215084076
+    },
+    {
+      "name": "items_per_day",
+      "mean_abs_shap": 0.12981097400188446
+    },
+    {
+      "name": "weekend_ratio",
+      "mean_abs_shap": 0.12924695014953613
+    },
+    {
+      "name": "active_months",
+      "mean_abs_shap": 0.11771702021360397
+    },
+    {
+      "name": "total_orders",
+      "mean_abs_shap": 0.11125154048204422
+    },
+    {
+      "name": "interval_mean",
+      "mean_abs_shap": 0.10716377943754196
+    },
+    {
+      "name": "low_engagement_score",
+      "mean_abs_shap": 0.10272762179374695
+    },
+    {
+      "name": "spend_late_30d",
+      "mean_abs_shap": 0.09360739588737488
+    },
+    {
+      "name": "activity_rate",
+      "mean_abs_shap": 0.08200708776712418
+    },
+    {
+      "name": "order_frequency",
+      "mean_abs_shap": 0.0817161500453949
+    },
+    {
+      "name": "overdue_score",
+      "mean_abs_shap": 0.08040528744459152
+    },
+    {
+      "name": "is_weekday",
+      "mean_abs_shap": 0.07308381795883179
+    },
+    {
+      "name": "orders_early_60d",
+      "mean_abs_shap": 0.07278097420930862
+    },
+    {
+      "name": "purchase_consistency",
+      "mean_abs_shap": 0.06536930799484253
+    },
+    {
+      "name": "spending_cv",
+      "mean_abs_shap": 0.044270824640989304
+    },
+    {
+      "name": "recency_ratio",
+      "mean_abs_shap": 0.04413802549242973
+    },
+    {
+      "name": "price_range",
+      "mean_abs_shap": 0.037026844918727875
+    },
+    {
+      "name": "engagement_consistency",
+      "mean_abs_shap": 0.03176426142454147
+    },
+    {
+      "name": "spend_late_60d",
+      "mean_abs_shap": 0.025029432028532028
+    },
+    {
+      "name": "purchase_density",
+      "mean_abs_shap": 0.02492685802280903
+    },
+    {
+      "name": "orders_early_30d",
+      "mean_abs_shap": 0.021559761837124825
+    },
+    {
+      "name": "orders_late_30d",
+      "mean_abs_shap": 0.007689282298088074
+    }
+  ],
+  "iter_results": {
+    "20": {
+      "test_auc": 0.7596815191387559,
+      "oot_mean": 0.8997571875821256,
+      "oot_each": [
+        0.8760338275246734,
+        0.897987683140437,
+        0.9252500520812668
+      ],
+      "n_features": 20
+    },
+    "30": {
+      "test_auc": 0.7606347188995215,
+      "oot_mean": 0.9082299699816182,
+      "oot_each": [
+        0.8859397290819183,
+        0.9091102670202317,
+        0.9296399138427047
+      ],
+      "n_features": 30
+    },
+    "40": {
+      "test_auc": 0.7709105861244019,
+      "oot_mean": 0.9121986510957564,
+      "oot_each": [
+        0.8887935370441917,
+        0.9129408129088843,
+        0.9348616033341931
+      ],
+      "n_features": 40
+    },
+    "50": {
+      "test_auc": 0.77110870215311,
+      "oot_mean": 0.9127860176103533,
+      "oot_each": [
+        0.890487378986597,
+        0.9141447056289158,
+        0.9337259682155471
+      ],
+      "n_features": 50
+    }
+  },
+  "best_K": 50,
+  "v7_baseline_oot": 0.9127128320107171,
+  "improved": true
+}

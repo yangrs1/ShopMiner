@@ -1,0 +1,96 @@
+# ============================================================
+# 商品模块测试数据
+# ============================================================
+get_products:
+  - name: 获取商品列表-默认分页
+    params: {}
+    expected_status: 200
+    expected_has_products: true
+  - name: 获取商品列表-按类型筛选
+    params:
+      type: tshirt
+    expected_status: 200
+    expected_type: tshirt
+  - name: 获取商品列表-搜索关键词
+    params:
+      q: T-Shirt
+    expected_status: 200
+    expected_has_products: true
+  - name: 获取商品列表-分页
+    params:
+      page: 1
+      per_page: 2
+    expected_status: 200
+    expected_max_items: 2
+
+get_categories:
+  - name: 获取分类列表
+    expected_status: 200
+    expected_has_categories: true
+
+get_product_detail:
+  - name: 获取商品详情-存在商品
+    product_id: 1
+    expected_status: 200
+    expected_has_id: true
+  - name: 获取商品详情-不存在商品
+    product_id: 99999
+    expected_status: 404
+
+create_product:
+  - name: 管理员创建商品
+    name: 新商品测试
+    description: 测试描述
+    image: /img/test.jpg
+    price: 4999
+    stock: 50
+    type: tshirt
+    category_name: 电子产品
+    as_admin: true
+    expected_status: 201
+  - name: 普通用户创建商品-禁止
+    name: 非法商品
+    description: 非法
+    image: /img/hack.jpg
+    price: 1
+    stock: 1
+    type: tshirt
+    as_admin: false
+    expected_status: 403
+  - name: 创建商品-负价格
+    name: 负价格商品
+    description: 测试
+    image: /img/test.jpg
+    price: -100
+    stock: 10
+    type: tshirt
+    as_admin: true
+    expected_status: 400
+  - name: 创建商品-负库存
+    name: 负库存商品
+    description: 测试
+    image: /img/test.jpg
+    price: 1000
+    stock: -5
+    type: tshirt
+    as_admin: true
+    expected_status: 400
+
+update_product:
+  - name: 管理员更新商品
+    product_id: 1
+    data:
+      name: 更新后商品名
+      price: 3999
+    as_admin: true
+    expected_status: 200
+
+delete_product:
+  - name: 管理员下架商品
+    product_id: 3
+    as_admin: true
+    expected_status: 200
+  - name: 普通用户下架商品-禁止
+    product_id: 1
+    as_admin: false
+    expected_status: 403

@@ -1,0 +1,33 @@
+{
+  "baseline": {
+    "silhouette": 0.272,
+    "davies_bouldin": 1.37,
+    "K": 5
+  },
+  "experiments": {
+    "A_log_KMeans": {
+      "K": 8,
+      "silhouette": 0.27388200961187986,
+      "davies_bouldin": 1.2927214850081077,
+      "hopkins": 0.07459203394905921
+    },
+    "B_log_GMM": {
+      "K": 3,
+      "silhouette": 0.23296772703133833,
+      "davies_bouldin": 1.423023865665847,
+      "hopkins": 0.08458403674310012
+    },
+    "C_yeo_KMeans": {
+      "K": 3,
+      "silhouette": 0.28113194410330405,
+      "davies_bouldin": 1.4202513028823007,
+      "hopkins": 0.11283718928212631
+    },
+    "D_log_MBKM": {
+      "K": 4,
+      "silhouette": 0.3595963449568028,
+      "davies_bouldin": 1.0669761656893166,
+      "hopkins": 0.06765799106369641
+    }
+  }
+}

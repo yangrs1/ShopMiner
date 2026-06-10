@@ -1,0 +1,56 @@
+# ============================================================
+# 订单模块测试数据
+# ============================================================
+create_order:
+  - name: 正常创建订单
+    pre_add_cart: true
+    product_id: 1
+    quantity: 1
+    expected_status: 201
+    expected_status_field: pending
+  - name: 空购物车创建订单
+    pre_add_cart: false
+    expected_status: 400
+
+pay_order:
+  - name: 正常支付pending订单
+    expected_status: 200
+    expected_status_field: paid
+  - name: 正常支付后重复支付-应拒绝
+    expected_status: 200
+    pay_twice: true
+
+cancel_order:
+  - name: 用户取消pending订单
+    expected_status: 200
+    expected_status_field: cancelled
+    order_state: pending
+  - name: 正常取消后重复取消-应拒绝
+    expected_status: 200
+    cancel_twice: true
+  - name: 用户取消已支付订单-自动退款
+    expected_status: 200
+    order_state: paid
+  - name: 用户越权取消他人订单
+    expected_status: 403
+    cross_user: true
+
+refund_order:
+  - name: 管理员退款已支付订单
+    expected_status: 200
+    expected_status_field: refunded
+
+get_orders:
+  - name: 获取订单列表
+    expected_status: 200
+    expected_has_orders: true
+
+get_order_detail:
+  - name: 获取订单详情
+    expected_status: 200
+    expected_has_id: true
+
+get_order_status_logs:
+  - name: 获取订单状态日志
+    expected_status: 200
+    expected_has_logs: true

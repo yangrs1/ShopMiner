@@ -1,0 +1,120 @@
+# ============================================================
+# 认证模块测试数据
+# ============================================================
+register_success:
+  - name: 正常注册
+    first_name: New
+    last_name: User
+    email: newuser@test.com
+    password: Test@123
+    address: Test Address
+    expected_status: 201
+    expected_code: 201
+  - name: Faker随机邮箱注册
+    first_name: ${random_first_name}
+    last_name: ${random_last_name}
+    email: ${random_email}
+    password: ${random_password}
+    address: ${random_address}
+    expected_status: 201
+    expected_code: 201
+
+register_missing_fields:
+  - name: 缺少必填字段-无邮箱
+    first_name: No
+    last_name: Email
+    email: ""
+    password: Test@123
+    expected_status: 400
+    expected_code: 400
+  - name: 缺少必填字段-无密码
+    first_name: No
+    last_name: Pwd
+    email: nopwd@test.com
+    password: ""
+    expected_status: 400
+    expected_code: 400
+  - name: 缺少必填字段-无姓名
+    first_name: ""
+    last_name: ""
+    email: noname@test.com
+    password: Test@123
+    expected_status: 400
+    expected_code: 400
+  - name: 空请求体注册
+    empty_body: true
+    expected_status: 400
+
+register_duplicate:
+  - name: 重复邮箱注册
+    first_name: Dup
+    last_name: User
+    email: customer@shopminer.com
+    password: Test@123
+    expected_status: 409
+    expected_code: 409
+
+login_success:
+  - name: 正常登录-客户
+    email: customer@shopminer.com
+    password: Customer@123
+    expected_status: 200
+    expected_code: 200
+  - name: 正常登录-管理员
+    email: admin@shopminer.com
+    password: Admin@123
+    expected_status: 200
+    expected_code: 200
+
+login_failure:
+  - name: 密码错误
+    email: customer@shopminer.com
+    password: WrongPassword
+    expected_status: 401
+    expected_code: 401
+  - name: 用户不存在
+    email: nobody@test.com
+    password: Test@123
+    expected_status: 401
+    expected_code: 401
+  - name: 缺少邮箱和密码
+    email: ""
+    password: ""
+    expected_status: 400
+    expected_code: 400
+  - name: 空请求体登录
+    empty_body: true
+    expected_status: 400
+
+get_current_user:
+  - name: 已登录用户获取信息
+    expected_status: 200
+    expected_email: customer@shopminer.com
+  - name: 未登录获取信息-401
+    no_auth: true
+    expected_status: 401
+
+update_user:
+  - name: 更新用户姓名
+    first_name: Updated
+    expected_status: 200
+    expected_field: first_name
+    expected_value: Updated
+  - name: 更新用户地址
+    address: New Address 123
+    expected_status: 200
+  - name: 更新用户密码
+    password: NewPass@456
+    expected_status: 200
+
+recharge:
+  - name: 正常充值
+    amount: 10000
+    expected_status: 200
+    expected_balance_increase: 10000
+  - name: 充值负数金额
+    amount: -100
+    expected_status: 400
+  - name: 充值零金额
+    amount: 0
+    expected_status: 400

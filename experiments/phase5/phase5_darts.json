@@ -1,0 +1,12 @@
+{
+  "nbeats_test_smape": 15.495450973510742,
+  "nbeats_test_mape": 14.490571975708008,
+  "nbeats_test_mae": 24221.9296875,
+  "nbeats_test_rmse": 28883.268513102874,
+  "lgbm_test_smape_reproduced": 4.85699820543594,
+  "lgbm_test_smape_v3": 4.85699820543594,
+  "best_ensemble_weight_lgb": 1.0,
+  "best_ensemble_weight_nbeats": 0.0,
+  "ensemble_test_smape": 4.85699820543594,
+  "improved": false
+}

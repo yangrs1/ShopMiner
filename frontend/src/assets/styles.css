@@ -1,0 +1,213 @@
+/* ============================================================
+   ShopMiner Design System — Soft UI Evolution
+   ============================================================ */
+
+/* CSS Variables */
+:root {
+  /* Colors */
+  --color-primary: #409EFF;
+  --color-primary-light: #66B1FF;
+  --color-primary-dark: #337ECC;
+  --color-success: #67C23A;
+  --color-warning: #E6A23C;
+  --color-danger: #F56C6C;
+  --color-info: #909399;
+
+  /* Background */
+  --bg-page: #F5F7FA;
+  --bg-card: #FFFFFF;
+  --bg-hover: #F5F7FA;
+
+  /* Text */
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --text-placeholder: #C0C4CC;
+
+  /* Border */
+  --border-color: #EBEEF5;
+  --border-radius: 8px;
+  --border-radius-sm: 4px;
+
+  /* Shadow */
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 18px rgba(0, 0, 0, 0.10);
+  --shadow-button: 0 2px 6px rgba(64, 158, 255, 0.2);
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Font */
+  --font-heading: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'PingFang SC',
+    'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+
+  /* Transition */
+  --transition-fast: 150ms ease-in-out;
+  --transition-normal: 200ms ease-in-out;
+  --transition-slow: 300ms ease-in-out;
+}
+
+/* ============================================================
+   Reset & Base
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings use Poppins */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+}
+
+#shopminer-app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ============================================================
+   Layout
+   ============================================================ */
+.main-container {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.app-footer {
+  background: var(--color-primary);
+  color: #fff;
+  text-align: center;
+  padding: 16px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  font-size: 14px;
+}
+
+/* ============================================================
+   Card (Soft UI)
+   ============================================================ */
+.page-card {
+  background: var(--bg-card);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow var(--transition-normal), transform var(--transition-normal);
+}
+
+.page-card.hover-lift:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.page-card:hover {
+  box-shadow: var(--shadow-card-hover);
+}
+
+.page-title {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   Empty State
+   ============================================================ */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+  font-size: 16px;
+}
+
+/* ============================================================
+   Price
+   ============================================================ */
+.price {
+  color: var(--color-danger);
+  font-weight: 700;
+  font-size: 20px;
+  font-family: var(--font-heading);
+}
+
+.price::before {
+  content: '\00A5';
+  font-size: 14px;
+}
+
+/* ============================================================
+   Status Tags
+   ============================================================ */
+.status-tag {
+  font-size: 12px;
+}
+
+/* ============================================================
+   Element Plus Overrides (Soft UI alignment)
+   ============================================================ */
+.el-button--primary {
+  --el-button-bg-color: var(--color-primary);
+  --el-button-border-color: var(--color-primary);
+}
+
+.el-card {
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: var(--shadow-card);
+}
+
+.el-menu--horizontal {
+  border-bottom: none !important;
+}
+
+/* ============================================================
+   Utility Classes
+   ============================================================ */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 0 12px;
+    margin: 12px auto;
+  }
+  .page-card {
+    padding: var(--spacing-md);
+  }
+  .page-title {
+    font-size: 18px;
+  }
+}

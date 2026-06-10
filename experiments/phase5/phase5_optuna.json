@@ -1,0 +1,21 @@
+{
+  "best_value_cv_smape": 13.099316640836154,
+  "best_params": {
+    "n_estimators": 300,
+    "learning_rate": 0.04614636110527742,
+    "num_leaves": 31,
+    "max_depth": 3,
+    "min_child_samples": 3,
+    "subsample": 0.8254816915123271,
+    "colsample_bytree": 0.786169799770249,
+    "reg_alpha": 3.471301481362344e-05,
+    "reg_lambda": 0.023581593796634503
+  },
+  "n_trials": 40,
+  "test_smape": 5.353863771631473,
+  "test_mape": 5.5122352009938576,
+  "test_mae": 8490.23111137963,
+  "test_rmse": 9905.388745286147,
+  "smape_improved": false,
+  "baseline_smape": 4.85699820543594
+}

@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.coverage
+*.egg-info/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+.trae/
+.omo/
+
+# Environment
+.env
+
+# Node
+node_modules/
+frontend/node_modules/
+
+# Testing
+.pytest_cache/
+.playwright-mcp/
+.browsers/
+test-results/
+tests/report/allure-results/
+tests/report/allure-report/
+
+# Runtime
+logs/
+instance/
+*.log
+
+# CI/CD
+jenkins/jenkins.war
+
+# OS
+Thumbs.db
+.DS_Store

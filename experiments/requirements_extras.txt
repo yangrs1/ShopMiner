@@ -1,0 +1,4 @@
+shap==0.46.0
+# darts==0.44.1 installed in conda base (D:\anaconda) — needs torch 2.7.1+cu118
+# Run Darts scripts with: D:\anaconda\python.exe <script>
+# venv does NOT have torch; do not run Darts in venv

@@ -1,0 +1,251 @@
+# ============================================================
+# 安全测试数据 - SQL注入 / XSS / 认证绕过 / 越权访问
+# ============================================================
+
+sql_injection:
+  auth_login:
+    - name: "SQL注入-登录邮箱-经典OR 1=1"
+      email: "' OR 1=1 --"
+      password: "anything"
+      expected_status: 401
+      expected_no_leak: true
+
+    - name: "SQL注入-登录邮箱-UNION SELECT"
+      email: "' UNION SELECT 1,2,3,4,5,6,7,8 --"
+      password: "anything"
+      expected_status: 401
+      expected_no_leak: true
+
+    - name: "SQL注入-登录邮箱-分号截断"
+      email: "admin@shopminer.com'; DROP TABLE users; --"
+      password: "anything"
+      expected_status: 401
+      expected_no_leak: true
+
+    - name: "SQL注入-登录密码字段"
+      email: "admin@shopminer.com"
+      password: "' OR '1'='1"
+      expected_status: 401
+      expected_no_leak: true
+
+  auth_register:
+    - name: "SQL注入-注册邮箱"
+      first_name: "Test"
+      last_name: "User"
+      email: "test'; DROP TABLE users; --@evil.com"
+      password: "Test@123456"
+      expected_status: 400
+      expected_no_leak: true
+
+    - name: "SQL注入-注册姓名"
+      first_name: "Robert'); DROP TABLE users; --"
+      last_name: "Normal"
+      email: "sqli_name_test@example.com"
+      password: "Test@123456"
+      expected_status_in: [201, 400, 409]
+      expected_no_leak: true
+
+  product_search:
+    - name: "SQL注入-商品搜索-OR 1=1"
+      q: "' OR 1=1 --"
+      expected_status: 200
+      expected_no_leak: true
+
+    - name: "SQL注入-商品搜索-UNION SELECT"
+      q: "' UNION SELECT 1,2,3,4,5,6,7 --"
+      expected_status: 200
+      expected_no_leak: true
+
+    - name: "SQL注入-商品搜索-分号截断"
+      q: "'; DROP TABLE products; --"
+      expected_status: 200
+      expected_no_leak: true
+
+  cart_add:
+    - name: "SQL注入-加购product_id字符串注"
+      product_id_str: "1 OR 1=1"
+      quantity: 1
+      expected_status_in: [400, 404]
+      expected_no_leak: true
+
+  order_pay:
+    - name: "SQL注入-订单支付路径参数"
+      order_id_str: "1 OR 1=1"
+      expected_status_in: [400, 404]
+      expected_no_leak: true
+
+xss:
+  auth_register:
+    - name: "XSS-注册姓名-Script标签"
+      first_name: "<script>alert('XSS')</script>"
+      last_name: "Normal"
+      email: "xss_script_test@example.com"
+      password: "Test@123456"
+      expected_status_in: [201, 400]
+      expected_no_script_in_response: true
+
+    - name: "XSS-注册姓名-事件处理"
+      first_name: "<img src=x onerror=alert(1)>"
+      last_name: "Normal"
+      email: "xss_img_test@example.com"
+      password: "Test@123456"
+      expected_status_in: [201, 400]
+      expected_no_script_in_response: true
+
+    - name: "XSS-注册地址-SVG标签"
+      first_name: "Normal"
+      last_name: "User"
+      email: "xss_svg_test@example.com"
+      password: "Test@123456"
+      address: "<svg onload=alert('XSS')>"
+      expected_status_in: [201, 400]
+      expected_no_script_in_response: true
+
+  product_create:
+    - name: "XSS-商品名称-Script标签"
+      name: "<script>document.cookie</script>"
+      description: "Normal desc"
+      image: "test.jpg"
+      price: 1000
+      type: "tshirt"
+      stock: 10
+      expected_no_script_in_response: true
+
+  review_create:
+    - name: "XSS-评价内容-Script标签"
+      rating: 5
+      content: "<script>alert('review_xss')</script>"
+      expected_no_script_in_response: true
+
+auth_bypass:
+  no_token:
+    - name: "无Token访问受保护端点(购物车)"
+      endpoint: "/api/v1/cart"
+      method: "GET"
+      expected_status: 401
+
+    - name: "无Token访问受保护端点(订单列表)"
+      endpoint: "/api/v1/orders"
+      method: "GET"
+      expected_status: 401
+
+    - name: "无Token访问受保护端点(用户信息)"
+      endpoint: "/api/v1/auth/me"
+      method: "GET"
+      expected_status: 401
+
+    - name: "无Token访问受保护端点(下单)"
+      endpoint: "/api/v1/orders"
+      method: "POST"
+      expected_status: 401
+
+    - name: "无Token访问受保护端点(管理)"
+      endpoint: "/api/v1/admin/users"
+      method: "GET"
+      expected_status: 401
+
+  invalid_token:
+    - name: "伪造Token访问-购物车"
+      endpoint: "/api/v1/cart"
+      method: "GET"
+      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+      expected_status: 422
+
+    - name: "空Token访问-用户信息"
+      endpoint: "/api/v1/auth/me"
+      method: "GET"
+      token: ""
+      expected_status: 401
+
+    - name: "Bearer空字符串-用户信息"
+      endpoint: "/api/v1/auth/me"
+      method: "GET"
+      token: "Bearer "
+      expected_status: 422
+
+privilege_escalation:
+  customer_as_admin:
+    - name: "普通用户尝试创建商品"
+      endpoint: "/api/v1/products"
+      method: "POST"
+      body:
+        name: "Hacked Product"
+        description: "Should not be created"
+        image: "hack.jpg"
+        price: 1
+        type: "tshirt"
+        stock: 1
+      expected_status: 403
+
+    - name: "普通用户尝试查看所有用户"
+      endpoint: "/api/v1/admin/users"
+      method: "GET"
+      expected_status: 403
+
+    - name: "普通用户尝试查看所有订单"
+      endpoint: "/api/v1/admin/orders"
+      method: "GET"
+      expected_status: 403
+
+    - name: "普通用户尝试调整余额"
+      endpoint: "/api/v1/admin/users/1/balance"
+      method: "PUT"
+      body:
+        amount: 999999
+      expected_status: 403
+
+    - name: "普通用户尝试下架商品"
+      endpoint: "/api/v1/products/1"
+      method: "DELETE"
+      expected_status: 403
+
+input_validation:
+  negative_amount:
+    - name: "充值负数金额"
+      amount: -1000
+      expected_status: 400
+
+  zero_amount:
+    - name: "充值金额"
+      amount: 0
+      expected_status: 400
+
+  overflow_quantity:
+    - name: "加购超大量数据"
+      quantity: 999999999
+      expected_status_in: [400, 404]
+
+  invalid_rating:
+    - name: "评价评分超范围6分"
+      rating: 6
+      expected_status_in: [400, 404]
+
+    - name: "评价评分超范围0分"
+      rating: 0
+      expected_status_in: [400, 404]
+
+    - name: "评价评分负数"
+      rating: -1
+      expected_status_in: [400, 404]
+
+  empty_fields:
+    - name: "注册空邮箱"
+      email: ""
+      password: "Test@123456"
+      first_name: "Test"
+      last_name: "User"
+      expected_status: 400
+
+    - name: "注册空密"
+      email: "empty_pwd@example.com"
+      password: ""
+      first_name: "Test"
+      last_name: "User"
+      expected_status: 400
+
+    - name: "注册空姓"
+      email: "empty_name@example.com"
+      password: "Test@123456"
+      first_name: ""
+      last_name: ""
+      expected_status: 400

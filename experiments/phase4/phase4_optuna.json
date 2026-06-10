@@ -1,0 +1,41 @@
+{
+  "best_value_val_auc": 0.928201070716386,
+  "best_params": {
+    "n_estimators": 600,
+    "max_depth": 7,
+    "learning_rate": 0.1148503193078177,
+    "subsample": 0.8040806118729306,
+    "colsample_bytree": 0.8525897245414366,
+    "min_child_weight": 1,
+    "gamma": 0.08610741481513996,
+    "reg_alpha": 2.739062192743481e-07,
+    "reg_lambda": 0.00016590982850740534,
+    "scale_pos_weight": 0.6056485407622948
+  },
+  "n_trials": 40,
+  "test_auc": 0.7767120215311004,
+  "oot_results": [
+    {
+      "window": "2011-06-30~2011-09-30",
+      "auc": 0.8906303234526719,
+      "n": 4900,
+      "churn_rate": 0.49734693877551023
+    },
+    {
+      "window": "2011-07-31~2011-09-30",
+      "auc": 0.9139816167136405,
+      "n": 5001,
+      "churn_rate": 0.5232953409318136
+    },
+    {
+      "window": "2011-08-31~2011-09-30",
+      "auc": 0.9335265558658388,
+      "n": 5107,
+      "churn_rate": 0.5514000391619346
+    }
+  ],
+  "oot_mean_auc": 0.9127128320107171,
+  "oot_improved": true,
+  "baseline_oot_mean": 0.904,
+  "note": "Optuna objective was VAL AUC on temporal holdout (cutoff 2011-07-31), not random test"
+}
