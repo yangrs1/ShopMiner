@@ -9,8 +9,6 @@ from app.models.analytics import (
     ChurnPrediction, UserBehavior, ModelMetric,
 )
 from app.extensions import db
-import subprocess
-import sys
 import os
 import logging
 
@@ -347,24 +345,15 @@ def get_hot_products(category=None, limit=6):
 
 
 def trigger_recompute():
-    """触发后台重算 compute_analytics.py (force=True 清空重建)"""
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    script_path = os.path.join(project_root, "scripts", "compute_analytics.py")
-
-    if not os.path.exists(script_path):
-        logger.error(f"compute_analytics.py not found at: {script_path}")
-        return {"status": "error", "message": "compute_analytics.py not found"}
-
+    """Trigger Celery async recompute of analytics."""
     try:
-        proc = subprocess.Popen(
-            [sys.executable, script_path, "--force"],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            cwd=project_root,
-        )
-        logger.info(f"Recompute subprocess started, pid={proc.pid}")
-        return {"status": "started", "pid": proc.pid}
+        from app.tasks import compute_analytics_task
+    except (ImportError, ModuleNotFoundError):
+        return {"status": "error", "message": "Celery is not installed in this environment"}
+    try:
+        task = compute_analytics_task.delay()
+        return {"status": "started", "task_id": task.id}
     except Exception as e:
-        logger.exception(f"Failed to start recompute subprocess: {e}")
         return {"status": "error", "message": str(e)}
 
 

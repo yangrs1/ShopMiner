@@ -438,19 +438,13 @@ def admin_import_data():
     if error_response:
         return error_response, status_code
 
-    import subprocess, sys as _sys
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))))
-    script_path = os.path.join(project_root, "scripts", "import_uci_data.py")
-
-    if not os.path.exists(script_path):
-        return jsonify({"code": 404, "message": "import_uci_data.py not found"}), 404
+    try:
+        from app.tasks import import_uci_data_task
+    except (ImportError, ModuleNotFoundError):
+        return jsonify({"code": 500, "message": "Celery 未安装，无法执行异步导入"}), 500
 
     try:
-        proc = subprocess.Popen(
-            [_sys.executable, script_path],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-            cwd=project_root,
-        )
+        task = import_uci_data_task.delay()
         return jsonify({"code": 200, "message": "数据导入已启动（后台运行中）"}), 200
     except Exception as e:
         return jsonify({"code": 500, "message": f"启动导入失败: {str(e)}"}), 500

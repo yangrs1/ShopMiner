@@ -255,6 +255,32 @@ def admin_recompute():
 
 
 # ============================================================
+# Task Status
+# ============================================================
+@analytics_bp.route("/analytics/admin/task-status/<task_id>", methods=["GET"])
+@jwt_required()
+def task_status(task_id):
+    """Query the status of a Celery task by ID."""
+    if not _require_admin():
+        return jsonify({"code": 403, "message": "Admin access required"}), 403
+
+    from celery.result import AsyncResult
+    from app.celery_app import celery as celery_app
+
+    result = AsyncResult(task_id, app=celery_app)
+    response_data = {
+        "task_id": task_id,
+        "status": result.state,
+    }
+    if result.state == "SUCCESS":
+        response_data["result"] = result.result
+    elif result.state == "FAILURE":
+        response_data["error"] = str(result.result)
+
+    return jsonify({"code": 200, "message": "success", "data": response_data}), 200
+
+
+# ============================================================
 # Review Endpoints
 # ============================================================
 @analytics_bp.route("/reviews/product/<int:product_id>", methods=["GET"])
