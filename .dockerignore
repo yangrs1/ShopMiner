@@ -1,0 +1,15 @@
+node_modules/
+__pycache__/
+.git/
+.env
+*.pyc
+*.pkl
+data/
+instance/
+.pytest_cache/
+tests/report/
+.omo/
+.idea/
+.vscode/
+*.md
+.gitignore
