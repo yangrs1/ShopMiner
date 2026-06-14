@@ -20,6 +20,9 @@ build/
 node_modules/
 frontend/node_modules/
 
+# Vite temp files (timestamp-* generated during builds)
+*.timestamp-*
+
 # Testing
 .pytest_cache/
 .playwright-mcp/
@@ -27,6 +30,10 @@ frontend/node_modules/
 test-results/
 tests/report/allure-results/
 tests/report/allure-report/
+tests/report/screenshots/
+
+# Uploads (keep .gitkeep only)
+static/uploads/*.png
 
 # Runtime
 logs/
