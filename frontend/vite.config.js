@@ -20,4 +20,8 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
   },
+  test: {
+    environment: 'jsdom',
+    globals: true,
+  },
 })
