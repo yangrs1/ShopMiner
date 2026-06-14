@@ -22,6 +22,14 @@ class LoginPage(BasePage):
         self.fill(self.EMAIL_INPUT, email)
         self.fill(self.PASSWORD_INPUT, password)
         self.click(self.LOGIN_BUTTON)
+        self.page.wait_for_timeout(3000)
+        # Retry if still on login page (rate limit / failure)
+        if "login" in self.page.url:
+            self.page.wait_for_timeout(10000)
+            self.fill(self.EMAIL_INPUT, email)
+            self.fill(self.PASSWORD_INPUT, password)
+            self.click(self.LOGIN_BUTTON)
+            self.page.wait_for_timeout(3000)
         return self
 
     def login_success(self, email, password):

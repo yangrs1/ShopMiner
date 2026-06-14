@@ -7,52 +7,12 @@ import allure
 import pytest
 import random
 from playwright.sync_api import Page, expect
+from tests.web.pages.login_page import LoginPage
+from tests.web.pages.register_page import RegisterPage
 
 
 BASE_URL = "http://127.0.0.1:5000"
 
-
-# ============================================================
-# 工具函数
-# ============================================================
-def login_as(page, email, password):
-    page.goto(f"{BASE_URL}/#/login", timeout=20000)
-    page.wait_for_load_state("networkidle")
-    page.wait_for_timeout(800)
-    # 等待登录表单渲染完成
-    page.wait_for_selector("input[placeholder='请输入邮箱']", timeout=10000)
-    page.fill("input[placeholder='请输入邮箱']", email)
-    page.fill("input[placeholder='请输入密码']", password)
-    page.click("button:has-text('登录')")
-    page.wait_for_timeout(3000)
-    # 检测是否还停留在登录页(限流/失败)，重试一次
-    if "login" in page.url:
-        page.wait_for_timeout(10000)
-        page.fill("input[placeholder='请输入邮箱']", email)
-        page.fill("input[placeholder='请输入密码']", password)
-        page.click("button:has-text('登录')")
-        page.wait_for_timeout(3000)
-
-
-def goto_hash(page, path):
-    """Navigate to a hash route reliably (Playwright goto with hash can be flaky)."""
-    page.evaluate(f"() => {{ window.location.hash = '{path}'; }}")
-    page.wait_for_timeout(800)
-    # Trigger a hashchange event in case the navigation didn't fire one
-    page.evaluate(f"() => {{ window.dispatchEvent(new HashChangeEvent('hashchange')); }}")
-    page.wait_for_timeout(800)
-
-
-def register_user(page, email, password="TestWeb@123"):
-    page.goto(f"{BASE_URL}/#/register", timeout=20000)
-    page.wait_for_load_state("networkidle")
-    page.fill("input[placeholder='请输入姓']", "Web")
-    page.fill("input[placeholder='请输入名']", "Test")
-    page.fill("input[placeholder='请输入邮箱']", email)
-    page.fill("input[placeholder='至少8位，含大小写字母和数字']", password)
-    page.fill("input[placeholder='请输入收货地址']", "Test Address")
-    page.click("button:has-text('注册')")
-    page.wait_for_timeout(2000)
 
 
 # ============================================================
@@ -332,7 +292,7 @@ class TestProductDetailPage:
     @allure.title("WEB-05-02 已登录用户加购商?")
     def test_product_detail_add_to_cart_logged_in(self, page: Page):
         with allure.step("先登?"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开商品详情"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -375,7 +335,7 @@ class TestCartPage:
     @allure.title("WEB-06-01 先加购→购物车展示商?")
     def test_cart_has_items_after_add(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("加购商品"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -403,7 +363,7 @@ class TestCartPage:
         with allure.step("注册新用户确保空购物车"):
             suffix = random.randint(100000, 999999)
             email = f"emptycart{suffix}@test.com"
-            register_user(page, email, "EmptyCart@123")
+            RegisterPage(page).navigate().register("Web", "Test", email, "EmptyCart@123", "Auto Address")
             page.wait_for_timeout(3000)
 
         with allure.step("打开购物车"):
@@ -441,7 +401,7 @@ class TestOrdersPage:
     @allure.title("WEB-07-01 新用户订单页显示空状?")
     def test_orders_empty(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开订单?"):
             page.goto(f"{BASE_URL}/#/orders", timeout=20000)
@@ -457,7 +417,7 @@ class TestOrdersPage:
     @allure.title("WEB-07-02 完整下单支付流程(加购→下单→支付)")
     def test_complete_order_flow(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("加购商品"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -500,7 +460,7 @@ class TestProfilePage:
     @allure.title("WEB-08-01 个人中心页面加载")
     def test_profile_page_loads(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开个人中心"):
             page.goto(f"{BASE_URL}/#/profile", timeout=20000)
@@ -516,7 +476,7 @@ class TestProfilePage:
     @allure.title("WEB-08-02 新用户RFM分群=新用?")
     def test_profile_new_user_rfm(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开个人中心查看消费报告"):
             page.goto(f"{BASE_URL}/#/profile", timeout=20000)
@@ -551,7 +511,7 @@ class TestAdminPage:
     @allure.title("WEB-09-01 管理员访问数据看?")
     def test_admin_dashboard(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开管理后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -567,7 +527,7 @@ class TestAdminPage:
     @allure.title("WEB-09-02 管理员切换到客户分群页签")
     def test_admin_rfm_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台并切换到RFM"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -586,7 +546,7 @@ class TestAdminPage:
     @allure.title("WEB-09-03 管理员查看订单管?")
     def test_admin_orders_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -605,7 +565,7 @@ class TestAdminPage:
     @allure.title("WEB-09-04 普通用户访问管理后台→被拦?")
     def test_admin_access_denied_for_customer(self, page: Page):
         with allure.step("普通用户登?"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("尝试访问管理后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -641,7 +601,7 @@ class TestNavBar:
     @allure.title("WEB-10-02 已登录→显示购物车'订单/用户菜单")
     def test_navbar_logged_in(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("验证导航栏显示已登录状?"):
             page.wait_for_timeout(1000)
@@ -692,7 +652,7 @@ class TestAdminUserManagement:
     @allure.title("WEB-12-01 管理员查看用户管理页?")
     def test_admin_users_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -718,7 +678,7 @@ class TestProductReview:
     @allure.title("WEB-13-01 已登录用户提交商品评?")
     def test_submit_product_review(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开商品详情"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -751,7 +711,7 @@ class TestCartItemActions:
     @allure.title("WEB-14-01 购物车更新商品数量")
     def test_cart_update_quantity(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("加购商品"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -782,7 +742,7 @@ class TestCartItemActions:
     @allure.title("WEB-14-02 购物车删除商?")
     def test_cart_remove_item(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("加购商品"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -824,7 +784,7 @@ class TestOrderActions:
     @allure.title("WEB-15-01 订单页显示付款和取消按钮")
     def test_order_has_action_buttons(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("先加购并下单"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -860,7 +820,7 @@ class TestOrderActions:
     @allure.title("WEB-15-02 订单取消操作")
     def test_cancel_order(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("加购下单"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -912,10 +872,13 @@ class TestProfileActions:
     @allure.title("WEB-16-01 个人中心-保存修改按钮可见")
     def test_profile_save_button(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开个人中心"):
-            goto_hash(page, "/profile")
+            page.evaluate("() => { window.location.hash = '/profile'; }")
+            page.wait_for_timeout(800)
+            page.evaluate("() => { window.dispatchEvent(new HashChangeEvent('hashchange')); }")
+            page.wait_for_timeout(800)
             page.wait_for_timeout(2000)
 
         with allure.step("验证保存修改按钮可见"):
@@ -927,10 +890,13 @@ class TestProfileActions:
     @allure.title("WEB-16-02 个人中心-充值按钮可?")
     def test_profile_recharge_button(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("打开个人中心"):
-            goto_hash(page, "/profile")
+            page.evaluate("() => { window.location.hash = '/profile'; }")
+            page.wait_for_timeout(800)
+            page.evaluate("() => { window.dispatchEvent(new HashChangeEvent('hashchange')); }")
+            page.wait_for_timeout(800)
             page.wait_for_timeout(2000)
 
         with allure.step("验证充值按钮可用"):
@@ -949,7 +915,7 @@ class TestAdminAnalyticsTabs:
     @allure.title("WEB-17-01 管理员查看销售分析页?")
     def test_admin_sales_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -968,7 +934,7 @@ class TestAdminAnalyticsTabs:
     @allure.title("WEB-17-02 管理员查看关联规则页?")
     def test_admin_association_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -987,7 +953,7 @@ class TestAdminAnalyticsTabs:
     @allure.title("WEB-17-03 管理员查看流失预警页?")
     def test_admin_churn_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1006,7 +972,7 @@ class TestAdminAnalyticsTabs:
     @allure.title("WEB-17-04 管理员查看模型指标页?")
     def test_admin_models_tab(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1032,7 +998,7 @@ class TestAdminOrderActions:
     @allure.title("WEB-18-01 管理员订单管理页展示发货/退款按?")
     def test_admin_order_action_buttons(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台→订单管?"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1052,7 +1018,7 @@ class TestAdminOrderActions:
     @allure.title("WEB-18-02 管理员重新计算按钮可见")
     def test_admin_recompute_button(self, page: Page):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1075,7 +1041,7 @@ class TestNavBarLogout:
     @allure.title("WEB-19-01 已登录用户退出登?")
     def test_navbar_logout(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "customer@shopminer.com", "Customer@123")
+            LoginPage(page).navigate().login("customer@shopminer.com", "Customer@123")
 
         with allure.step("点击用户菜单"):
             user_menu = page.locator(".el-sub-menu:has-text('Test'), .el-sub-menu:has-text('Customer')")
@@ -1133,7 +1099,7 @@ class TestAdminVizDialogVersion:
     @allure.title("{case[title]}")
     def test_admin_viz_dialog_shows_version(self, page: Page, case):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台→模型指?"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1178,7 +1144,7 @@ class TestAdminVizDialogVersion:
     @allure.title("{case[title]}")
     def test_admin_viz_dialog_shows_version(self, page: Page, case):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台→模型指?"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1224,7 +1190,7 @@ class TestAdminKpiCards:
     @allure.title("{case[title]}")
     def test_admin_kpi_cards_show_metrics(self, page: Page, case):
         with allure.step("管理员登?"):
-            login_as(page, "admin@shopminer.com", "Admin@123")
+            LoginPage(page).navigate().login("admin@shopminer.com", "Admin@123")
 
         with allure.step("打开后台→模型指?"):
             page.goto(f"{BASE_URL}/#/admin", timeout=20000)
@@ -1254,7 +1220,7 @@ class TestFavoritesWeb:
     @allure.title("WEB-24-01 已登录用户可点击按钮切换收藏状态")
     def test_favorite_button_toggle(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "test@shopminer.com", "Test@123456")
+            LoginPage(page).navigate().login("test@shopminer.com", "Test@123456")
 
         with allure.step("打开商品详情页(test server product id=1)"):
             page.goto(f"{BASE_URL}/#/product/1", timeout=20000)
@@ -1296,10 +1262,13 @@ class TestFavoritesWeb:
     @allure.title("WEB-24-03 我的收藏页面正常加载并显示空状态或商品")
     def test_favorites_page_loads(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "test@shopminer.com", "Test@123456")
+            LoginPage(page).navigate().login("test@shopminer.com", "Test@123456")
 
         with allure.step("通过导航栏进入/favorites"):
-            goto_hash(page, "/favorites")
+            page.evaluate("() => { window.location.hash = '/favorites'; }")
+            page.wait_for_timeout(800)
+            page.evaluate("() => { window.dispatchEvent(new HashChangeEvent('hashchange')); }")
+            page.wait_for_timeout(800)
             page.wait_for_timeout(2000)
 
         with allure.step("验证页面标题"):
@@ -1310,10 +1279,13 @@ class TestFavoritesWeb:
     @allure.title("WEB-24-04 导航栏出现'收藏'菜单入口")
     def test_navbar_shows_favorites_link(self, page: Page):
         with allure.step("登录"):
-            login_as(page, "test@shopminer.com", "Test@123456")
+            LoginPage(page).navigate().login("test@shopminer.com", "Test@123456")
 
         with allure.step("打开首页"):
-            goto_hash(page, "/")
+            page.evaluate("() => { window.location.hash = '/'; }")
+            page.wait_for_timeout(800)
+            page.evaluate("() => { window.dispatchEvent(new HashChangeEvent('hashchange')); }")
+            page.wait_for_timeout(800)
             page.wait_for_timeout(1500)
 
         with allure.step("验证导航栏含'收藏'菜单项"):
