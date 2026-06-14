@@ -1,72 +1,35 @@
 <template>
-  <div class="admin-page">
-    <el-container>
-      <el-aside width="220px" class="admin-sidebar">
-        <div class="sidebar-brand">
-          <strong>ShopMiner</strong>
-          <span>管理后台</span>
-        </div>
-        <el-menu :default-active="activeTab" @select="activeTab = $event">
-          <el-menu-item index="dashboard"><el-icon><DataAnalysis /></el-icon>数据看板</el-menu-item>
-          <el-menu-item index="rfm"><el-icon><PieChart /></el-icon>客户分群</el-menu-item>
-          <el-menu-item index="sales"><el-icon><TrendCharts /></el-icon>销售分析</el-menu-item>
-          <el-menu-item index="association"><el-icon><Connection /></el-icon>关联规则</el-menu-item>
-          <el-menu-item index="churn"><el-icon><Warning /></el-icon>流失预警</el-menu-item>
-          <el-menu-item index="models"><el-icon><Cpu /></el-icon>模型指标</el-menu-item>
-          <el-menu-item index="orders"><el-icon><List /></el-icon>订单管理</el-menu-item>
-          <el-menu-item index="products"><el-icon><Goods /></el-icon>商品管理</el-menu-item>
-          <el-menu-item index="users"><el-icon><User /></el-icon>用户管理</el-menu-item>
-        </el-menu>
-        <div class="sidebar-footer">
-          <div class="compute-time" v-if="lastComputeTime"><el-icon><Clock /></el-icon> {{ lastComputeTime }}</div>
-          <el-button type="primary" size="small" :loading="recomputing" @click="triggerRecompute" style="width:100%">重新计算</el-button>
-        </div>
-      </el-aside>
-
-      <el-main class="admin-main">
-        <DashboardTab v-if="activeTab === 'dashboard'" />
-        <RfmTab v-if="activeTab === 'rfm'" />
-        <SalesTab v-if="activeTab === 'sales'" />
-        <AssociationTab v-if="activeTab === 'association'" />
-        <ChurnTab v-if="activeTab === 'churn'" />
-        <ModelsTab v-if="activeTab === 'models'" />
-        <OrdersTab v-if="activeTab === 'orders'" />
-        <ProductManagement v-if="activeTab === 'products'" />
-        <UsersTab v-if="activeTab === 'users'" />
-      </el-main>
-    </el-container>
+  <div>
+    <h2 class="page-title">关联规则</h2>
+    <div class="kpi-card">
+      <el-table :data="associationRules" stripe v-loading="loadingAssociation">
+        <el-table-column prop="antecedent" label="前件" min-width="120" />
+        <el-table-column prop="consequent" label="后件" min-width="120" />
+        <el-table-column prop="support" label="支持度" width="100"><template #default="{ row }">{{ (row.support * 100).toFixed(2) }}%</template></el-table-column>
+        <el-table-column prop="confidence" label="置信度" width="100"><template #default="{ row }">{{ (row.confidence * 100).toFixed(2) }}%</template></el-table-column>
+        <el-table-column prop="lift" label="提升度" width="100"><template #default="{ row }">{{ row.lift.toFixed(2) }}</template></el-table-column>
+      </el-table>
+      <el-pagination v-if="associationTotal > associationPerPage" v-model:current-page="associationPage" :page-size="associationPerPage" :total="associationTotal" layout="prev,pager,next" class="mt-md" @current-change="loadAssociationRules" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { DataAnalysis, PieChart, TrendCharts, Connection, Warning, Cpu, List, User, Goods, Clock } from '@element-plus/icons-vue'
-import { adminAnalyticsApi } from '../api'
-import { ElMessage } from 'element-plus'
-import DashboardTab from '../admin/components/DashboardTab.vue'
-import RfmTab from '../admin/components/RfmTab.vue'
-import SalesTab from '../admin/components/SalesTab.vue'
-import AssociationTab from '../admin/components/AssociationTab.vue'
-import ChurnTab from '../admin/components/ChurnTab.vue'
-import ModelsTab from '../admin/components/ModelsTab.vue'
-import OrdersTab from '../admin/components/OrdersTab.vue'
-import UsersTab from '../admin/components/UsersTab.vue'
-import ProductManagement from '../admin/components/ProductManagement.vue'
+import { adminAnalyticsApi } from '../../api'
 
-const activeTab = ref('dashboard')
-const recomputing = ref(false)
-const lastComputeTime = ref('')
+const associationRules = ref([])
+const associationPage = ref(1), associationTotal = ref(0), associationPerPage = 50
+const loadingAssociation = ref(false)
 
-async function loadLastComputeTime() {
-  try { const r = await adminAnalyticsApi.getLastComputeTime(); lastComputeTime.value = r.data.last_compute_time || '未知' } catch {}
-}
-async function triggerRecompute() {
-  recomputing.value = true
-  try { await adminAnalyticsApi.recompute(); ElMessage.success('重算已启动'); setTimeout(loadLastComputeTime, 3000) } catch {} finally { recomputing.value = false }
+async function loadAssociationRules() {
+  loadingAssociation.value = true
+  try { const r = await adminAnalyticsApi.getAssociationList({ page: associationPage.value, per_page: associationPerPage }); associationRules.value = r.data.rules || []; associationTotal.value = r.data.total || 0 } catch { associationRules.value = [] }
+  finally { loadingAssociation.value = false }
 }
 
 onMounted(() => {
-  loadLastComputeTime()
+  loadAssociationRules()
 })
 </script>
 

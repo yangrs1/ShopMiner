@@ -1,72 +1,95 @@
 <template>
-  <div class="admin-page">
-    <el-container>
-      <el-aside width="220px" class="admin-sidebar">
-        <div class="sidebar-brand">
-          <strong>ShopMiner</strong>
-          <span>管理后台</span>
+  <div>
+    <h2 class="page-title">客户分群 (K-Means + RFM)</h2>
+    <div class="kpi-card">
+      <div v-if="rfmSegments.length">
+        <div ref="rfmChartRef" class="chart-box" style="height:380px"></div>
+        <el-table :data="rfmSegments" stripe class="mt-md">
+          <el-table-column prop="segment" label="分群" />
+          <el-table-column prop="count" label="用户数" />
+          <el-table-column prop="avg_recency" label="平均R（最近消费天数）" />
+          <el-table-column prop="avg_frequency" label="平均F（消费频率）" />
+          <el-table-column prop="avg_monetary" label="平均M（消费金额）" />
+        </el-table>
+      </div>
+      <div v-else class="demo-rfm">
+        <div class="demo-rfm-header">
+          <el-icon :size="48" color="#409EFF"><PieChart /></el-icon>
+          <h3>RFM 分析模型</h3>
+          <p>通过 Recency、Frequency、Monetary 三个维度对用户进行分层</p>
         </div>
-        <el-menu :default-active="activeTab" @select="activeTab = $event">
-          <el-menu-item index="dashboard"><el-icon><DataAnalysis /></el-icon>数据看板</el-menu-item>
-          <el-menu-item index="rfm"><el-icon><PieChart /></el-icon>客户分群</el-menu-item>
-          <el-menu-item index="sales"><el-icon><TrendCharts /></el-icon>销售分析</el-menu-item>
-          <el-menu-item index="association"><el-icon><Connection /></el-icon>关联规则</el-menu-item>
-          <el-menu-item index="churn"><el-icon><Warning /></el-icon>流失预警</el-menu-item>
-          <el-menu-item index="models"><el-icon><Cpu /></el-icon>模型指标</el-menu-item>
-          <el-menu-item index="orders"><el-icon><List /></el-icon>订单管理</el-menu-item>
-          <el-menu-item index="products"><el-icon><Goods /></el-icon>商品管理</el-menu-item>
-          <el-menu-item index="users"><el-icon><User /></el-icon>用户管理</el-menu-item>
-        </el-menu>
-        <div class="sidebar-footer">
-          <div class="compute-time" v-if="lastComputeTime"><el-icon><Clock /></el-icon> {{ lastComputeTime }}</div>
-          <el-button type="primary" size="small" :loading="recomputing" @click="triggerRecompute" style="width:100%">重新计算</el-button>
-        </div>
-      </el-aside>
-
-      <el-main class="admin-main">
-        <DashboardTab v-if="activeTab === 'dashboard'" />
-        <RfmTab v-if="activeTab === 'rfm'" />
-        <SalesTab v-if="activeTab === 'sales'" />
-        <AssociationTab v-if="activeTab === 'association'" />
-        <ChurnTab v-if="activeTab === 'churn'" />
-        <ModelsTab v-if="activeTab === 'models'" />
-        <OrdersTab v-if="activeTab === 'orders'" />
-        <ProductManagement v-if="activeTab === 'products'" />
-        <UsersTab v-if="activeTab === 'users'" />
-      </el-main>
-    </el-container>
+        <el-row :gutter="16" class="mt-md">
+          <el-col :span="8" v-for="demo in rfmDemoData" :key="demo.segment">
+            <div class="demo-card" :style="{ borderLeftColor: demo.color }">
+              <div class="demo-card-name">{{ demo.segment }}</div>
+              <div class="demo-card-desc">{{ demo.desc }}</div>
+              <div class="demo-card-action">{{ demo.action }}</div>
+            </div>
+          </el-col>
+        </el-row>
+        <div ref="rfmDemoChartRef" class="chart-box" style="height:280px;margin-top:20px"></div>
+        <div class="empty-state"><p>暂无RFM分群数据</p><p class="text-muted">请先导入数据并点击左侧"重新计算"按钮生成分析结果</p></div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { DataAnalysis, PieChart, TrendCharts, Connection, Warning, Cpu, List, User, Goods, Clock } from '@element-plus/icons-vue'
-import { adminAnalyticsApi } from '../api'
-import { ElMessage } from 'element-plus'
-import DashboardTab from '../admin/components/DashboardTab.vue'
-import RfmTab from '../admin/components/RfmTab.vue'
-import SalesTab from '../admin/components/SalesTab.vue'
-import AssociationTab from '../admin/components/AssociationTab.vue'
-import ChurnTab from '../admin/components/ChurnTab.vue'
-import ModelsTab from '../admin/components/ModelsTab.vue'
-import OrdersTab from '../admin/components/OrdersTab.vue'
-import UsersTab from '../admin/components/UsersTab.vue'
-import ProductManagement from '../admin/components/ProductManagement.vue'
+import { ref, onMounted, nextTick } from 'vue'
+import { PieChart } from '@element-plus/icons-vue'
+import { adminAnalyticsApi } from '../../api'
+import { useECharts } from '../composables/useECharts'
 
-const activeTab = ref('dashboard')
-const recomputing = ref(false)
-const lastComputeTime = ref('')
+const { chartInstances, initChart, disposeChartRefs, handleResize, safeRender } = useECharts()
 
-async function loadLastComputeTime() {
-  try { const r = await adminAnalyticsApi.getLastComputeTime(); lastComputeTime.value = r.data.last_compute_time || '未知' } catch {}
+const rfmSegments = ref([])
+const rfmChartRef = ref(null), rfmDemoChartRef = ref(null)
+
+const rfmDemoData = [
+  { segment: '高价值客户', color: '#67C23A', desc: '近期消费多、频率高、金额大', action: '重点维护，提供VIP服务' },
+  { segment: '潜力客户', color: '#409EFF', desc: '消费频率或金额有提升空间', action: '推送个性化推荐' },
+  { segment: '一般客户', color: '#E6A23C', desc: '消费行为中等水平', action: '保持常规触达' },
+  { segment: '流失预警', color: '#F56C6C', desc: '长时间未消费，有流失风险', action: '发送召回优惠' },
+  { segment: '低价值客户', color: '#909399', desc: '新注册或消费较少', action: '引导完成首单' },
+]
+
+async function loadRfm() {
+  try {
+    const res = await adminAnalyticsApi.getRfmSummary()
+    rfmSegments.value = res.data.segments || []
+    await nextTick()
+    if (rfmSegments.value.length) { safeRender(() => renderRfmChart()) }
+    else { safeRender(() => renderRfmDemoChart()) }
+  } catch { rfmSegments.value = [] }
 }
-async function triggerRecompute() {
-  recomputing.value = true
-  try { await adminAnalyticsApi.recompute(); ElMessage.success('重算已启动'); setTimeout(loadLastComputeTime, 3000) } catch {} finally { recomputing.value = false }
+
+function renderRfmChart() {
+  const chart = initChart(rfmChartRef)
+  if (!chart) return
+  chart.setOption({
+    tooltip: { trigger: 'item', confine: true, extraCssText: 'z-index:1;', formatter: '{b}: {c} ({d}%)' },
+    series: [{ type: 'pie', radius: ['35%', '65%'], data: rfmSegments.value.map(s => ({ name: s.segment, value: s.count })), label: { formatter: '{b}\n{d}%' }, animationDuration: 600 }],
+    color: ['#67C23A', '#409EFF', '#E6A23C', '#F56C6C', '#909399'],
+  })
+}
+
+function renderRfmDemoChart() {
+  const chart = initChart(rfmDemoChartRef)
+  if (!chart) return
+  const data = [{ name: '高价值客户', value: 15 }, { name: '潜力客户', value: 25 }, { name: '一般客户', value: 30 }, { name: '流失预警', value: 18 }, { name: '低价值客户', value: 12 }]
+  const colors = { '高价值客户': '#67C23A', '潜力客户': '#409EFF', '一般客户': '#E6A23C', '流失预警': '#F56C6C', '低价值客户': '#909399' }
+  chart.setOption({
+    tooltip: { confine: true, extraCssText: 'z-index:1;', trigger: 'axis' },
+    grid: { left: 90, right: 50, top: 10, bottom: 10 },
+    xAxis: { type: 'value', name: '占比 (%)' },
+    yAxis: { type: 'category', data: data.map(d => d.name), inverse: true },
+    animationDuration: 600,
+    series: [{ type: 'bar', data: data.map(d => ({ value: d.value, itemStyle: { color: colors[d.name] } })), label: { show: true, position: 'right', formatter: '{c}%' }, animationDelay: idx => idx * 60 }],
+  })
 }
 
 onMounted(() => {
-  loadLastComputeTime()
+  loadRfm()
 })
 </script>
 

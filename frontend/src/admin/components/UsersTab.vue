@@ -1,72 +1,43 @@
 <template>
-  <div class="admin-page">
-    <el-container>
-      <el-aside width="220px" class="admin-sidebar">
-        <div class="sidebar-brand">
-          <strong>ShopMiner</strong>
-          <span>管理后台</span>
-        </div>
-        <el-menu :default-active="activeTab" @select="activeTab = $event">
-          <el-menu-item index="dashboard"><el-icon><DataAnalysis /></el-icon>数据看板</el-menu-item>
-          <el-menu-item index="rfm"><el-icon><PieChart /></el-icon>客户分群</el-menu-item>
-          <el-menu-item index="sales"><el-icon><TrendCharts /></el-icon>销售分析</el-menu-item>
-          <el-menu-item index="association"><el-icon><Connection /></el-icon>关联规则</el-menu-item>
-          <el-menu-item index="churn"><el-icon><Warning /></el-icon>流失预警</el-menu-item>
-          <el-menu-item index="models"><el-icon><Cpu /></el-icon>模型指标</el-menu-item>
-          <el-menu-item index="orders"><el-icon><List /></el-icon>订单管理</el-menu-item>
-          <el-menu-item index="products"><el-icon><Goods /></el-icon>商品管理</el-menu-item>
-          <el-menu-item index="users"><el-icon><User /></el-icon>用户管理</el-menu-item>
-        </el-menu>
-        <div class="sidebar-footer">
-          <div class="compute-time" v-if="lastComputeTime"><el-icon><Clock /></el-icon> {{ lastComputeTime }}</div>
-          <el-button type="primary" size="small" :loading="recomputing" @click="triggerRecompute" style="width:100%">重新计算</el-button>
-        </div>
-      </el-aside>
-
-      <el-main class="admin-main">
-        <DashboardTab v-if="activeTab === 'dashboard'" />
-        <RfmTab v-if="activeTab === 'rfm'" />
-        <SalesTab v-if="activeTab === 'sales'" />
-        <AssociationTab v-if="activeTab === 'association'" />
-        <ChurnTab v-if="activeTab === 'churn'" />
-        <ModelsTab v-if="activeTab === 'models'" />
-        <OrdersTab v-if="activeTab === 'orders'" />
-        <ProductManagement v-if="activeTab === 'products'" />
-        <UsersTab v-if="activeTab === 'users'" />
-      </el-main>
-    </el-container>
+  <div>
+    <h2 class="page-title">用户管理</h2>
+    <div class="kpi-card">
+      <el-table :data="adminUsers" stripe v-loading="loadingUsers">
+        <el-table-column prop="id" label="ID" width="70" />
+        <el-table-column prop="first_name" label="名" width="100" />
+        <el-table-column prop="last_name" label="姓" width="100" />
+        <el-table-column prop="email" label="邮箱" min-width="180" />
+        <el-table-column prop="balance" label="余额 (元)" min-width="120" align="right"><template #default="{ row }">{{ fmtMoney(row.balance) }}</template></el-table-column>
+        <el-table-column prop="role" label="角色" width="80"><template #default="{ row }"><el-tag :type="row.role==='admin'?'danger':''" size="small">{{ row.role }}</el-tag></template></el-table-column>
+        <el-table-column label="操作" width="160"><template #default="{ row }"><el-button type="primary" size="small" @click="adjustBalance(row)">调整余额</el-button></template></el-table-column>
+      </el-table>
+      <el-pagination v-if="usersTotal>usersPerPage" v-model:current-page="usersPage" :page-size="usersPerPage" :total="usersTotal" layout="prev,pager,next" class="mt-md" @current-change="loadAdminUsers" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { DataAnalysis, PieChart, TrendCharts, Connection, Warning, Cpu, List, User, Goods, Clock } from '@element-plus/icons-vue'
-import { adminAnalyticsApi } from '../api'
-import { ElMessage } from 'element-plus'
-import DashboardTab from '../admin/components/DashboardTab.vue'
-import RfmTab from '../admin/components/RfmTab.vue'
-import SalesTab from '../admin/components/SalesTab.vue'
-import AssociationTab from '../admin/components/AssociationTab.vue'
-import ChurnTab from '../admin/components/ChurnTab.vue'
-import ModelsTab from '../admin/components/ModelsTab.vue'
-import OrdersTab from '../admin/components/OrdersTab.vue'
-import UsersTab from '../admin/components/UsersTab.vue'
-import ProductManagement from '../admin/components/ProductManagement.vue'
+import { adminApi } from '../../api'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { fmtMoney } from '../composables/useECharts'
 
-const activeTab = ref('dashboard')
-const recomputing = ref(false)
-const lastComputeTime = ref('')
+const adminUsers = ref([])
+const usersPage = ref(1), usersTotal = ref(0), usersPerPage = 15
+const loadingUsers = ref(false)
 
-async function loadLastComputeTime() {
-  try { const r = await adminAnalyticsApi.getLastComputeTime(); lastComputeTime.value = r.data.last_compute_time || '未知' } catch {}
+async function loadAdminUsers() {
+  loadingUsers.value = true
+  try { const r = await adminApi.getUsers({ page: usersPage.value, per_page: usersPerPage }); adminUsers.value = r.data.users || []; usersTotal.value = r.data.total || 0 } catch { adminUsers.value = [] }
+  finally { loadingUsers.value = false }
 }
-async function triggerRecompute() {
-  recomputing.value = true
-  try { await adminAnalyticsApi.recompute(); ElMessage.success('重算已启动'); setTimeout(loadLastComputeTime, 3000) } catch {} finally { recomputing.value = false }
+
+async function adjustBalance(user) {
+  try { const { value } = await ElMessageBox.prompt('输入调整金额（正数增加，负数减少，单位：元）', '调整余额', { inputPattern: /^-?\d+(\.\d+)?$/, inputErrorMessage: '请输入有效数字' }); await adminApi.adjustBalance(user.id, Math.round(parseFloat(value) * 100)); ElMessage.success('余额已调整'); loadAdminUsers() } catch {}
 }
 
 onMounted(() => {
-  loadLastComputeTime()
+  loadAdminUsers()
 })
 </script>
 

@@ -1,72 +1,133 @@
 <template>
-  <div class="admin-page">
-    <el-container>
-      <el-aside width="220px" class="admin-sidebar">
-        <div class="sidebar-brand">
-          <strong>ShopMiner</strong>
-          <span>管理后台</span>
-        </div>
-        <el-menu :default-active="activeTab" @select="activeTab = $event">
-          <el-menu-item index="dashboard"><el-icon><DataAnalysis /></el-icon>数据看板</el-menu-item>
-          <el-menu-item index="rfm"><el-icon><PieChart /></el-icon>客户分群</el-menu-item>
-          <el-menu-item index="sales"><el-icon><TrendCharts /></el-icon>销售分析</el-menu-item>
-          <el-menu-item index="association"><el-icon><Connection /></el-icon>关联规则</el-menu-item>
-          <el-menu-item index="churn"><el-icon><Warning /></el-icon>流失预警</el-menu-item>
-          <el-menu-item index="models"><el-icon><Cpu /></el-icon>模型指标</el-menu-item>
-          <el-menu-item index="orders"><el-icon><List /></el-icon>订单管理</el-menu-item>
-          <el-menu-item index="products"><el-icon><Goods /></el-icon>商品管理</el-menu-item>
-          <el-menu-item index="users"><el-icon><User /></el-icon>用户管理</el-menu-item>
-        </el-menu>
-        <div class="sidebar-footer">
-          <div class="compute-time" v-if="lastComputeTime"><el-icon><Clock /></el-icon> {{ lastComputeTime }}</div>
-          <el-button type="primary" size="small" :loading="recomputing" @click="triggerRecompute" style="width:100%">重新计算</el-button>
-        </div>
-      </el-aside>
-
-      <el-main class="admin-main">
-        <DashboardTab v-if="activeTab === 'dashboard'" />
-        <RfmTab v-if="activeTab === 'rfm'" />
-        <SalesTab v-if="activeTab === 'sales'" />
-        <AssociationTab v-if="activeTab === 'association'" />
-        <ChurnTab v-if="activeTab === 'churn'" />
-        <ModelsTab v-if="activeTab === 'models'" />
-        <OrdersTab v-if="activeTab === 'orders'" />
-        <ProductManagement v-if="activeTab === 'products'" />
-        <UsersTab v-if="activeTab === 'users'" />
-      </el-main>
-    </el-container>
+  <div>
+    <h2 class="page-title">流失预警</h2>
+    <el-row :gutter="16" class="mb-md">
+      <el-col :span="8">
+        <div class="mini-kpi"><div class="mini-kpi-label">高风险用户</div><div class="mini-kpi-value" style="color:#F56C6C">{{ churnHighRisk }}</div></div>
+      </el-col>
+      <el-col :span="8">
+        <div class="mini-kpi"><div class="mini-kpi-label">中风险用户</div><div class="mini-kpi-value" style="color:#E6A23C">{{ churnMediumRisk }}</div></div>
+      </el-col>
+      <el-col :span="8">
+        <div class="mini-kpi"><div class="mini-kpi-label">已解决</div><div class="mini-kpi-value" style="color:#67C23A">{{ churnResolved }}</div></div>
+      </el-col>
+    </el-row>
+    <div class="kpi-card">
+      <div class="card-toolbar">
+        <el-checkbox v-model="churnRiskOnly" @change="loadChurnList">仅显示高风险</el-checkbox>
+      </div>
+      <el-table :data="churnList" stripe v-loading="loadingChurn">
+        <el-table-column prop="user_id" label="ID" width="60" />
+        <el-table-column prop="user_name" label="用户" width="110" />
+        <el-table-column prop="segment" label="RFM分群" width="100" />
+        <el-table-column prop="churn_probability" label="流失概率" width="130">
+          <template #default="{ row }"><el-progress :percentage="Math.round(row.churn_probability * 100)" :color="churnColor(row.churn_probability)" :stroke-width="14" /></template>
+        </el-table-column>
+        <el-table-column prop="risk_level" label="风险" width="80">
+          <template #default="{ row }"><el-tag :type="row.risk_level==='high'?'danger':row.risk_level==='medium'?'warning':'success'" size="small">{{ {high:'高',medium:'中',low:'低'}[row.risk_level]||row.risk_level }}</el-tag></template>
+        </el-table-column>
+        <el-table-column prop="status" label="状态" width="100">
+          <template #default="{ row }"><el-select v-model="row.status" size="small" @change="updateChurnStatus(row)"><el-option label="待处理" value="pending"/><el-option label="已联系" value="contacted"/><el-option label="已解决" value="resolved"/></el-select></template>
+        </el-table-column>
+        <el-table-column prop="prediction_date" label="预测日期" width="110" />
+      </el-table>
+      <el-pagination v-if="churnTotal>churnPerPage" v-model:current-page="churnPage" :page-size="churnPerPage" :total="churnTotal" layout="prev,pager,next" class="mt-md" @current-change="loadChurnList" />
+    </div>
+    <el-row :gutter="16">
+      <el-col :span="12">
+        <div class="kpi-card mt-md"><h3 class="card-title">流失趋势</h3><div ref="churnTrendChartRef" class="chart-box" style="height:280px"></div></div>
+      </el-col>
+      <el-col :span="12">
+        <div class="kpi-card mt-md"><h3 class="card-title">特征重要性</h3><div ref="importanceChartRef" class="chart-box" style="height:280px"></div></div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
-import { DataAnalysis, PieChart, TrendCharts, Connection, Warning, Cpu, List, User, Goods, Clock } from '@element-plus/icons-vue'
-import { adminAnalyticsApi } from '../api'
+import { ref, onMounted, nextTick } from 'vue'
+import { adminAnalyticsApi } from '../../api'
 import { ElMessage } from 'element-plus'
-import DashboardTab from '../admin/components/DashboardTab.vue'
-import RfmTab from '../admin/components/RfmTab.vue'
-import SalesTab from '../admin/components/SalesTab.vue'
-import AssociationTab from '../admin/components/AssociationTab.vue'
-import ChurnTab from '../admin/components/ChurnTab.vue'
-import ModelsTab from '../admin/components/ModelsTab.vue'
-import OrdersTab from '../admin/components/OrdersTab.vue'
-import UsersTab from '../admin/components/UsersTab.vue'
-import ProductManagement from '../admin/components/ProductManagement.vue'
+import { useECharts } from '../composables/useECharts'
+import * as echarts from 'echarts'
 
-const activeTab = ref('dashboard')
-const recomputing = ref(false)
-const lastComputeTime = ref('')
+const { chartInstances, initChart, disposeChartRefs, handleResize, safeRender } = useECharts()
 
-async function loadLastComputeTime() {
-  try { const r = await adminAnalyticsApi.getLastComputeTime(); lastComputeTime.value = r.data.last_compute_time || '未知' } catch {}
+const churnList = ref([])
+const churnPage = ref(1), churnTotal = ref(0), churnPerPage = 20
+const churnRiskOnly = ref(false), loadingChurn = ref(false)
+const churnHighRisk = ref(0), churnMediumRisk = ref(0), churnResolved = ref(0)
+const importanceChartRef = ref(null), churnTrendChartRef = ref(null)
+
+function churnColor(p) { return p > 0.7 ? '#F56C6C' : p > 0.4 ? '#E6A23C' : '#67C23A' }
+
+async function loadChurnList() {
+  loadingChurn.value = true
+  try {
+    const r = await adminAnalyticsApi.getChurnList({ page: churnPage.value, per_page: churnPerPage, risk_only: churnRiskOnly.value ? '1' : '0' })
+    churnList.value = r.data.predictions || []
+    churnTotal.value = r.data.total || 0
+    if (r.data.summary) {
+      churnHighRisk.value = r.data.summary.high || 0
+      churnMediumRisk.value = r.data.summary.medium || 0
+      churnResolved.value = r.data.summary.resolved || 0
+    }
+  } catch { churnList.value = [] }
+  finally { loadingChurn.value = false }
 }
-async function triggerRecompute() {
-  recomputing.value = true
-  try { await adminAnalyticsApi.recompute(); ElMessage.success('重算已启动'); setTimeout(loadLastComputeTime, 3000) } catch {} finally { recomputing.value = false }
+
+async function updateChurnStatus(row) {
+  try { await adminAnalyticsApi.updateChurnStatus(row.id, row.status); ElMessage.success('状态已更新') } catch {}
+}
+
+async function loadChurnImportance() {
+  try { const r = await adminAnalyticsApi.getChurnImportance(); const d = r.data || {}; await nextTick(); safeRender(() => renderImportanceChart(d)) } catch {}
+}
+
+function renderImportanceChart(data) {
+  const chart = initChart(importanceChartRef)
+  if (!chart) return
+  const features = data.feature_counts || []
+  if (!features.length) return
+  const sorted = [...features].sort((a, b) => b.count - a.count).slice(0, 12)
+  chart.setOption({
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true, extraCssText: 'z-index:1;' },
+    grid: { left: 100, right: 40, top: 8, bottom: 15 },
+    xAxis: { type: 'value' },
+    yAxis: { type: 'category', data: sorted.map(s => s.feature), inverse: true, axisLabel: { fontSize: 10 } },
+    animationDuration: 600,
+    series: [{ type: 'bar', data: sorted.map(s => ({ value: s.count, itemStyle: { color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{ offset: 0, color: '#409EFF' }, { offset: 1, color: '#66B1FF' }]) } })), label: { show: true, position: 'right', fontSize: 10 } }],
+  })
+}
+
+async function loadChurnTrend() {
+  try { const r = await adminAnalyticsApi.getChurnTrend(); const d = r.data || []; await nextTick(); safeRender(() => renderChurnTrend(d)) } catch {}
+}
+
+function renderChurnTrend(data) {
+  const chart = initChart(churnTrendChartRef)
+  if (!chart || !data.length) return
+  chart.setOption({
+    tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, confine: true, extraCssText: 'z-index:1;', formatter: function(params) { const d = data[params[0].dataIndex]; return d.bucket + '<br/>用户数: ' + d.count + '<br/>占比: ' + d.rate + '%' } },
+    grid: { left: 55, right: 30, top: 15, bottom: 25 },
+    xAxis: { type: 'category', data: data.map(d => d.bucket), axisLabel: { fontSize: 11 } },
+    yAxis: { type: 'value', name: '用户数' },
+    animationDuration: 600,
+    series: [{
+      type: 'bar', data: data.map(d => ({
+        value: d.count,
+        itemStyle: { color: d.bucket.includes('80') || d.bucket.includes('60') ? '#F56C6C' : d.bucket.includes('40') ? '#E6A23C' : '#67C23A' }
+      })),
+      label: { show: true, position: 'top', formatter: function(p) { return data[p.dataIndex].rate + '%' }, fontSize: 11 },
+      barWidth: '40%',
+    }],
+  })
 }
 
 onMounted(() => {
-  loadLastComputeTime()
+  loadChurnList()
+  loadChurnImportance()
+  loadChurnTrend()
 })
 </script>
 

@@ -1,72 +1,58 @@
 <template>
-  <div class="admin-page">
-    <el-container>
-      <el-aside width="220px" class="admin-sidebar">
-        <div class="sidebar-brand">
-          <strong>ShopMiner</strong>
-          <span>管理后台</span>
-        </div>
-        <el-menu :default-active="activeTab" @select="activeTab = $event">
-          <el-menu-item index="dashboard"><el-icon><DataAnalysis /></el-icon>数据看板</el-menu-item>
-          <el-menu-item index="rfm"><el-icon><PieChart /></el-icon>客户分群</el-menu-item>
-          <el-menu-item index="sales"><el-icon><TrendCharts /></el-icon>销售分析</el-menu-item>
-          <el-menu-item index="association"><el-icon><Connection /></el-icon>关联规则</el-menu-item>
-          <el-menu-item index="churn"><el-icon><Warning /></el-icon>流失预警</el-menu-item>
-          <el-menu-item index="models"><el-icon><Cpu /></el-icon>模型指标</el-menu-item>
-          <el-menu-item index="orders"><el-icon><List /></el-icon>订单管理</el-menu-item>
-          <el-menu-item index="products"><el-icon><Goods /></el-icon>商品管理</el-menu-item>
-          <el-menu-item index="users"><el-icon><User /></el-icon>用户管理</el-menu-item>
-        </el-menu>
-        <div class="sidebar-footer">
-          <div class="compute-time" v-if="lastComputeTime"><el-icon><Clock /></el-icon> {{ lastComputeTime }}</div>
-          <el-button type="primary" size="small" :loading="recomputing" @click="triggerRecompute" style="width:100%">重新计算</el-button>
-        </div>
-      </el-aside>
-
-      <el-main class="admin-main">
-        <DashboardTab v-if="activeTab === 'dashboard'" />
-        <RfmTab v-if="activeTab === 'rfm'" />
-        <SalesTab v-if="activeTab === 'sales'" />
-        <AssociationTab v-if="activeTab === 'association'" />
-        <ChurnTab v-if="activeTab === 'churn'" />
-        <ModelsTab v-if="activeTab === 'models'" />
-        <OrdersTab v-if="activeTab === 'orders'" />
-        <ProductManagement v-if="activeTab === 'products'" />
-        <UsersTab v-if="activeTab === 'users'" />
-      </el-main>
-    </el-container>
+  <div>
+    <h2 class="page-title">订单管理</h2>
+    <div class="kpi-card">
+      <el-table :data="adminOrders" stripe v-loading="loadingOrders">
+        <el-table-column prop="id" label="ID" width="70" />
+        <el-table-column prop="user_name" label="用户" width="120" />
+        <el-table-column prop="total_amount" label="金额 (元)" min-width="120" align="right"><template #default="{ row }">{{ fmtMoney(row.total_amount) }}</template></el-table-column>
+        <el-table-column prop="status" label="状态" width="100"><template #default="{ row }"><el-tag :type="orderStatusType(row.status)" size="small">{{ orderStatusLabel(row.status) }}</el-tag></template></el-table-column>
+        <el-table-column prop="shipping_phone" label="收货电话" width="120" />
+        <el-table-column prop="tracking_number" label="运单号" width="140"><template #default="{ row }">{{ row.tracking_number || '-' }}</template></el-table-column>
+        <el-table-column prop="created_at" label="创建时间" width="160" />
+        <el-table-column label="操作" width="200" fixed="right">
+            <template #default="{ row }">
+            <el-button v-if="row.status==='pending'" type="warning" size="small" @click="payOrder(row.id)">付款</el-button>
+            <el-button v-if="row.status==='paid'" type="primary" size="small" @click="shipOrder(row.id)">发货</el-button>
+            <el-button v-if="row.status==='shipped'" type="success" size="small" @click="deliverOrder(row.id)">送达</el-button>
+            <el-button v-if="['pending','paid'].includes(row.status)" type="danger" size="small" @click="refundOrder(row.id)">退款</el-button>
+            </template>
+          </el-table-column>
+      </el-table>
+      <el-pagination v-if="ordersTotal>ordersPerPage" v-model:current-page="ordersPage" :page-size="ordersPerPage" :total="ordersTotal" layout="prev,pager,next" class="mt-md" @current-change="loadAdminOrders" />
+    </div>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { DataAnalysis, PieChart, TrendCharts, Connection, Warning, Cpu, List, User, Goods, Clock } from '@element-plus/icons-vue'
-import { adminAnalyticsApi } from '../api'
-import { ElMessage } from 'element-plus'
-import DashboardTab from '../admin/components/DashboardTab.vue'
-import RfmTab from '../admin/components/RfmTab.vue'
-import SalesTab from '../admin/components/SalesTab.vue'
-import AssociationTab from '../admin/components/AssociationTab.vue'
-import ChurnTab from '../admin/components/ChurnTab.vue'
-import ModelsTab from '../admin/components/ModelsTab.vue'
-import OrdersTab from '../admin/components/OrdersTab.vue'
-import UsersTab from '../admin/components/UsersTab.vue'
-import ProductManagement from '../admin/components/ProductManagement.vue'
+import { adminApi } from '../../api'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { fmtMoney } from '../composables/useECharts'
 
-const activeTab = ref('dashboard')
-const recomputing = ref(false)
-const lastComputeTime = ref('')
+const adminOrders = ref([])
+const ordersPage = ref(1), ordersTotal = ref(0), ordersPerPage = 15
+const loadingOrders = ref(false)
 
-async function loadLastComputeTime() {
-  try { const r = await adminAnalyticsApi.getLastComputeTime(); lastComputeTime.value = r.data.last_compute_time || '未知' } catch {}
+const orderStatusMap = { pending: { label: '待付款', type: 'warning' }, paid: { label: '已付款', type: 'primary' }, shipped: { label: '已发货', type: '' }, delivered: { label: '已送达', type: 'success' }, cancelled: { label: '已取消', type: 'info' }, refunded: { label: '已退款', type: 'danger' } }
+function orderStatusLabel(s) { return orderStatusMap[s]?.label || s }
+function orderStatusType(s) { return orderStatusMap[s]?.type || 'info' }
+
+async function loadAdminOrders() {
+  loadingOrders.value = true
+  try { const r = await adminApi.getOrders({ page: ordersPage.value, per_page: ordersPerPage }); adminOrders.value = r.data.orders || []; ordersTotal.value = r.data.total || 0 } catch { adminOrders.value = [] }
+  finally { loadingOrders.value = false }
 }
-async function triggerRecompute() {
-  recomputing.value = true
-  try { await adminAnalyticsApi.recompute(); ElMessage.success('重算已启动'); setTimeout(loadLastComputeTime, 3000) } catch {} finally { recomputing.value = false }
+
+async function shipOrder(id) {
+  try { const { value: t } = await ElMessageBox.prompt('请输入运单号（可选）', '发货', { confirmButtonText: '确认发货', cancelButtonText: '取消' }); await adminApi.shipOrder(id, t || ''); ElMessage.success('已发货'); loadAdminOrders() } catch {}
 }
+async function deliverOrder(id) { try { await adminApi.deliverOrder(id); ElMessage.success('已送达'); loadAdminOrders() } catch {} }
+async function refundOrder(id) { try { await ElMessageBox.confirm('确认退款？', '退款'); await adminApi.refundOrder(id); ElMessage.success('已退款'); loadAdminOrders() } catch {} }
+async function payOrder(id) { try { await ElMessageBox.confirm('确认代客付款？', '付款'); await adminApi.payOrder(id); ElMessage.success('已付款'); loadAdminOrders() } catch {} }
 
 onMounted(() => {
-  loadLastComputeTime()
+  loadAdminOrders()
 })
 </script>
 
