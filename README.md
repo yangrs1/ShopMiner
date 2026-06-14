@@ -32,7 +32,7 @@
 | 亮点 | 说明 |
 |------|------|
 | **数据驱动** | 四大数据挖掘模块覆盖客户分析、销量预测、流失预警、商品关联，用数据指导运营决策 |
-| **全栈工程** | Vue3 + Flask + MySQL 完整前后端分离，RESTful API + JWT 认证 + RBAC 权限 |
+| **全栈工程** | Vue3 + Flask + PostgreSQL 完整前后端分离，RESTful API + JWT 认证 + RBAC 权限 |
 | **产品质量** | 443 自动化测试（pytest），代码覆盖率 82%，7 个真实 Bug 修复与回归保障 |
 | **真实数据** | 207 张真实商品图片，12 类目种子数据，开箱即用的演示环境 |
 | **简历 Ready** | 可直接部署演示，适合数据科学/后端/测试岗位面试展示 |
@@ -45,12 +45,12 @@
 |------|------|------|
 | **前端** | Vue 3 + Composition API | 响应式 SPA |
 | | Element Plus | UI 组件库 |
-| | ECharts + vue-echarts | 数据可视化（RFM 散点图、销量趋势、关联网络图） |
+| | ECharts | 数据可视化（RFM 散点图、销量趋势、关联网络图） |
 | | Axios | HTTP 请求 |
 | | Pinia | 状态管理 |
 | | Vue Router | 前端路由 |
 | **后端** | Flask 3.0 | Web 框架 |
-| | Flask-SQLAlchemy | ORM + MySQL |
+| | Flask-SQLAlchemy | ORM + PostgreSQL |
 | | Flask-JWT-Extended | JWT 认证 |
 | | Flask-Limiter | 速率限制 |
 | | Flask-CORS | 跨域 |
@@ -61,7 +61,7 @@
 | **测试** | pytest | 单元/集成测试 |
 | | pytest-cov | 覆盖率 |
 | | Playwright | E2E 测试 |
-| **数据库** | MySQL 8.0 | 主数据库 |
+| **数据库** | PostgreSQL 16 | 主数据库 |
 | | SQLAlchemy 迁移 | 表结构版本管理 |
 
 ---
@@ -98,7 +98,7 @@
                     │
                     ▼
               ┌──────────┐
-              │  MySQL 8  │
+              │ PostgreSQL 16 │
               │ Database  │
               └──────────┘
 ```
@@ -204,7 +204,7 @@
 ### 环境要求
 
 - Python 3.10+
-- MySQL 8.0+
+- PostgreSQL 16+
 - Node.js 18+（仅构建前端时需要）
 
 ### 1️⃣ 克隆项目
@@ -217,8 +217,11 @@ cd ShopMiner
 ### 2️⃣ 配置数据库
 
 ```bash
-# 创建 MySQL 数据库
-mysql -u root -p -e "CREATE DATABASE shopminer CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+# 创建 PostgreSQL 数据库
+
+```bash
+# 创建 PostgreSQL 数据库
+psql -U postgres -c "CREATE DATABASE shopminer;"
 
 # 复制环境变量模板
 cp .env.example .env
@@ -285,7 +288,7 @@ npm run build
 ### 运行测试
 
 ```bash
-# 运行全部测试
+# 运行全部后端测试
 pytest
 
 # 带覆盖率报告
@@ -296,6 +299,9 @@ pytest tests/unit/
 
 # 仅运行 API 测试
 pytest tests/api/
+
+# 运行前端单元测试
+cd frontend && npm run test:unit
 ```
 
 ### 测试覆盖要点

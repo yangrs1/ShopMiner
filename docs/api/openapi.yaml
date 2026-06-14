@@ -1,0 +1,3505 @@
+openapi: "3.0.3"
+info:
+  title: ShopMiner API - 智能电商平台
+  description: |
+    ShopMiner 是一个将数据挖掘与电商系统深度结合的全栈 Web 应用。
+    具备完整的电商功能（用户、商品、购物车、订单、支付），
+    内置 RFM 客户分群、销量预测、流失预警和关联规则推荐四大数据挖掘模块。
+
+    ## 统一响应格式
+    所有 API 统一返回 JSON 格式：
+    ```json
+    {
+      "code": 200,
+      "message": "success",
+      "data": { ... }
+    }
+    ```
+
+    ## 认证方式
+    使用 JWT Bearer Token。在请求头中添加：
+    ```
+    Authorization: Bearer <token>
+    ```
+
+    ## 金额单位
+    价格金额以 **分（fen）** 为单位（1 元 = 100 分），返回值为整数。
+  version: "1.0.0"
+  contact:
+    name: ShopMiner Team
+  license:
+    name: MIT
+
+servers:
+  - url: http://127.0.0.1:5000
+    description: 本地开发服务器
+
+paths:
+  # ============================================================
+  # Health
+  # ============================================================
+  /api/v1/health:
+    get:
+      tags:
+        - Health
+      summary: Health check
+      description: 服务健康检查，检测数据库连接状态
+      operationId: healthCheck
+      responses:
+        "200":
+          description: 健康状态返回
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthResponse"
+
+  # ============================================================
+  # Auth
+  # ============================================================
+  /api/v1/auth/register:
+    post:
+      tags:
+        - Auth
+      summary: Register a new user
+      description: 用户注册，创建新账户并返回 JWT Token
+      operationId: registerUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterRequest"
+      responses:
+        "201":
+          description: 注册成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: 请求参数错误（缺少必填字段、邮箱格式无效、密码不符合要求）
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: 邮箱已被注册
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/auth/login:
+    post:
+      tags:
+        - Auth
+      summary: Login
+      description: 用户登录，验证邮箱和密码，返回 JWT Token
+      operationId: loginUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+      responses:
+        "200":
+          description: 登录成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: 缺少邮箱或密码
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 邮箱或密码错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/auth/me:
+    get:
+      tags:
+        - Auth
+      summary: Get current user
+      description: 获取当前登录用户的个人信息
+      operationId: getCurrentUser
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回用户信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 用户不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - Auth
+      summary: Update current user
+      description: 更新当前登录用户的个人信息（姓名、电话、地址、密码等）
+      operationId: updateCurrentUser
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateUserRequest"
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 用户不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/auth/me/recharge:
+    post:
+      tags:
+        - Auth
+      summary: Recharge balance
+      description: 当前登录用户充值账户余额（金额单位为分）
+      operationId: rechargeBalance
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RechargeRequest"
+      responses:
+        "200":
+          description: 充值成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: 金额无效（非正数或超过上限 10,000,000 分）
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Products
+  # ============================================================
+  /api/v1/products:
+    get:
+      tags:
+        - Products
+      summary: List products
+      description: 获取上架商品列表，支持分页、搜索、分类筛选、价格区间、排序
+      operationId: getProducts
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+        - name: type
+          in: query
+          schema:
+            type: string
+          description: 商品类型筛选
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: 商品分类筛选
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: 搜索关键词（匹配名称和描述）
+        - name: min_price
+          in: query
+          schema:
+            type: integer
+          description: 最低价格（分）
+        - name: max_price
+          in: query
+          schema:
+            type: integer
+          description: 最高价格（分）
+        - name: sort_by
+          in: query
+          schema:
+            type: string
+            enum: [price, rating, created_at]
+            default: created_at
+          description: 排序字段
+        - name: order
+          in: query
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc
+          description: 排序方向
+      responses:
+        "200":
+          description: 成功返回商品列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductListResponse"
+        "400":
+          description: 参数错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      tags:
+        - Products
+      summary: Create product (Admin)
+      description: 管理员创建新商品
+      operationId: createProduct
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductCreateRequest"
+      responses:
+        "201":
+          description: 商品创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "400":
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/products/categories:
+    get:
+      tags:
+        - Products
+      summary: List product categories
+      description: 获取所有商品分类及其商品数量
+      operationId: getCategories
+      responses:
+        "200":
+          description: 成功返回分类列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CategoryListResponse"
+
+  /api/v1/products/ratings:
+    get:
+      tags:
+        - Products
+      summary: Get products ratings
+      description: 批量获取商品的评分和评价数量（通过 product_ids 逗号分隔）
+      operationId: getProductsRatings
+      parameters:
+        - name: product_ids
+          in: query
+          required: true
+          schema:
+            type: string
+          description: 商品 ID 列表，逗号分隔，如 "1,2,3"
+      responses:
+        "200":
+          description: 成功返回评分数据
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductRatingsResponse"
+
+  /api/v1/products/{product_id}:
+    get:
+      tags:
+        - Products
+      summary: Get product detail
+      description: 获取单个商品的详细信息（已登录用户访问会自动记录浏览行为）
+      operationId: getProductById
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 成功返回商品详情
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "404":
+          description: 商品不存在或已下架
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - Products
+      summary: Update product (Admin)
+      description: 管理员更新商品信息
+      operationId: updateProduct
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProductUpdateRequest"
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "400":
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - Products
+      summary: Deactivate product (Admin)
+      description: 管理员下架商品（软删除，设置 is_active=false）
+      operationId: deactivateProduct
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 下架成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/products/{product_id}/rating:
+    get:
+      tags:
+        - Products
+      summary: Get product rating
+      description: 获取单个商品的平均评分和评价数量
+      operationId: getProductRating
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 成功返回评分信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductRatingDetailResponse"
+
+  # ============================================================
+  # Cart
+  # ============================================================
+  /api/v1/cart:
+    get:
+      tags:
+        - Cart
+      summary: Get cart
+      description: 获取当前用户的购物车列表
+      operationId: getCart
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回购物车内容
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      tags:
+        - Cart
+      summary: Add to cart
+      description: 将商品添加到购物车（已存在则合并数量）
+      operationId: addToCart
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddToCartRequest"
+      responses:
+        "200":
+          description: 添加成功（包含合并）
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemsResponse"
+        "400":
+          description: 请求参数错误或库存不足
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - Cart
+      summary: Clear cart
+      description: 清空当前用户的购物车
+      operationId: clearCart
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 清空成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EmptyCartResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/cart/{product_id}:
+    put:
+      tags:
+        - Cart
+      summary: Update cart item quantity
+      description: 更新购物车中某商品的数量
+      operationId: updateCartItem
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateCartItemRequest"
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemsResponse"
+        "400":
+          description: 数量无效或库存不足
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不在购物车中
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - Cart
+      summary: Remove from cart
+      description: 从购物车中移除指定商品
+      operationId: removeFromCart
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 移除成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CartItemsResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 购物车中未找到该商品
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Orders
+  # ============================================================
+  /api/v1/orders:
+    post:
+      tags:
+        - Orders
+      summary: Create order
+      description: 从购物车创建订单（包含事务与并发控制）
+      operationId: createOrder
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOrderRequest"
+      responses:
+        "201":
+          description: 订单创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 购物车为空或库存不足
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    get:
+      tags:
+        - Orders
+      summary: List user orders
+      description: 获取当前用户的订单列表（分页）
+      operationId: getUserOrders
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+      responses:
+        "200":
+          description: 成功返回订单列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderListResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/orders/{order_id}:
+    get:
+      tags:
+        - Orders
+      summary: Get order detail
+      description: 获取单个订单的详细信息（含商品项和状态日志）
+      operationId: getOrderById
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 成功返回订单详情
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "403":
+          description: 无权访问（非本人订单）
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/orders/{order_id}/cancel:
+    post:
+      tags:
+        - Orders
+      summary: Cancel order
+      description: 取消订单（待支付状态直接取消，已支付状态自动退款）
+      operationId: cancelOrder
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 取消成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许取消
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无权操作
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/orders/{order_id}/pay:
+    post:
+      tags:
+        - Orders
+      summary: Pay order
+      description: 支付订单（扣除用户余额）
+      operationId: payOrder
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 支付成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许支付或余额不足
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无权操作
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/orders/{order_id}/deliver:
+    post:
+      tags:
+        - Orders
+      summary: Confirm delivery
+      description: 用户确认收货
+      operationId: confirmDelivery
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 确认收货成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许确认收货
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/orders/{order_id}/status-logs:
+    get:
+      tags:
+        - Orders
+      summary: Get order status logs
+      description: 获取订单的状态变更历史日志
+      operationId: getOrderStatusLogs
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 成功返回状态日志列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/StatusLogListResponse"
+        "403":
+          description: 无权访问
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Favorites
+  # ============================================================
+  /api/v1/favorites:
+    get:
+      tags:
+        - Favorites
+      summary: List favorites
+      description: 获取当前用户的收藏列表（分页）
+      operationId: listFavorites
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+      responses:
+        "200":
+          description: 成功返回收藏列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FavoriteListResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      tags:
+        - Favorites
+      summary: Add favorite
+      description: 收藏商品
+      operationId: addFavorite
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddFavoriteRequest"
+      responses:
+        "201":
+          description: 收藏成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FavoriteItemResponse"
+        "200":
+          description: 商品已收藏（幂等）
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FavoriteItemResponse"
+        "400":
+          description: 缺少 product_id
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/favorites/{product_id}:
+    delete:
+      tags:
+        - Favorites
+      summary: Remove favorite
+      description: 取消收藏商品（幂等操作）
+      operationId: removeFavorite
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 取消收藏成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/favorites/check/{product_id}:
+    get:
+      tags:
+        - Favorites
+      summary: Check favorite status
+      description: 检查当前用户是否已收藏某商品
+      operationId: checkFavorite
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 成功返回收藏状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FavoriteCheckResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Admin
+  # ============================================================
+  /api/v1/admin/orders:
+    get:
+      tags:
+        - Admin
+      summary: List all orders (Admin)
+      description: 管理员获取所有订单列表，支持按状态筛选和分页
+      operationId: adminGetOrders
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [pending, paid, shipped, delivered, cancelled, refunded]
+          description: 按订单状态筛选
+      responses:
+        "200":
+          description: 成功返回订单列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderListResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/orders/{order_id}/ship:
+    put:
+      tags:
+        - Admin
+      summary: Ship order (Admin)
+      description: 管理员发货，可附带物流单号
+      operationId: adminShipOrder
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tracking_number:
+                  type: string
+                  description: 物流单号
+      responses:
+        "200":
+          description: 发货成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许发货
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/orders/{order_id}/deliver:
+    put:
+      tags:
+        - Admin
+      summary: Mark delivered (Admin)
+      description: 管理员标记订单为已送达
+      operationId: adminDeliverOrder
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 标记送达成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许操作
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/orders/{order_id}/refund:
+    post:
+      tags:
+        - Admin
+      summary: Refund order (Admin)
+      description: 管理员退款（自动退还金额至用户余额）
+      operationId: adminRefundOrder
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 退款成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许退款
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/orders/{order_id}/pay:
+    post:
+      tags:
+        - Admin
+      summary: Admin pay order (Admin)
+      description: 管理员代付（将待支付订单标记为已支付）
+      operationId: adminPayOrder
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: order_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 订单 ID
+      responses:
+        "200":
+          description: 代付成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderResponse"
+        "400":
+          description: 订单状态不允许支付
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 订单不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/users:
+    get:
+      tags:
+        - Admin
+      summary: List all users (Admin)
+      description: 管理员获取所有用户列表（分页）
+      operationId: adminGetUsers
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+      responses:
+        "200":
+          description: 成功返回用户列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserListResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/users/{user_id}/balance:
+    put:
+      tags:
+        - Admin
+      summary: Adjust user balance (Admin)
+      description: 管理员调整用户余额（正数增加，负数减少）
+      operationId: adminAdjustBalance
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 用户 ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - amount
+              properties:
+                amount:
+                  type: integer
+                  description: 调整金额（分），正数增加负数减少
+                  example: 10000
+      responses:
+        "200":
+          description: 调整成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserResponse"
+        "400":
+          description: 金额无效或余额不足
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 用户不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/products:
+    get:
+      tags:
+        - Admin
+      summary: List all products (Admin)
+      description: 管理员获取所有商品列表，含未上架商品，支持搜索和状态筛选
+      operationId: adminGetProducts
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+        - name: q
+          in: query
+          schema:
+            type: string
+          description: 搜索关键词
+        - name: is_active
+          in: query
+          schema:
+            type: string
+            enum: ["1", "0", "true", "false"]
+          description: 按上架状态筛选
+      responses:
+        "200":
+          description: 成功返回商品列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AdminProductListResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      tags:
+        - Admin
+      summary: Create product (Admin)
+      description: 管理员创建商品（备用管理端创建接口）
+      operationId: adminCreateProduct
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminProductCreateRequest"
+      responses:
+        "200":
+          description: 商品创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "400":
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/products/{product_id}:
+    get:
+      tags:
+        - Admin
+      summary: Get product (Admin)
+      description: 管理员获取单个商品的完整信息
+      operationId: adminGetProduct
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 成功返回商品信息
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    put:
+      tags:
+        - Admin
+      summary: Update product (Admin)
+      description: 管理员更新商品信息（备用管理端更新接口）
+      operationId: adminUpdateProduct
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AdminProductUpdateRequest"
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "400":
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/products/{product_id}/toggle-active:
+    put:
+      tags:
+        - Admin
+      summary: Toggle product active status (Admin)
+      description: 管理员切换商品的上架/下架状态
+      operationId: adminToggleProductActive
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 状态切换成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProductResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 商品不存在
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/reset:
+    post:
+      tags:
+        - Admin
+      summary: Reset system (Admin)
+      description: 管理员重置系统数据。mode=accounts 只重置演示账户，mode=all 清空所有测试数据
+      operationId: adminReset
+      security:
+        - BearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  type: string
+                  enum: [accounts, all]
+                  default: accounts
+                  description: 重置模式
+      responses:
+        "200":
+          description: 重置成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/admin/import-data:
+    post:
+      tags:
+        - Admin
+      summary: Import UCI data (Admin)
+      description: 管理员触发 UCI 公开数据集导入（后台异步运行）
+      operationId: adminImportData
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 导入任务已启动
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SimpleResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 导入脚本未找到
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Upload
+  # ============================================================
+  /api/v1/upload:
+    post:
+      tags:
+        - Upload
+      summary: Upload image (Admin)
+      description: 管理员上传商品图片（支持 jpg/png/gif/webp，最大 5MB）
+      operationId: uploadImage
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+                - file
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 图片文件
+      responses:
+        "200":
+          description: 上传成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UploadResponse"
+        "400":
+          description: 文件无效（大小超限或类型不支持）
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - Dashboard & RFM
+  # ============================================================
+  /api/v1/analytics/dashboard:
+    get:
+      tags:
+        - Analytics
+      summary: Get dashboard stats (Admin)
+      description: 管理员获取仪表盘统计数据（总用户数、总订单数、总收入等）
+      operationId: getDashboardStats
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回仪表盘数据
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/rfm/summary:
+    get:
+      tags:
+        - Analytics
+      summary: Get RFM summary (Admin)
+      description: 管理员获取 RFM 客户分群摘要统计
+      operationId: getRfmSummary
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回 RFM 摘要
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/clustering/detail:
+    get:
+      tags:
+        - Analytics
+      summary: Get clustering detail (Admin)
+      description: 管理员获取客户聚类分群详细信息（含 K-Means 指标和各分群分布）
+      operationId: getClusteringDetail
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回聚类详情
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - Sales
+  # ============================================================
+  /api/v1/analytics/sales/trend:
+    get:
+      tags:
+        - Analytics
+      summary: Get sales trend (Admin)
+      description: 管理员获取销售趋势数据（按日汇总）
+      operationId: getSalesTrend
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回销售趋势
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/sales/prediction:
+    get:
+      tags:
+        - Analytics
+      summary: Get sales prediction (Admin)
+      description: 管理员获取销量预测数据（历史值 + 预测值）
+      operationId: getSalesPrediction
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回销量预测
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/sales/prediction-metrics:
+    get:
+      tags:
+        - Analytics
+      summary: Get prediction metrics (Admin)
+      description: 管理员获取销售预测模型评估指标（MSE, R2, sMAPE 等）
+      operationId: getPredictionMetrics
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回预测指标
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/sales/heatmap:
+    get:
+      tags:
+        - Analytics
+      summary: Get sales heatmap (Admin)
+      description: 管理员获取销售热力图数据
+      operationId: getSalesHeatmap
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回热力图数据
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - Association Rules
+  # ============================================================
+  /api/v1/analytics/association/list:
+    get:
+      tags:
+        - Analytics
+      summary: List association rules (Admin)
+      description: 管理员获取关联规则列表（分页）
+      operationId: listAssociationRules
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 50
+          description: 每页数量
+      responses:
+        "200":
+          description: 成功返回关联规则列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AssociationRuleListResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/association/product/{product_id}:
+    get:
+      tags:
+        - Analytics
+      summary: Get product recommendations
+      description: 获取某商品的关联推荐列表（基于 Apriori 算法）
+      operationId: getProductRecommendations
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+      responses:
+        "200":
+          description: 成功返回关联推荐
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+
+  # ============================================================
+  # Analytics - Churn Prediction
+  # ============================================================
+  /api/v1/analytics/churn/list:
+    get:
+      tags:
+        - Analytics
+      summary: List churn predictions (Admin)
+      description: 管理员获取客户流失预警列表（分页，可筛选高风险）
+      operationId: listChurnPredictions
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 20
+          description: 每页数量
+        - name: risk_only
+          in: query
+          schema:
+            type: string
+            enum: ["0", "1"]
+            default: "0"
+          description: 是否仅返回高风险客户（1=是）
+      responses:
+        "200":
+          description: 成功返回流失预警列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChurnListResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/churn/importance:
+    get:
+      tags:
+        - Analytics
+      summary: Get churn feature importance (Admin)
+      description: 管理员获取流失预警模型特征重要性
+      operationId: getChurnImportance
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回特征重要性
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/churn/trend:
+    get:
+      tags:
+        - Analytics
+      summary: Get churn trend (Admin)
+      description: 管理员获取流失趋势数据
+      operationId: getChurnTrend
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回流失趋势
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/churn/{churn_id}/status:
+    put:
+      tags:
+        - Analytics
+      summary: Update churn status (Admin)
+      description: 管理员更新流失预警记录的处理状态
+      operationId: updateChurnStatus
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: churn_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 流失预警 ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - status
+              properties:
+                status:
+                  type: string
+                  description: 处理状态
+                  example: contacted
+      responses:
+        "200":
+          description: 更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChurnStatusResponse"
+        "400":
+          description: 无效的 churn_id 或状态
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - User Personal
+  # ============================================================
+  /api/v1/analytics/user/rfm:
+    get:
+      tags:
+        - Analytics
+      summary: Get user RFM
+      description: 当前用户获取自己的 RFM 分析报告（含雷达图数据）
+      operationId: getUserRfm
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回用户 RFM 报告
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/user/trend:
+    get:
+      tags:
+        - Analytics
+      summary: Get user consumption trend
+      description: 当前用户获取自己的消费趋势（按月汇总）
+      operationId: getUserConsumptionTrend
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回消费趋势
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/user/category-preference:
+    get:
+      tags:
+        - Analytics
+      summary: Get user category preference
+      description: 当前用户获取自己的品类偏好分析
+      operationId: getUserCategoryPreference
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回品类偏好
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - Model Metrics
+  # ============================================================
+  /api/v1/analytics/metrics:
+    get:
+      tags:
+        - Analytics
+      summary: Get model metrics (Admin)
+      description: 管理员获取各数据挖掘模型的评估指标，可按模型名称筛选
+      operationId: getModelMetrics
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: model
+          in: query
+          schema:
+            type: string
+          description: 模型名称筛选（如 Clustering, Churn, SalesForecast, Association）
+      responses:
+        "200":
+          description: 成功返回模型指标
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - Hot Products
+  # ============================================================
+  /api/v1/analytics/products/hot:
+    get:
+      tags:
+        - Analytics
+      summary: Get hot products
+      description: 获取热门商品列表（可按分类筛选，无需登录）
+      operationId: getHotProducts
+      parameters:
+        - name: category
+          in: query
+          schema:
+            type: string
+          description: 分类名称筛选
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 6
+          description: 返回数量上限
+      responses:
+        "200":
+          description: 成功返回热门商品
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HotProductsResponse"
+
+  # ============================================================
+  # Analytics - Admin Recompute
+  # ============================================================
+  /api/v1/analytics/admin/recompute:
+    post:
+      tags:
+        - Analytics
+      summary: Trigger recompute (Admin)
+      description: 管理员触发数据挖掘模型重新计算
+      operationId: adminRecompute
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 重算任务触发成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /api/v1/analytics/admin/last-compute-time:
+    get:
+      tags:
+        - Analytics
+      summary: Get last compute time (Admin)
+      description: 管理员获取最近一次模型计算的时间
+      operationId: getLastComputeTime
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: 成功返回最后计算时间
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Analytics - Model Visualization
+  # ============================================================
+  /api/v1/analytics/viz/{model}:
+    get:
+      tags:
+        - Analytics
+      summary: Get model visualization data (Admin)
+      description: 管理员获取指定模型的可视化预计算数据
+      operationId: getModelViz
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: model
+          in: path
+          required: true
+          schema:
+            type: string
+          description: |
+            模型名称别名:
+            - phase3 / Clustering: 客户分群
+            - phase4 / Churn: 流失预警
+            - phase5 / SalesForecast: 销售预测
+            - phase6 / Association: 关联规则
+      responses:
+        "200":
+          description: 成功返回可视化数据
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AnalyticsDataResponse"
+        "403":
+          description: 无管理员权限
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: 指定模型无可视化数据
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  # ============================================================
+  # Reviews
+  # ============================================================
+  /api/v1/reviews/product/{product_id}:
+    get:
+      tags:
+        - Reviews
+      summary: Get product reviews
+      description: 获取某商品的所有评价（分页，含平均评分）
+      operationId: getProductReviews
+      parameters:
+        - name: product_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: 商品 ID
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+          description: 页码
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: 每页数量
+      responses:
+        "200":
+          description: 成功返回评价列表
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewListResponse"
+
+  /api/v1/reviews:
+    post:
+      tags:
+        - Reviews
+      summary: Create review
+      description: 创建或更新商品评价（同一用户对同一商品只能有一条评价，重复提交则更新）
+      operationId: createReview
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateReviewRequest"
+      responses:
+        "201":
+          description: 评价创建成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewItemResponse"
+        "200":
+          description: 评价更新成功
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReviewItemResponse"
+        "400":
+          description: 请求参数错误
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: 未认证
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 在请求头中添加 `Authorization: Bearer <token>`
+
+  schemas:
+    # ==========================================================
+    # Unified Response Schemas
+    # ==========================================================
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          description: 业务状态码（200=成功，4xx=客户端错误，5xx=服务端错误）
+        message:
+          type: string
+          description: 响应消息
+        data:
+          description: 响应数据（具体结构视接口而定）
+
+    SimpleResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 400
+        message:
+          type: string
+          example: 请求参数错误
+
+    # ==========================================================
+    # Health
+    # ==========================================================
+    HealthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [healthy, degraded]
+          description: 服务状态
+          example: healthy
+        timestamp:
+          type: string
+          format: date-time
+          description: 当前 UTC 时间
+        version:
+          type: string
+          description: API 版本
+          example: "1.0.0"
+        database:
+          type: string
+          enum: [connected, disconnected]
+          description: 数据库连接状态
+
+    # ==========================================================
+    # User
+    # ==========================================================
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 用户 ID
+        first_name:
+          type: string
+          description: 名
+        last_name:
+          type: string
+          description: 姓
+        phone:
+          type: string
+          description: 电话号码
+        address:
+          type: string
+          description: 地址
+        email:
+          type: string
+          format: email
+          description: 邮箱
+        icon:
+          type: string
+          description: 头像文件名
+        balance:
+          type: integer
+          description: 账户余额（分）
+        role:
+          type: string
+          enum: [customer, admin]
+          description: 用户角色
+        created_at:
+          type: string
+          format: date-time
+          description: 注册时间
+
+    UserResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/User"
+
+    AuthResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Login successful
+        data:
+          type: object
+          properties:
+            access_token:
+              type: string
+              description: JWT Token
+            user:
+              $ref: "#/components/schemas/User"
+
+    RegisterRequest:
+      type: object
+      required:
+        - email
+        - password
+        - first_name
+        - last_name
+      properties:
+        email:
+          type: string
+          format: email
+          description: 邮箱地址
+          example: user@example.com
+        password:
+          type: string
+          description: 密码（需符合安全要求）
+          example: Test@123
+        first_name:
+          type: string
+          description: 名
+          example: John
+        last_name:
+          type: string
+          description: 姓
+          example: Doe
+        address:
+          type: string
+          description: 地址（可选）
+          example: 123 Main St
+        icon:
+          type: string
+          description: 头像图标（可选，默认 icon_bear.png）
+          example: icon_bear.png
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          description: 邮箱地址
+          example: customer@shopminer.com
+        password:
+          type: string
+          description: 密码
+          example: Customer@123
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: 名
+        last_name:
+          type: string
+          description: 姓
+        phone:
+          type: string
+          description: 电话号码
+        address:
+          type: string
+          description: 地址
+        password:
+          type: string
+          description: 新密码（留空不修改）
+
+    RechargeRequest:
+      type: object
+      required:
+        - amount
+      properties:
+        amount:
+          type: integer
+          description: 充值金额（分），须为正数，上限 10,000,000
+          example: 10000
+
+    # ==========================================================
+    # Product
+    # ==========================================================
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 商品 ID
+        name:
+          type: string
+          description: 商品名称
+        description:
+          type: string
+          description: 商品描述
+        image:
+          type: string
+          description: 图片 URL
+        price:
+          type: integer
+          description: 价格（分）
+        stock:
+          type: integer
+          description: 库存数量
+        type:
+          type: string
+          description: 商品类型
+        category_name:
+          type: string
+          description: 分类名称
+        is_active:
+          type: boolean
+          description: 是否上架
+        created_at:
+          type: string
+          format: date-time
+          description: 创建时间
+
+    ProductResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/Product"
+
+    ProductCreateRequest:
+      type: object
+      required:
+        - name
+        - description
+        - image
+        - price
+        - type
+        - stock
+      properties:
+        name:
+          type: string
+          description: 商品名称
+          example: 新商品
+        description:
+          type: string
+          description: 商品描述
+          example: 这是一件优质商品
+        image:
+          type: string
+          description: 图片 URL
+          example: /img/product.jpg
+        price:
+          type: integer
+          description: 价格（分），不可为负数
+          example: 4999
+        stock:
+          type: integer
+          description: 库存数量
+          example: 100
+        type:
+          type: string
+          description: 商品类型
+          example: tshirt
+        category_name:
+          type: string
+          description: 分类名称
+          example: 电子产品
+
+    ProductUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 商品名称
+        description:
+          type: string
+          description: 商品描述
+        image:
+          type: string
+          description: 图片 URL
+        price:
+          type: integer
+          description: 价格（分）
+        stock:
+          type: integer
+          description: 库存数量
+        type:
+          type: string
+          description: 商品类型
+        category_name:
+          type: string
+          description: 分类名称
+        is_active:
+          type: boolean
+          description: 是否上架
+
+    AdminProductCreateRequest:
+      type: object
+      required:
+        - name
+        - price
+        - stock
+      properties:
+        name:
+          type: string
+          description: 商品名称
+          example: 新商品
+        description:
+          type: string
+          description: 商品描述
+          example: 这是一件优质商品
+        image:
+          type: string
+          description: 图片 URL
+          example: /img/product.jpg
+        price:
+          type: integer
+          description: 价格（分），须为正整数
+          example: 4999
+        stock:
+          type: integer
+          description: 库存数量，须为非负整数
+          example: 100
+        type:
+          type: string
+          description: 商品类型
+          example: physical
+        category_name:
+          type: string
+          description: 分类名称
+          example: 电子产品
+
+    AdminProductUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 商品名称（不能为空）
+        description:
+          type: string
+          description: 商品描述
+        image:
+          type: string
+          description: 图片 URL
+        price:
+          type: integer
+          description: 价格（分），须为正整数
+        stock:
+          type: integer
+          description: 库存数量，须为非负整数
+        type:
+          type: string
+          description: 商品类型
+        category_name:
+          type: string
+          description: 分类名称
+
+    ProductListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            products:
+              type: array
+              items:
+                $ref: "#/components/schemas/Product"
+            total:
+              type: integer
+              description: 商品总数
+            pages:
+              type: integer
+              description: 总页数
+            page:
+              type: integer
+              description: 当前页码
+
+    AdminProductListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            products:
+              type: array
+              items:
+                $ref: "#/components/schemas/Product"
+            total:
+              type: integer
+            pages:
+              type: integer
+            page:
+              type: integer
+
+    CategoryListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            categories:
+              type: array
+              items:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    description: 分类名称
+                  count:
+                    type: integer
+                    description: 该分类下的商品数量
+
+    ProductRatingsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              avg_rating:
+                type: number
+                format: float
+                description: 平均评分
+              total_reviews:
+                type: integer
+                description: 评价总数
+
+    ProductRatingDetailResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            product_id:
+              type: integer
+            avg_rating:
+              type: number
+              format: float
+              description: 平均评分
+            total_reviews:
+              type: integer
+              description: 评价总数
+
+    # ==========================================================
+    # Cart
+    # ==========================================================
+    CartItem:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 商品 ID
+        product_id:
+          type: integer
+          description: 商品 ID
+        name:
+          type: string
+          description: 商品名称
+        price:
+          type: integer
+          description: 单价（分）
+        image:
+          type: string
+          description: 商品图片 URL
+        stock:
+          type: integer
+          description: 库存数量
+        quantity:
+          type: integer
+          description: 购物车中的数量
+
+    CartResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            items:
+              type: array
+              items:
+                $ref: "#/components/schemas/CartItem"
+            total_amount:
+              type: integer
+              description: 购物车总金额（分）
+            item_count:
+              type: integer
+              description: 商品种类数
+
+    CartItemsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/CartItem"
+
+    AddToCartRequest:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: integer
+          description: 商品 ID
+          example: 1
+        quantity:
+          type: integer
+          description: 数量
+          default: 1
+          example: 2
+
+    UpdateCartItemRequest:
+      type: object
+      required:
+        - quantity
+      properties:
+        quantity:
+          type: integer
+          description: 新数量（须为正整数）
+          example: 3
+
+    EmptyCartResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Cart cleared
+        data:
+          type: array
+          items: {}
+
+    # ==========================================================
+    # Order
+    # ==========================================================
+    Order:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: 订单 ID
+        user_id:
+          type: integer
+          description: 用户 ID
+        total_amount:
+          type: integer
+          description: 订单总金额（分）
+        freight:
+          type: integer
+          description: 运费（分）
+        shipping_address:
+          type: string
+          description: 收货地址
+        shipping_phone:
+          type: string
+          description: 收货电话
+        tracking_number:
+          type: string
+          description: 物流单号
+        status:
+          type: string
+          enum: [pending, paid, shipped, delivered, cancelled, refunded]
+          description: 订单状态
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderItem"
+        status_logs:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderStatusLog"
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+
+    OrderItem:
+      type: object
+      properties:
+        id:
+          type: integer
+        order_id:
+          type: integer
+        product_id:
+          type: integer
+        product_name:
+          type: string
+          description: 商品名称
+        product_image:
+          type: string
+          description: 商品图片
+        quantity:
+          type: integer
+          description: 数量
+        unit_price:
+          type: integer
+          description: 单价（分）
+
+    OrderStatusLog:
+      type: object
+      properties:
+        id:
+          type: integer
+        order_id:
+          type: integer
+        from_status:
+          type: string
+          nullable: true
+          description: 原状态
+        to_status:
+          type: string
+          description: 目标状态
+        created_at:
+          type: string
+          format: date-time
+
+    OrderResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/Order"
+
+    OrderListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            orders:
+              type: array
+              items:
+                $ref: "#/components/schemas/Order"
+            total:
+              type: integer
+              description: 订单总数
+            pages:
+              type: integer
+              description: 总页数
+            page:
+              type: integer
+              description: 当前页码
+
+    StatusLogListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: array
+          items:
+            $ref: "#/components/schemas/OrderStatusLog"
+
+    CreateOrderRequest:
+      type: object
+      properties:
+        shipping_address:
+          type: string
+          description: 收货地址
+          example: 某某路 123 号
+        shipping_phone:
+          type: string
+          description: 收货电话
+          example: "13800138000"
+
+    # ==========================================================
+    # Favorites
+    # ==========================================================
+    Favorite:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        product_id:
+          type: integer
+        product:
+          $ref: "#/components/schemas/Product"
+        created_at:
+          type: string
+          format: date-time
+
+    FavoriteListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            favorites:
+              type: array
+              items:
+                $ref: "#/components/schemas/Favorite"
+            total:
+              type: integer
+            pages:
+              type: integer
+            page:
+              type: integer
+
+    FavoriteItemResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 201
+        message:
+          type: string
+          example: Added to favorites
+        data:
+          $ref: "#/components/schemas/Favorite"
+
+    AddFavoriteRequest:
+      type: object
+      required:
+        - product_id
+      properties:
+        product_id:
+          type: integer
+          description: 商品 ID
+          example: 1
+
+    FavoriteCheckResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            favorited:
+              type: boolean
+              description: 是否已收藏
+
+    # ==========================================================
+    # Review
+    # ==========================================================
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        user_name:
+          type: string
+          description: 用户名
+        product_id:
+          type: integer
+        product_name:
+          type: string
+        order_id:
+          type: integer
+          nullable: true
+        rating:
+          type: integer
+          description: 评分 1-5
+        content:
+          type: string
+          description: 评价内容
+        created_at:
+          type: string
+          format: date-time
+
+    ReviewListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            reviews:
+              type: array
+              items:
+                $ref: "#/components/schemas/Review"
+            avg_rating:
+              type: number
+              format: float
+              description: 平均评分
+            total:
+              type: integer
+              description: 评价总数
+            pages:
+              type: integer
+              description: 总页数
+
+    ReviewItemResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 201
+        message:
+          type: string
+          example: Review created
+        data:
+          $ref: "#/components/schemas/Review"
+
+    CreateReviewRequest:
+      type: object
+      required:
+        - product_id
+        - rating
+      properties:
+        product_id:
+          type: integer
+          description: 商品 ID
+          example: 1
+        rating:
+          type: integer
+          description: 评分（1-5）
+          minimum: 1
+          maximum: 5
+          example: 5
+        content:
+          type: string
+          description: 评价内容（可选）
+          example: 非常好的商品，强烈推荐！
+
+    # ==========================================================
+    # User List (Admin)
+    # ==========================================================
+    UserListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                $ref: "#/components/schemas/User"
+            total:
+              type: integer
+            pages:
+              type: integer
+            page:
+              type: integer
+
+    # ==========================================================
+    # Upload
+    # ==========================================================
+    UploadResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            url:
+              type: string
+              description: 上传后的图片 URL 路径
+              example: /static/uploads/abc123.jpg
+
+    # ==========================================================
+    # Analytics (Generic)
+    # ==========================================================
+    AnalyticsDataResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          description: 分析数据（结构因接口而异）
+
+    # ==========================================================
+    # Association Rules
+    # ==========================================================
+    AssociationRule:
+      type: object
+      properties:
+        id:
+          type: integer
+        product_id:
+          type: integer
+          nullable: true
+        antecedent:
+          type: string
+          description: 先导商品
+        consequent:
+          type: string
+          description: 后继商品
+        consequent_id:
+          type: integer
+          nullable: true
+        support:
+          type: number
+          format: float
+          description: 支持度
+        confidence:
+          type: number
+          format: float
+          description: 置信度
+        lift:
+          type: number
+          format: float
+          description: 提升度
+
+    AssociationRuleListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            rules:
+              type: array
+              items:
+                $ref: "#/components/schemas/AssociationRule"
+            total:
+              type: integer
+            pages:
+              type: integer
+            page:
+              type: integer
+
+    # ==========================================================
+    # Churn
+    # ==========================================================
+    ChurnPrediction:
+      type: object
+      properties:
+        id:
+          type: integer
+        user_id:
+          type: integer
+        churn_prob:
+          type: number
+          format: float
+          description: 流失概率
+        is_churn_risk:
+          type: boolean
+          description: 是否为高风险
+        top_features:
+          type: array
+          items:
+            type: string
+          description: 主要特征
+        model_name:
+          type: string
+          description: 模型名称
+        status:
+          type: string
+          description: 处理状态（pending / contacted / resolved）
+
+    ChurnListResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            predictions:
+              type: array
+              items:
+                $ref: "#/components/schemas/ChurnPrediction"
+            total:
+              type: integer
+            pages:
+              type: integer
+            page:
+              type: integer
+            summary:
+              type: object
+              description: 流失汇总统计
+
+    ChurnStatusResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          $ref: "#/components/schemas/ChurnPrediction"
+
+    # ==========================================================
+    # Hot Products
+    # ==========================================================
+    HotProductsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: success
+        data:
+          type: object
+          properties:
+            products:
+              type: array
+              items:
+                $ref: "#/components/schemas/Product"
