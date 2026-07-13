@@ -5,7 +5,7 @@ class RegisterPage(BasePage):
     FIRST_NAME_INPUT = "input[placeholder='请输入名']"
     LAST_NAME_INPUT = "input[placeholder='请输入姓']"
     EMAIL_INPUT = "input[placeholder='请输入邮箱']"
-    PASSWORD_INPUT = "input[placeholder='至少6位，含大小写和数字']"
+    PASSWORD_INPUT = "input[placeholder='至少8位，含大小写字母和数字']"
     ADDRESS_INPUT = "input[placeholder='请输入收货地址']"
     REGISTER_BUTTON = "button:has-text('注册')"
     LOGIN_LINK = "a:has-text('去登录')"

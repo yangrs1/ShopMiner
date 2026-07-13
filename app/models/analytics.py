@@ -12,6 +12,7 @@ class UserBehavior(db.Model):
     action = db.Column(db.String(30), nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+    # [GAP: missing-test] UserBehavior.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,
@@ -37,6 +38,7 @@ class RFMAnalysis(db.Model):
     segment = db.Column(db.String(50), nullable=False)
     analyzed_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+    # [GAP: missing-test] RFMAnalysis.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,
@@ -64,6 +66,7 @@ class SalesPrediction(db.Model):
     model_name = db.Column(db.String(30), nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+    # [GAP: missing-test] SalesPrediction.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,
@@ -88,6 +91,7 @@ class AssociationRule(db.Model):
     lift = db.Column(db.Float, nullable=False)
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+    # [GAP: missing-test] AssociationRule.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,
@@ -113,6 +117,7 @@ class ChurnPrediction(db.Model):
     status = db.Column(db.String(20), default="pending")  # pending / contacted / resolved
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+    # [GAP: missing-test] ChurnPrediction.to_dict() has no unit test
     def to_dict(self):
         import json
         top_features_raw = self.top_features or "[]"
@@ -141,6 +146,7 @@ class ModelMetric(db.Model):
     detail = db.Column(db.String(500), default="")
     created_at = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc))
 
+    # [GAP: missing-test] ModelMetric.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,
@@ -166,6 +172,7 @@ class Review(db.Model):
     user = db.relationship("User", lazy="joined")
     product = db.relationship("Product", lazy="joined")
 
+    # [GAP: missing-test] Review.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,
@@ -191,6 +198,7 @@ class Favorite(db.Model):
 
     product = db.relationship("Product", lazy="joined")
 
+    # [GAP: missing-test] Favorite.to_dict() has no unit test
     def to_dict(self):
         return {
             "id": self.id,

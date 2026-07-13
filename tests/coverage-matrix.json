@@ -1,0 +1,175 @@
+{
+  "project": "ShopMiner",
+  "generated_at": "2026-07-12T00:00:00+08:00",
+  "total_views": 18,
+  "covered_views": 18,
+  "coverage_percentage": "100.0%",
+  "web_tests_total": 62,
+  "api_tests_total": 205,
+  "last_updated": "2026-07-12",
+  "views": [
+    {
+      "name": "Home",
+      "file": "frontend/src/views/Home.vue",
+      "page_object": "tests/web/pages/home_page.py",
+      "test_file": "test_product_search_web.py, test_ratings.py",
+      "tests": 3,
+      "api_tests": 0,
+      "covered": true
+    },
+    {
+      "name": "Login",
+      "file": "frontend/src/views/Login.vue",
+      "page_object": "tests/web/pages/login_page.py",
+      "test_file": "test_auth_web.py",
+      "tests": 4,
+      "api_tests": 14,
+      "covered": true
+    },
+    {
+      "name": "Register",
+      "file": "frontend/src/views/Register.vue",
+      "page_object": "tests/web/pages/register_page.py",
+      "test_file": "test_auth_web.py",
+      "tests": 4,
+      "api_tests": 14,
+      "covered": true
+    },
+    {
+      "name": "Search",
+      "file": "frontend/src/views/Search.vue",
+      "page_object": "tests/web/pages/search_page.py",
+      "test_file": "test_product_search_web.py",
+      "tests": 2,
+      "api_tests": 8,
+      "covered": true
+    },
+    {
+      "name": "ProductDetail",
+      "file": "frontend/src/views/ProductDetail.vue",
+      "page_object": "tests/web/pages/product_page.py",
+      "test_file": "test_product_search_web.py, test_ratings.py",
+      "tests": 6,
+      "api_tests": 6,
+      "covered": true
+    },
+    {
+      "name": "Cart",
+      "file": "frontend/src/views/Cart.vue",
+      "page_object": "tests/web/pages/cart_page.py",
+      "test_file": "test_cart_order_web.py",
+      "tests": 5,
+      "api_tests": 13,
+      "covered": true
+    },
+    {
+      "name": "Orders",
+      "file": "frontend/src/views/Orders.vue",
+      "page_object": "tests/web/pages/orders_page.py",
+      "test_file": "test_cart_order_web.py",
+      "tests": 4,
+      "api_tests": 27,
+      "covered": true
+    },
+    {
+      "name": "OrderDetail",
+      "file": "frontend/src/views/OrderDetail.vue",
+      "page_object": "N/A",
+      "test_file": "test_cart_order_web.py",
+      "tests": 3,
+      "api_tests": 27,
+      "covered": true
+    },
+    {
+      "name": "Favorites",
+      "file": "frontend/src/views/Favorites.vue",
+      "page_object": "tests/web/pages/favorites_page.py",
+      "test_file": "test_favorites_profile_web.py",
+      "tests": 4,
+      "api_tests": 5,
+      "covered": true
+    },
+    {
+      "name": "Profile",
+      "file": "frontend/src/views/Profile.vue",
+      "page_object": "tests/web/pages/profile_page.py",
+      "test_file": "test_favorites_profile_web.py",
+      "tests": 5,
+      "api_tests": 9,
+      "covered": true
+    },
+    {
+      "name": "Admin/Dashboard",
+      "file": "frontend/src/admin/components/DashboardTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 2,
+      "api_tests": 29,
+      "covered": true
+    },
+    {
+      "name": "Admin/RFM",
+      "file": "frontend/src/admin/components/RfmTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 1,
+      "api_tests": 29,
+      "covered": true
+    },
+    {
+      "name": "Admin/Churn",
+      "file": "frontend/src/admin/components/ChurnTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 1,
+      "api_tests": 29,
+      "covered": true
+    },
+    {
+      "name": "Admin/Sales",
+      "file": "frontend/src/admin/components/SalesTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 1,
+      "api_tests": 29,
+      "covered": true
+    },
+    {
+      "name": "Admin/Association",
+      "file": "frontend/src/admin/components/AssociationTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 1,
+      "api_tests": 29,
+      "covered": true
+    },
+    {
+      "name": "Admin/Products",
+      "file": "frontend/src/admin/components/ProductManagement.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 1,
+      "api_tests": 38,
+      "covered": true
+    },
+    {
+      "name": "Admin/Orders",
+      "file": "frontend/src/admin/components/OrdersTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 4,
+      "api_tests": 29,
+      "covered": true
+    },
+    {
+      "name": "Admin/Users",
+      "file": "frontend/src/admin/components/UsersTab.vue",
+      "page_object": "tests/web/pages/admin_page.py",
+      "test_file": "test_admin_web.py",
+      "tests": 2,
+      "api_tests": 29,
+      "covered": true
+    }
+  ],
+  "gaps": []
+}

@@ -17,6 +17,36 @@ BASE_URL = os.getenv("BASE_URL", "http://127.0.0.1:5000")
 HEADLESS = os.getenv("PLAYWRIGHT_HEADLESS", "true").lower() == "true"
 
 
+# ──────────────────────────────────────────────
+# 第一道防线: import 时即检查 FLASK_ENV
+# ──────────────────────────────────────────────
+def _check_flask_env():
+    """强制 FLASK_ENV 必须为 testing。"""
+    env = os.environ.get('FLASK_ENV', '')
+    if env != 'testing':
+        raise RuntimeError(
+            f"[DENY] FLASK_ENV='{env}' must be 'testing'! "
+            f"Aborting to prevent accidental production database operations."
+        )
+
+
+_check_flask_env()
+
+
+# ──────────────────────────────────────────────
+# 第二道防线: pytest 配置时验证数据库引擎
+# ──────────────────────────────────────────────
+def pytest_configure(config):
+    """pytest 配置钩子: 验证数据库引擎为 SQLite。"""
+    app = create_app("testing")
+    db_uri = app.config['SQLALCHEMY_DATABASE_URI']
+    if 'postgresql' in db_uri.lower() or 'postgres' in db_uri.lower():
+        raise RuntimeError(
+            f"[DENY] Detected non-SQLite database: {db_uri}. "
+            f"Tests must use SQLite, not PostgreSQL."
+        )
+
+
 @pytest.fixture(scope="function")
 def app():
     app = create_app("testing")

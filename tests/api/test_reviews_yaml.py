@@ -53,6 +53,10 @@ class TestCreateReview:
         if "content" in case:
             payload["content"] = case["content"]
 
+        # [GAP: resolved-redundancy] Duplicate review setup/logic retained for YAML test
+        # parametrization, but the scenario is also covered by
+        # test_business_reviews.py::TestDuplicateReviewUpdate with DB verification
+        # (stronger assertions per rule 4).
         if case.get("note") and "重复" in case.get("note", ""):
             with allure.step("先创建一条评价"):
                 client.post("/api/v1/reviews", headers=headers, json=payload)

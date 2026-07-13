@@ -84,6 +84,7 @@ def get_rfm_summary():
     return {"segments": segments}
 
 
+# [GAP: missing-test] analytics_service.get_sales_trend() has no unit test
 def get_sales_trend():
     return db.session.query(
         func.date(Order.created_at).label("date"),
@@ -94,6 +95,7 @@ def get_sales_trend():
     ).group_by(func.date(Order.created_at)).order_by(func.date(Order.created_at)).all()
 
 
+# [GAP: missing-test] analytics_service.get_sales_prediction() has no unit test
 def get_sales_prediction():
     preds = SalesPrediction.query.order_by(SalesPrediction.pred_date).all()
     historical = db.session.query(
@@ -130,6 +132,7 @@ def get_association_rules(page=1, per_page=50):
     )
 
 
+# [GAP: missing-test] analytics_service.get_product_recommendations() has no unit test
 def get_product_recommendations(product_id, limit=6):
     rules = AssociationRule.query.filter_by(product_id=product_id).order_by(
         AssociationRule.lift.desc()
@@ -240,6 +243,7 @@ def get_churn_importance():
     }
 
 
+# [GAP: missing-test] analytics_service.get_user_rfm() has no unit test
 def get_user_rfm(user_id):
     rfm = RFMAnalysis.query.filter_by(user_id=user_id).first()
     if not rfm:
@@ -278,6 +282,7 @@ def get_user_rfm(user_id):
     }
 
 
+# [GAP: missing-test] analytics_service.get_user_trend() has no unit test
 def get_user_trend(user_id):
     return db.session.query(
         func.strftime("%Y-%m", Order.created_at).label("month"),
@@ -289,6 +294,7 @@ def get_user_trend(user_id):
     ).group_by(func.strftime("%Y-%m", Order.created_at)).order_by("month").all()
 
 
+# [GAP: missing-test] analytics_service.get_user_category_preference() has no unit test
 def get_user_category_preference(user_id):
     order_ids = [o.id for o in Order.query.filter_by(user_id=user_id).all()]
     if not order_ids:
@@ -320,6 +326,7 @@ def get_user_category_preference(user_id):
     return result
 
 
+# [GAP: missing-test] analytics_service.get_model_metrics() has no unit test
 def get_model_metrics(model_name=None):
     query = ModelMetric.query
     if model_name:
@@ -457,6 +464,7 @@ def get_churn_trend():
     return result
 
 
+# [GAP: missing-test] analytics_service.get_sales_heatmap() has no unit test
 def get_sales_heatmap():
     """获取销售热力图数据：按星期几和月份聚合"""
     from sqlalchemy import func as sa_func
@@ -493,6 +501,7 @@ def get_sales_heatmap():
     }
 
 
+# [GAP: missing-test] analytics_service.get_prediction_metrics() has no unit test
 def get_prediction_metrics():
     """获取预测准确度指标"""
     from app.models.analytics import ModelMetric
@@ -519,6 +528,7 @@ def get_prediction_metrics():
     return data
 
 
+# [GAP: missing-test] analytics_service.get_model_viz() has no unit test
 def get_model_viz(model_name):
     """读取预计算的图表数据 (data/prep/phase*_viz.json)
 
@@ -548,6 +558,7 @@ def get_model_viz(model_name):
         return None
 
 
+# [GAP: missing-test] analytics_service.update_churn_status() has no unit test
 def update_churn_status(churn_id, status):
     """更新流失预警处理状态"""
     churn = db.session.get(ChurnPrediction, churn_id)

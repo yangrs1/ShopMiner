@@ -16,6 +16,7 @@ if _project_root not in sys.path:
 
 
 @celery.task(bind=True, max_retries=3, default_retry_delay=60)
+# [GAP: missing-test] run_phase3_clustering needs Celery integration test env
 def run_phase3_clustering(self):
     """Run Phase 3: K-Means customer clustering (RFM + behavioral features)."""
     from app import create_app
@@ -35,6 +36,7 @@ def run_phase3_clustering(self):
 
 
 @celery.task(bind=True, max_retries=3, default_retry_delay=60)
+# [GAP: missing-test] run_phase4_churn needs Celery integration test env
 def run_phase4_churn(self):
     """Run Phase 4: Customer churn prediction (LightGBM + CLV + NPW)."""
     from app import create_app
@@ -54,6 +56,7 @@ def run_phase4_churn(self):
 
 
 @celery.task(bind=True, max_retries=3, default_retry_delay=60)
+# [GAP: missing-test] run_phase5_forecast needs Celery integration test env
 def run_phase5_forecast(self):
     """Run Phase 5: Sales forecast (weekly LightGBM with recent-sample weighting)."""
     from app import create_app
@@ -73,6 +76,7 @@ def run_phase5_forecast(self):
 
 
 @celery.task(bind=True, max_retries=3, default_retry_delay=60)
+# [GAP: missing-test] run_phase6_association needs Celery integration test env
 def run_phase6_association(self):
     """Run Phase 6: Association rule mining (Apriori, dual-level category + stockcode)."""
     from app import create_app
@@ -92,6 +96,7 @@ def run_phase6_association(self):
 
 
 @celery.task(bind=True, max_retries=3, default_retry_delay=60)
+# [GAP: missing-test] run_compute_all needs Celery integration test env
 def run_compute_all(self):
     """Orchestrator: run all analytics phases sequentially via compute_all()."""
     from app import create_app
@@ -109,6 +114,7 @@ def run_compute_all(self):
 
 
 @celery.task(bind=True, max_retries=3, default_retry_delay=60)
+# [GAP: missing-test] compute_analytics_task needs Celery integration test env
 def compute_analytics_task(self):
     """Backward-compatible: run full analytics pipeline (force clear old data).
     Replaces the old subprocess-based task.
@@ -128,6 +134,7 @@ def compute_analytics_task(self):
 
 
 @celery.task(bind=True, max_retries=2, default_retry_delay=120)
+# [GAP: missing-test] import_uci_data_task needs Celery integration test env
 def import_uci_data_task(self):
     """Backward-compatible: import UCI Online Retail dataset.
     Replaces the old subprocess-based task.

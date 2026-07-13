@@ -6,10 +6,12 @@ from celery import Celery
 
 def make_celery(app_name=__name__):
     """Create a Celery instance with default configuration."""
+    import os as _os
+    _redis_url = _os.environ.get("REDIS_URL", "redis://127.0.0.1:6379/0")
     celery = Celery(
         app_name,
-        broker="redis://redis:6379/0",
-        backend="redis://redis:6379/0",
+        broker=_redis_url,
+        backend=_redis_url,
         include=["app.tasks.analytics"],
     )
     celery.conf.update(

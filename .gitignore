@@ -12,6 +12,7 @@ build/
 .idea/
 .trae/
 .omo/
+.opencode/
 
 # Environment
 .env
@@ -22,6 +23,13 @@ frontend/node_modules/
 
 # Vite temp files (timestamp-* generated during builds)
 *.timestamp-*
+
+# Raw data (too large for git)
+data/raw/
+
+# ML experiments
+experiments/phase*/pkl/
+experiments/phase*/json/
 
 # Testing
 .pytest_cache/
