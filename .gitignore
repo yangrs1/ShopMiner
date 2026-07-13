@@ -26,6 +26,13 @@ frontend/node_modules/
 
 # Raw data (too large for git)
 data/raw/
+data/prep/
+
+# Frontend build output
+frontend_dist/
+
+# ML model artifacts
+*.pkl
 
 # ML experiments
 experiments/phase*/pkl/
