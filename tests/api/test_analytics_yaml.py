@@ -319,6 +319,7 @@ class TestPredictionMetrics:
 @allure.feature("数据分析模块")
 class TestModelViz:
     """模型可视化数据接口 /analytics/viz/<model>"""
+    pytestmark = pytest.mark.slow
 
     @allure.story("模型可视化")
     @allure.severity(allure.severity_level.CRITICAL)
